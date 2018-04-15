@@ -8,3 +8,8 @@ A Sample Framework
 4.10 Day_02
  (1) Create MSigonleton
  (2) Create MonoSigonleton
+ 
+ 4.15 Day_03
+ (1) Create MUIBase
+ (2) Create MUIManager
+ 
