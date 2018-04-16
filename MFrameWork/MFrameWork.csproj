@@ -320,6 +320,7 @@
     <Compile Include="Assets\Scripts\MSingleton.cs" />
     <Compile Include="Assets\Scripts\UI\MUIBase.cs" />
     <Compile Include="Assets\Scripts\UI\MUIManager.cs" />
+    <Compile Include="Assets\Scripts\UI\MUICtrl\TestController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

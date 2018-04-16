@@ -15,6 +15,7 @@ namespace MFrameWork
 
     public abstract class MUIBase
     {
+        protected bool   _mInited;
         protected string _mUIName;
         protected GameObject _mUIGameObject;
         protected bool _mActive;
@@ -54,6 +55,8 @@ namespace MFrameWork
             }
         }
 
+        public bool MIsInited { get { return _mInited; } }
+
         public MUIBase(string uiName,UILayerType layerType)
         {
             _mUIName = uiName;
@@ -64,10 +67,12 @@ namespace MFrameWork
         {
             _mUIGameObject = Resources.Load(_mUIName) as GameObject;
             _mCallBack += OnLoaded;
+            _mInited = true;
         }
 
         public virtual void Uninit()
         {
+            _mInited = false;
             //Release GameObject
         }
 
@@ -84,7 +89,7 @@ namespace MFrameWork
             
         }
 
-        public virtual void OnLogonOut()
+        public virtual void OnLogOut()
         {
             
         }
@@ -103,7 +108,7 @@ namespace MFrameWork
 
             SetPanetByLayerType(_mUILayerType);
             go.transform.SetAsLastSibling();
-            MActive = true;
+            _mActive = true;
         }
 
         protected void SetPanetByLayerType(UILayerType layerType)

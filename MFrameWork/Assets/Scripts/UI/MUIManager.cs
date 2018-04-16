@@ -9,6 +9,7 @@ namespace MFrameWork
 {
     public class MUIManager : MSingleton<MUIManager>
     {
+        public const string TEST_CONTROLLER = "TestController";
 
         private Dictionary<string,MUIBase> _uiDict = new Dictionary<string, MUIBase>();
         private Camera _mUICamera;
@@ -77,6 +78,9 @@ namespace MFrameWork
                 }
             }
             _mUICamera = _mUIRoot.transform.Find("Camera").GetComponent<Camera>();
+
+            //UI Register
+            _uiDict.Add(TEST_CONTROLLER, new TestController());
 		}
 
 		public override void UnInit()
@@ -89,14 +93,42 @@ namespace MFrameWork
             base.OnLogOut();
 		}
 
-        public void ActiveUI(string uiName)
+        public MUIBase ActiveUI(string uiName)
         {
-            
+            MUIBase ui = GetUI(uiName);
+            if (ui == null)
+            {
+                Debug.LogError("unregister ui name= "+uiName);
+                return null;
+            }
+
+            if (!ui.MIsInited)
+            {
+                ui.Init();
+            }
+
+            ui.MActive = true;
+            return ui;
         }
 
         public void DeActiveUI(string uiName)
         {
-            
+            MUIBase ui = GetUI(uiName);
+            if (ui == null)
+            {
+                Debug.LogError("Name= " + uiName +"is null");
+                return;
+            }
+
+            if(ui.MIsInited)
+            {
+                if (ui.MActive)
+                {
+                    ui.MActive = false;
+                    ui.Uninit();
+                }
+            }
+
         }
 
         public MUIBase GetUI(string uiName)
@@ -106,6 +138,19 @@ namespace MFrameWork
             return result;
         }
 
+        public T GetUI<T>(string uiName) where T : MUIBase
+        {
+            MUIBase result = null;
+            if (_uiDict.TryGetValue(uiName, out result))
+            {
+                if (result is T)
+                {
+                    return (T)result;
+                }
+            }
+            return null;
+        }
+
         public void DeActiveAll()
         {
             foreach (KeyValuePair<string, MUIBase> pair in _uiDict)
@@ -113,5 +158,46 @@ namespace MFrameWork
                 DeActiveUI(pair.Key);
             }
         }
+
+        public void Update(float delta)
+        {
+            foreach (KeyValuePair<string, MUIBase> pair in _uiDict)
+            {
+                pair.Value.Update(delta);
+            }
+        }
+
+        public void LateUpdate(float delta)
+        {
+            foreach (KeyValuePair<string, MUIBase> pair in _uiDict)
+            {
+                pair.Value.LateUpdate(delta);
+            }
+        }
+
+        public void OnLogout()
+        {
+            foreach (KeyValuePair<string, MUIBase> pair in _uiDict)
+            {
+                pair.Value.OnLogOut();
+            }
+            if(_mUICamera)
+            {
+                _mUICamera.enabled = false;
+            }
+        }
+
+        public bool IsWorldPosInScreen(ref Vector3 worldPos)
+        {
+            /*
+            Vector3 pos = MScene.singleton.GameCamera.UCam.WorldToScreenPoint(worldPos);
+            if (pos.z < 0) return false;
+            Rect rect = Screen.safeArea;
+            return (pos.x >= rect.xMin && pos.x <= rect.xMax
+                    && pos.y >= rect.yMin && pos.y <= rect.yMax);
+                    */
+            return true;
+        }
+
 	}
 }
