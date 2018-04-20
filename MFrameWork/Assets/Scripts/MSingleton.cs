@@ -35,7 +35,7 @@ namespace MFrameWork
         public override void Init()
         {
             //This funcation is called when instance is used the first time
-            //Put all the initializations you need here , as you would do in awake  
+            //Put all the initializations you need here as you would do in awake  
         }
 
         public override void UnInit()

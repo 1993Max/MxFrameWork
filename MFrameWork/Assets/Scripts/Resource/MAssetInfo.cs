@@ -11,7 +11,7 @@ namespace MFrameWork
     public class MAssetInfo
     {
         //Resource 资源
-        public object MAsset;
+        public object MAsset;   
         //Is Keep in memory 是否常驻内存
         public bool MIsKeepInMemory;
         //The Count of using resource heap 资源堆的引用计数
