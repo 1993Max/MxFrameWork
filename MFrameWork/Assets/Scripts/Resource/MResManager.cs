@@ -50,7 +50,7 @@ namespace MFrameWork
             }
             if (isAsyc)
             {
-            
+                LoadAsync(assetPath, listener, assettype, isKeepInMemory);
             }
         }
 

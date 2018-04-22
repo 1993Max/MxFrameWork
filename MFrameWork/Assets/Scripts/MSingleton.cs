@@ -13,14 +13,15 @@ namespace MFrameWork
 
     public abstract class MSingleton<T> : MBaseSingleton where T : new()
     {
+
         private static readonly T _instatce = new T();
 
         protected MSingleton()
         {
-            if (_instatce == null)
+            if (_instatce != null)
             {
                 // Here is method in order to prevent the same instance create again
-                throw new System.Exception(_instatce.ToString()+"can not create again");
+                UnityEngine.Debug.Log(_instatce.ToString()+"can not create again");
             }
         }
 

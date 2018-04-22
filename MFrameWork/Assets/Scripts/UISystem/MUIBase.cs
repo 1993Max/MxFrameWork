@@ -79,9 +79,10 @@ namespace MFrameWork
 
         public virtual void Init()
         {
-            _mUIGameObject = Resources.Load(_mUIName) as GameObject;
+            _mUIGameObject = GameObject.Instantiate(Resources.Load("UI/Prefabs/"+_mUIName)) as GameObject;
             _mCallBack += OnLoaded;
             _mInited = true;
+            OnLoaded(_mUIGameObject);
         }
 
         public virtual void Uninit()
@@ -91,6 +92,7 @@ namespace MFrameWork
         }
 
         protected abstract void OnActive();
+
         protected abstract void OnDeActive();
 
         public virtual void Update(float deltaTime)
@@ -110,7 +112,7 @@ namespace MFrameWork
 
         protected void OnLoaded(GameObject go)
         {
-            //go.transform.SetParent();
+            SetPanetByLayerType(_mUILayerType);
             go.transform.localPosition = Vector3.zero;
             go.transform.localScale = Vector3.one;
             RectTransform rectTrans = go.GetComponent<RectTransform>();
@@ -120,7 +122,6 @@ namespace MFrameWork
                 rectTrans.offsetMin = Vector2.zero;
             }
 
-            SetPanetByLayerType(_mUILayerType);
             go.transform.SetAsLastSibling();
             _mActive = true;
         }
@@ -130,12 +131,16 @@ namespace MFrameWork
             switch(_mUILayerType)
             {
                 case UILayerType.Top:
+                    _mUIGameObject.transform.SetParent(MUIManager.singleton.MTransTop);
                     break;
                 case UILayerType.Upper:
+                    _mUIGameObject.transform.SetParent(MUIManager.singleton.MTransUpper);
                     break;
                 case UILayerType.Normal:
+                    _mUIGameObject.transform.SetParent(MUIManager.singleton.MTransNormal);
                     break;
                 case UILayerType.Hud:
+                    _mUIGameObject.transform.SetParent(MUIManager.singleton.MTransHUD);
                     break;
             }
         }

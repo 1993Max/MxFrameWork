@@ -11,8 +11,9 @@ namespace MFrameWork
     public class MUIManager : MSingleton<MUIManager>
     {
         public const string TEST_CONTROLLER = "TestController";
+        public const string LOGON_CONTROLLER = "LoginPanel";
 
-        private Dictionary<string,MUIBase> _uiDict = new Dictionary<string, MUIBase>();
+        private Dictionary<string, MUIBase> _mUiDict;
         private Camera _mUICamera;
         private GameObject _mUIRoot;
 
@@ -45,8 +46,10 @@ namespace MFrameWork
 		public override void Init()
 		{
             base.Init();
-            _mUIRoot = Resources.Load("UI/Prefabs/UIRoot") as GameObject;
+            _mUiDict = new Dictionary<string, MUIBase>();
+            _mUIRoot = GameObject.Instantiate(Resources.Load("UI/Prefabs/UIRoot") as GameObject);
             _mUIRoot.name = "UIRoot";
+            _mUIRoot.SetActive(true);
             GameObject.DontDestroyOnLoad(_mUIRoot);
             _mUiRootCanvasScaler = _mUIRoot.GetComponent<CanvasScaler>();
 
@@ -80,15 +83,21 @@ namespace MFrameWork
             }
             _mUICamera = _mUIRoot.transform.Find("Camera").GetComponent<Camera>();
 
-            //UI Register
-            _uiDict.Add(TEST_CONTROLLER, new TestController());
+            UIRegister();
 		}
+
+        //UI Register
+        private void UIRegister()
+        {
+            _mUiDict.Add(TEST_CONTROLLER, new TestController());
+            _mUiDict.Add(LOGON_CONTROLLER, new LogonController());
+        }
 
 		public override void UnInit()
 		{
-            /*
-            if (_uiRoot)
+            if (_mUIRoot)
             {
+                /*
                 MResLoader.singleton.DestroyObj(_uiRoot, false);
                 _uiRoot = null;
                 _transNormal = null;
@@ -96,7 +105,8 @@ namespace MFrameWork
                 _transTop = null;
                 _transHUD = null;
                 _uiCamera = null;
-            }*/
+                */
+            }
             base.UnInit();
 		}
 
@@ -146,14 +156,14 @@ namespace MFrameWork
         public MUIBase GetUI(string uiName)
         {
             MUIBase result = null;
-            _uiDict.TryGetValue(uiName, out result);
+            _mUiDict.TryGetValue(uiName, out result);
             return result;
         }
 
         public T GetUI<T>(string uiName) where T : MUIBase
         {
             MUIBase result = null;
-            if (_uiDict.TryGetValue(uiName, out result))
+            if (_mUiDict.TryGetValue(uiName, out result))
             {
                 if (result is T)
                 {
@@ -165,7 +175,7 @@ namespace MFrameWork
 
         public void DeActiveAll()
         {
-            foreach (KeyValuePair<string, MUIBase> pair in _uiDict)
+            foreach (KeyValuePair<string, MUIBase> pair in _mUiDict)
             {
                 DeActiveUI(pair.Key);
             }
@@ -173,7 +183,7 @@ namespace MFrameWork
 
         public void Update(float delta)
         {
-            foreach (KeyValuePair<string, MUIBase> pair in _uiDict)
+            foreach (KeyValuePair<string, MUIBase> pair in _mUiDict)
             {
                 pair.Value.Update(delta);
             }
@@ -181,7 +191,7 @@ namespace MFrameWork
 
         public void LateUpdate(float delta)
         {
-            foreach (KeyValuePair<string, MUIBase> pair in _uiDict)
+            foreach (KeyValuePair<string, MUIBase> pair in _mUiDict)
             {
                 pair.Value.LateUpdate(delta);
             }
@@ -189,7 +199,7 @@ namespace MFrameWork
 
         public void OnLogout()
         {
-            foreach (KeyValuePair<string, MUIBase> pair in _uiDict)
+            foreach (KeyValuePair<string, MUIBase> pair in _mUiDict)
             {
                 pair.Value.OnLogOut();
             }
