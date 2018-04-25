@@ -7,15 +7,12 @@ using Object = UnityEngine.Object;
 
 namespace MFrameWork
 {
+
     public sealed class MResManager : MSingleton<MResManager>
     {
         public static readonly Vector3 FAR_FAR_AWAY = new Vector3(0, -1000f, 0); //for GameObject pool
         // the all asset dic 所有资源的字典
-        private Dictionary<string, MAssetInfo> _mAssetDic = new Dictionary<string, MAssetInfo>();
-        // the loading list of assetInfo  正在加载中的资源列表
-        private List<MRequestInfo> _mLoadList = new List<MRequestInfo>();
-        // the waiting list for loading 等待加载的列表
-        private Queue<MRequestInfo> _mWaitQueue = new Queue<MRequestInfo>();
+        private Dictionary<string, Object> _mAssetDic = new Dictionary<string, Object>();
 
         public override void Init()
         {
@@ -41,51 +38,47 @@ namespace MFrameWork
         }
 
         #region Resource Load 资源加载
-        public void Load(string assetPath,MIResLoadListener listener,bool isAsyc = true,bool isKeepInMemory = false, Type assettype = null)
+        /// <summary>
+        /// object loader 非常的资源加载并管理
+        /// </summary>
+        public T ResLoad<T>(string path, bool isCatch) where T : UnityEngine.Object
         {
-            if (_mAssetDic.ContainsKey(assetPath))
+            if (_mAssetDic.ContainsKey(path))
             {
-                listener.Finished(_mAssetDic[assetPath]);
-                return;
-            }
-            if (isAsyc)
-            {
-                LoadAsync(assetPath, listener, assettype, isKeepInMemory);
-            }
-        }
-
-        public void LoadAsync(string assetPath, MIResLoadListener listener, Type assetType, bool isKetInMemory)
-        {
-            //判断是否在正在加载的加载列表中
-            for (int i = 0; i < _mLoadList.Count; i++)
-            {
-                if (_mLoadList[i].MAssetPath == assetPath)
-                {
-                    _mLoadList[i].AddListener(listener);
-                    return;
-                }
-            }
-            //判断是否在等待加载的家在列表中
-            foreach (MRequestInfo info in _mWaitQueue)
-            {
-                if (info.MAssetPath == assetPath)
-                {
-                    info.AddListener(listener);
-                    return;
-                }
+                return _mAssetDic[path] as T;
             }
 
-            MRequestInfo requestInfo = new MRequestInfo();
-            requestInfo.MAssetPath = assetPath;
-            requestInfo.AddListener(listener);
-            requestInfo.MIsKeepInMemory = isKetInMemory;
-            requestInfo.MAssetType = assetType == null ? typeof(GameObject) : assetType;
-            _mWaitQueue.Enqueue(requestInfo);
+            T asset = Resources.Load<T>(path);
+            if (asset != null)
+            {
+                if (isCatch)
+                {
+                    _mAssetDic.Add(path, asset);
+                }
+            }
+            else
+            {
+                Debug.Log("---------------------->>> Can't find in res Path :" + path);
+            }
+            return asset;
         }
+
         #endregion
 
         #region 资源处理
+        public void CreateGameObject(GameObject resObj, Transform targetParent, Vector3 pos, Vector3 scale, Vector3 rotate)
+        {
+            GameObject cObj = GameObject.Instantiate(resObj) as GameObject;
+            cObj.transform.SetParent(targetParent);
+            cObj.transform.localPosition = pos;
+            cObj.transform.localScale = scale;
+            cObj.transform.localRotation = Quaternion.Euler(rotate);
+        }
 
+        public void ClearAll()
+        {
+            _mAssetDic.Clear();
+        }
         #endregion
     }
 }
