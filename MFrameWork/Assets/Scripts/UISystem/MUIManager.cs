@@ -47,10 +47,10 @@ namespace MFrameWork
 		{
             base.Init();
             _mUiDict = new Dictionary<string, MUIBase>();
-            _mUIRoot = GameObject.Instantiate(Resources.Load("UI/Prefabs/UIRoot") as GameObject);
+            _mUIRoot = Object.Instantiate(Resources.Load("UI/Prefabs/UIRoot") as GameObject);
             _mUIRoot.name = "UIRoot";
             _mUIRoot.SetActive(true);
-            GameObject.DontDestroyOnLoad(_mUIRoot);
+            Object.DontDestroyOnLoad(_mUIRoot);
             _mUiRootCanvasScaler = _mUIRoot.GetComponent<CanvasScaler>();
 
             _mTransNormal = _mUIRoot.transform.Find("NormalLayer");

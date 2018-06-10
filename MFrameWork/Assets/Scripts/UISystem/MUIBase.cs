@@ -79,7 +79,7 @@ namespace MFrameWork
 
         public virtual void Init()
         {
-            _mUIGameObject = GameObject.Instantiate(Resources.Load("UI/Prefabs/"+_mUIName)) as GameObject;
+            _mUIGameObject = Object.Instantiate(Resources.Load("UI/Prefabs/" + _mUIName)) as GameObject;
             _mCallBack += OnLoaded;
             _mInited = true;
             OnLoaded(_mUIGameObject);
