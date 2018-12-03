@@ -8,7 +8,10 @@ using System.Threading.Tasks;
 
 namespace MFrameWork
 {
-    public class Localization : MSingleton<Localization>
+    /// <summary>
+    /// 对本地文本进行反序列化
+    /// </summary>
+    public class MLocalization : MSingleton<MLocalization>
     {
         private readonly Dictionary<string, string> _stringDict = new Dictionary<string, string>();
 

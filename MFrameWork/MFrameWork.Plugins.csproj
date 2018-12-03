@@ -269,15 +269,15 @@
     <Compile Include="Assets\Plugins\GameLibs\LitJson\JsonWriter.cs" />
     <Compile Include="Assets\Plugins\GameLibs\LitJson\Lexer.cs" />
     <Compile Include="Assets\Plugins\GameLibs\LitJson\ParserToken.cs" />
-    <Compile Include="Assets\Plugins\GameLibs\Localization.cs" />
     <Compile Include="Assets\Plugins\GameLibs\MDebug.cs" />
     <Compile Include="Assets\Plugins\GameLibs\MException.cs" />
     <Compile Include="Assets\Plugins\GameLibs\MFileEx.cs" />
     <Compile Include="Assets\Plugins\GameLibs\MiniJson\MiniJSON.cs" />
     <Compile Include="Assets\Plugins\GameLibs\MPathEx.cs" />
-    <Compile Include="Assets\Plugins\GameLibs\MSharedStringBuilder.cs" />
     <Compile Include="Assets\Plugins\GameLibs\MSingleton.cs" />
     <Compile Include="Assets\Plugins\GameLibs\PathUtils.cs" />
+    <Compile Include="Assets\Plugins\GameLibs\Utility\MLocalization.cs" />
+    <Compile Include="Assets\Plugins\GameLibs\Utility\MSharedStringBuilder.cs" />
     <Compile Include="Assets\Plugins\Helper\MArrayHelper.cs" />
     <Compile Include="Assets\Plugins\Helper\MBase64Helper.cs" />
     <Compile Include="Assets\Plugins\Helper\MCommonHelper.cs" />
