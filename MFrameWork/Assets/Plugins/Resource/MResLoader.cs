@@ -6,7 +6,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace MoonCommonLib
+namespace MFrameWork
 {
     public sealed class MResLoader : MSingleton<MResLoader>
     {

@@ -1,1 +1,2 @@
 TEST_KEY	测试
+TEST_KEY_X	我是测试文本

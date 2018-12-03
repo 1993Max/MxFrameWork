@@ -6,7 +6,8 @@ using UnityEngine.UI;
 
 public class TextureSolver : EditorWindow {
 
-    [MenuItem("Assets/Texture Solver #%b")]
+    [MenuItem("Assets/MSimpleTools/TextureSolverOld(图集处理旧)/Texture_Split_Old(分离) #%b")]
+    [MenuItem("MSimpleTools/TextureSolverOld(图集处理旧)/Texture_Split_Old(分离) #%b")]
     public static void Init()
     {
         TextureSolver me;

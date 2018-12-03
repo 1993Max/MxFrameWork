@@ -5,7 +5,7 @@ using System.IO;
 using System.Text;
 using Object = UnityEngine.Object;
 
-namespace MoonCommonLib
+namespace MFrameWork
 {
     public static class MFileEx
     {

@@ -3,15 +3,16 @@ using UnityEditor;
 using System.IO;
 using System;
 using System.Collections.Generic;
-using MoonCommonLib;
+using MFrameWork;
+using XUPorterJSON;
 
 public class SplitTextureAlpha : EditorWindow     
 {
     UnityEngine.Object[] selections;
     Vector2 scroll = Vector2.zero;
 
-    [MenuItem("Assets/ROTools/图集处理/Texture Alpha Split #Q")]
-    [MenuItem("ROTools/图集处理/Texture Alpha Split #Q")]
+    [MenuItem("Assets/MSimpleTools/TextureSolver(图集处理)/Texture_Split(分离) #%Q")]
+    [MenuItem("MSimpleTools/TextureSolver(图集处理)/Texture_Split(分离) #%Q")]
     public static void ShowWindow()
     {
         SplitTextureAlpha st = (SplitTextureAlpha)EditorWindow.GetWindow(typeof(SplitTextureAlpha));
@@ -473,7 +474,7 @@ public class SplitTextureAlpha : EditorWindow
             {
                 if (IsColorZero(targetPixels[offset]))
                 {
-                    targetPixels[offset] = TextureProcess.TextureSmoothEdge(sourcePixels, width, height, offset);
+                    targetPixels[offset] = TextureSmoothEdge(sourcePixels, width, height, offset);
                 }
 
                 offset++;
@@ -522,19 +523,10 @@ public class SplitTextureAlpha : EditorWindow
         return (textAsset.text.hashtableFromJson()).IsTexturePackerTable();
     }
 
-    public static bool IsColorZero(Color color)
-    {
-        if (color.r == 0 && color.g == 0 && color.b == 0 && color.a == 0)
-        {
-            return true;
-        }
-        return false;
-    }
-
     //图片边缘平滑
     public static Color TextureSmoothEdge(IList<Color> sourcePixels, int width, int height, int offset)
     {
-        Color currentColor = ListHelper.SafeGetData(sourcePixels, offset);
+        Color currentColor = MListHelper.SafeGetData(sourcePixels, offset);
         if (!IsColorZero(currentColor))
         {
             return currentColor;
@@ -551,7 +543,7 @@ public class SplitTextureAlpha : EditorWindow
         int count = 0;
         for (int i = 0; i < arounds.Count; i++)
         {
-            Color color = ListHelper.SafeGetData(sourcePixels, arounds[i]);
+            Color color = MListHelper.SafeGetData(sourcePixels, arounds[i]);
             if (!IsColorZero(color))
             {
                 result += color;
@@ -565,5 +557,14 @@ public class SplitTextureAlpha : EditorWindow
         }
 
         return result;
+    }
+
+    public static bool IsColorZero(Color color)
+    {
+        if (color.r == 0 && color.g == 0 && color.b == 0 && color.a == 0)
+        {
+            return true;
+        }
+        return false;
     }
 }

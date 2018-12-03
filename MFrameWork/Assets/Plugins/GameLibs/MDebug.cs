@@ -1,4 +1,4 @@
-﻿using MoonCommonLib;
+﻿using MFrameWork;
 
 public class MDebug : MSingleton<MDebug>
 {

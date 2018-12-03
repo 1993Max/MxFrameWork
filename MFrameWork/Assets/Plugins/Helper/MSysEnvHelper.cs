@@ -4,7 +4,7 @@ using System.IO;
 using LitJson;
 using UnityEngine;
 
-namespace MoonCommonLib
+namespace MFrameWork
 {
     public class MSysEnvHelper
     {

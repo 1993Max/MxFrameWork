@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections;
 using System.IO;
 
-namespace MoonCommonLib
+namespace MFrameWork
 {
     public static class DirectoryEx
     {

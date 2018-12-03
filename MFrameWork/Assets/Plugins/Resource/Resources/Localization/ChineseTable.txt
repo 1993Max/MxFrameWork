@@ -1,6 +1,0 @@
-﻿ATTR_BASE_NAME	素质
-CREATE_ROLE_CURRENT_COLOR	当前颜色：%s
-WROLD_TASK_ACCEPTED	你接取了奇闻任务<color=#ff8e3b>“%s”</color>，请在任务栏的其他标签页查看任务
-TEST_WORD_STRING	我是测试字符串%s
-TEST_WORD_NUM	我是测试数字%d
-	

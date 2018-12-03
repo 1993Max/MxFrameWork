@@ -334,7 +334,6 @@
     <Compile Include="Assets\Tools\Editor\SplitTexture\TextureSolver.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Plugins\Resource\Resources\Localization\ChineseTable.txt" />
     <None Include="Assets\Resources\Localization\ChineseTable.txt" />
     <None Include="Assets\ThirdParty\Behavior Designer\Editor\GridShader.shader" />
   </ItemGroup>

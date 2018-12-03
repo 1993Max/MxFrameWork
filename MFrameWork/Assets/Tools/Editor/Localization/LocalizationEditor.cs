@@ -5,7 +5,7 @@ using System.IO;
 using System.Text;
 using UnityEditor;
 using UnityEngine;
-using MoonCommonLib;
+using MFrameWork;
 
 public class LocalizationEditor : EditorWindow
 {
@@ -22,7 +22,7 @@ public class LocalizationEditor : EditorWindow
         }
     }
 
-    [MenuItem("SimpleTools/Localization/Open StringTableHelper")]
+    [MenuItem("MSimpleTools/Localization(文本本地化)/LocalizationEditor #%E")]
     public static void Open()
     {
         window.Show();

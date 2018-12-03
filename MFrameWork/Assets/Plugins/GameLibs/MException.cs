@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MoonCommonLib
+namespace MFrameWork
 {
     [Serializable]
     public class MException : ApplicationException

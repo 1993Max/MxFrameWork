@@ -6,7 +6,7 @@ using System.Net.Configuration;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MoonCommonLib
+namespace MFrameWork
 {
     public class Localization : MSingleton<Localization>
     {
