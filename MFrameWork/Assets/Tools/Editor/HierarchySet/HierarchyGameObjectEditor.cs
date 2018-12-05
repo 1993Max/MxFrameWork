@@ -9,8 +9,6 @@ using UnityEngine.UI;
 [InitializeOnLoad]
 public class HierarchyGameObjectEditor
 {
-    private static bool isShowActiveToogle = false;
-
     [MenuItem("MSimpleTools/HierarchySet(层次界面Toggle设置)/GameObject Active Toggle Close")]
     public static void CloseToggle()
     {
