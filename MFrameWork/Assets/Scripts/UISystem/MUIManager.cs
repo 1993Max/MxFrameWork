@@ -43,9 +43,8 @@ namespace MFrameWork
         public Transform MTransBubbleHUD { get; private set; }
         public Transform MTransSkillHUD { get; private set; }
 
-		public override void Init()
+		public override bool Init()
 		{
-            base.Init();
             _mUiDict = new Dictionary<string, MUIBase>();
             _mUIRoot = Object.Instantiate(Resources.Load("UI/Prefabs/UIRoot") as GameObject);
             _mUIRoot.name = "UIRoot";
@@ -84,7 +83,8 @@ namespace MFrameWork
             _mUICamera = _mUIRoot.transform.Find("Camera").GetComponent<Camera>();
 
             UIRegister();
-		}
+            return base.Init();
+        }
 
         //UI Register
         private void UIRegister()

@@ -14,9 +14,10 @@ namespace MFrameWork
         // the all asset dic 所有资源的字典
         private Dictionary<string, Object> _mAssetDic = new Dictionary<string, Object>();
 
-        public override void Init()
+        public override bool Init()
         {
             InitGameRes();
+            return base.Init();
         }
 
         public override void UnInit()

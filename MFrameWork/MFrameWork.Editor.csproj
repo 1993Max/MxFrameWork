@@ -307,6 +307,24 @@
     <Reference Include="UnityEngine.StandardEvents">
       <HintPath>C:/Users/mertenma/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.10/UnityEngine.StandardEvents.dll</HintPath>
     </Reference>
+    <Reference Include="CString">
+      <HintPath>Assets/Plugins/CString.dll</HintPath>
+    </Reference>
+    <Reference Include="Debugger">
+      <HintPath>Assets/Plugins/Debugger.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.CecilTools">
+      <HintPath>Assets/ToLua/Injection/Editor/Unity.CecilTools.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Cecil.Mdb">
+      <HintPath>Assets/ToLua/Injection/Editor/Unity.Cecil.Mdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Cecil.Pdb">
+      <HintPath>Assets/ToLua/Injection/Editor/Unity.Cecil.Pdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Cecil">
+      <HintPath>Assets/ToLua/Injection/Editor/Unity.Cecil.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>D:/Program Files/Unity/Editor/Data/PlaybackEngines/iOSSupport\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
     </Reference>
@@ -315,10 +333,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="MFrameWork.Plugins.csproj">
-      <Project>{54AB5FF0-F1E7-396C-04A2-B29D898BA0D6}</Project>
-      <Name>MFrameWork.Plugins</Name>
-    </ProjectReference>
     <ProjectReference Include="MFrameWork.csproj">
       <Project>{8D884FC7-D99F-3681-35CC-593B6E009E26}</Project>
       <Name>MFrameWork</Name>
@@ -329,13 +343,41 @@
     <Compile Include="Assets\ThirdParty\Behavior Designer\Editor\ExternalBehaviorTreeInspector.cs" />
     <Compile Include="Assets\ThirdParty\Behavior Designer\Editor\Object Drawers\FloatSliderDrawer.cs" />
     <Compile Include="Assets\ThirdParty\Behavior Designer\Editor\Object Drawers\IntSliderDrawer.cs" />
+    <Compile Include="Assets\ToLua\Editor\Custom\CustomSettings.cs" />
+    <Compile Include="Assets\ToLua\Editor\Extend\ToLua_LuaInterface_EventObject.cs" />
+    <Compile Include="Assets\ToLua\Editor\Extend\ToLua_LuaInterface_LuaConstructor.cs" />
+    <Compile Include="Assets\ToLua\Editor\Extend\ToLua_LuaInterface_LuaField.cs" />
+    <Compile Include="Assets\ToLua\Editor\Extend\ToLua_LuaInterface_LuaMethod.cs" />
+    <Compile Include="Assets\ToLua\Editor\Extend\ToLua_LuaInterface_LuaProperty.cs" />
+    <Compile Include="Assets\ToLua\Editor\Extend\ToLua_System_Delegate.cs" />
+    <Compile Include="Assets\ToLua\Editor\Extend\ToLua_System_Enum.cs" />
+    <Compile Include="Assets\ToLua\Editor\Extend\ToLua_System_Object.cs" />
+    <Compile Include="Assets\ToLua\Editor\Extend\ToLua_System_String.cs" />
+    <Compile Include="Assets\ToLua\Editor\Extend\ToLua_System_Type.cs" />
+    <Compile Include="Assets\ToLua\Editor\Extend\ToLua_UnityEngine_GameObject.cs" />
+    <Compile Include="Assets\ToLua\Editor\Extend\ToLua_UnityEngine_Input.cs" />
+    <Compile Include="Assets\ToLua\Editor\Extend\ToLua_UnityEngine_Object.cs" />
+    <Compile Include="Assets\ToLua\Editor\Extend\ToLua_UnityEngine_RectTransform.cs" />
+    <Compile Include="Assets\ToLua\Editor\ToLuaExport.cs" />
+    <Compile Include="Assets\ToLua\Editor\ToLuaMenu.cs" />
+    <Compile Include="Assets\ToLua\Editor\ToLuaTree.cs" />
+    <Compile Include="Assets\ToLua\Injection\Editor\ToLuaInjection.cs" />
+    <Compile Include="Assets\ToLua\Injection\Editor\ToluaInjectionBlackListPanel.cs" />
+    <Compile Include="Assets\ToLua\Injection\Editor\ToLuaInjectionHelper.cs" />
+    <Compile Include="Assets\ToLua\Injection\Editor\ToLuaText.cs" />
+    <Compile Include="Assets\Tools\Editor\HierarchySet\HierarchyGameObjectEditor.cs" />
     <Compile Include="Assets\Tools\Editor\Localization\LocalizationEditor.cs" />
     <Compile Include="Assets\Tools\Editor\SplitTexture\SplitTextureAlpha.cs" />
     <Compile Include="Assets\Tools\Editor\SplitTexture\TextureSolver.cs" />
+    <Compile Include="Assets\Tools\UI\Editor\LuaUISettingEditor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\Localization\ChineseTable.txt" />
     <None Include="Assets\ThirdParty\Behavior Designer\Editor\GridShader.shader" />
+    <None Include="Assets\ToLua\Injection\InjectionBlackList.txt" />
+    <None Include="Assets\ToLua\Injection\InjectionBridgeEditorInfo.xml" />
+    <None Include="Assets\ToLua\Injection\LuaInjectionSkipPaths.txt" />
+    <None Include="Assets\ToLua\readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
