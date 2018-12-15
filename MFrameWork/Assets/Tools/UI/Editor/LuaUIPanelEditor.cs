@@ -60,7 +60,6 @@ public class LuaUIPanelEditor : Editor
         {
             FindAllCom();
             SetRaycastTarget();
-            FindAllAtlas();
         }
     }
     #endregion
@@ -195,7 +194,6 @@ public class LuaUIPanelEditor : Editor
 
         //返回代码
         bindFunction.statementNodes.Add(new LuaScriptStatementNode("return l_panel"));
-
 
         MFileEx.SaveText(document.ToString(), LuaPanelPath);
     }
@@ -592,36 +590,6 @@ public class LuaUIPanelEditor : Editor
             }
         }, true);
     }
-
-    /// <summary>
-    /// 找到所有图集
-    /// </summary>
-    void FindAllAtlas()
-    {
-        HashSet<string> atlasNames = new HashSet<string>();
-        dfsAtlasNames(gameObject.transform, ref atlasNames);
-        List<string> atlasList = new List<string>();
-        atlasList.AddRange(atlasNames);
-        uiPanel.AtlasNames = atlasList.ToArray();
-    }
-
-    public static void dfsAtlasNames(Transform p, ref HashSet<string> atlasNames)
-    {
-        Image img = p.GetComponent<Image>();
-        if (img && img.sprite && img.material != Image.defaultGraphicMaterial)
-        {
-            if (!LuaUISetting.Instance.IgnoreAtlas.Contains(img.material) &&
-                img.material != LuaUISetting.Instance.DefaultMaterial)
-            {
-                atlasNames.Add(img.material.name);
-            }
-        }
-        for (int i = 0; i < p.childCount; i++)
-        {
-            dfsAtlasNames(p.GetChild(i), ref atlasNames);
-        }
-    }
     #endregion
-
 }
 

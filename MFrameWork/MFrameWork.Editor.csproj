@@ -283,11 +283,29 @@
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/15.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
+    <Reference Include="CString">
+      <HintPath>Assets/Plugins/CString.dll</HintPath>
+    </Reference>
+    <Reference Include="Debugger">
+      <HintPath>Assets/Plugins/Debugger.dll</HintPath>
+    </Reference>
     <Reference Include="BehaviorDesignerEditor">
       <HintPath>Assets/ThirdParty/Behavior Designer/Editor/BehaviorDesignerEditor.dll</HintPath>
     </Reference>
     <Reference Include="BehaviorDesignerRuntime">
       <HintPath>Assets/ThirdParty/Behavior Designer/Runtime/BehaviorDesignerRuntime.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Cecil">
+      <HintPath>Assets/ToLua/Injection/Editor/Unity.Cecil.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Cecil.Mdb">
+      <HintPath>Assets/ToLua/Injection/Editor/Unity.Cecil.Mdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Cecil.Pdb">
+      <HintPath>Assets/ToLua/Injection/Editor/Unity.Cecil.Pdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.CecilTools">
+      <HintPath>Assets/ToLua/Injection/Editor/Unity.CecilTools.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.Advertisements">
       <HintPath>C:/Users/mertenma/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>
@@ -306,24 +324,6 @@
     </Reference>
     <Reference Include="UnityEngine.StandardEvents">
       <HintPath>C:/Users/mertenma/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.10/UnityEngine.StandardEvents.dll</HintPath>
-    </Reference>
-    <Reference Include="CString">
-      <HintPath>Assets/Plugins/CString.dll</HintPath>
-    </Reference>
-    <Reference Include="Debugger">
-      <HintPath>Assets/Plugins/Debugger.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.CecilTools">
-      <HintPath>Assets/ToLua/Injection/Editor/Unity.CecilTools.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Cecil.Mdb">
-      <HintPath>Assets/ToLua/Injection/Editor/Unity.Cecil.Mdb.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Cecil.Pdb">
-      <HintPath>Assets/ToLua/Injection/Editor/Unity.Cecil.Pdb.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Cecil">
-      <HintPath>Assets/ToLua/Injection/Editor/Unity.Cecil.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>D:/Program Files/Unity/Editor/Data/PlaybackEngines/iOSSupport\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
@@ -369,7 +369,9 @@
     <Compile Include="Assets\Tools\Editor\Localization\LocalizationEditor.cs" />
     <Compile Include="Assets\Tools\Editor\SplitTexture\SplitTextureAlpha.cs" />
     <Compile Include="Assets\Tools\Editor\SplitTexture\TextureSolver.cs" />
-    <Compile Include="Assets\Tools\UI\Editor\LuaUISettingEditor.cs" />
+    <Compile Include="Assets\Tools\UI\Editor\LuaUIComEditor.cs" />
+    <Compile Include="Assets\Tools\UI\Editor\LuaUIGroupEditor.cs" />
+    <Compile Include="Assets\Tools\UI\Editor\LuaUIPanelEditor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\Localization\ChineseTable.txt" />

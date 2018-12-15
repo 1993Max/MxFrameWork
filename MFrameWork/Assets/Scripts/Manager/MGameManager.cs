@@ -6,32 +6,57 @@ namespace MFrameWork
 {
     public class MGameManager : MonoBehaviour 
     {
-        private MUIManager  _mUIManager = null;
-        private MResManager _mResManager = null;
+        private List<MBaseSingleton> _mManagerList = null;
 
-    	private void Awake()
+        public List<MBaseSingleton> ManagerList
+        {
+            get
+            {
+                return _mManagerList;
+            }
+        }
+
+        private void Awake()
     	{
-            //GameObject.DestroyObject(this.gameObject);
-             _mUIManager = MUIManager.singleton;
-            _mResManager = MResManager.singleton;
-    	}
+            SetManagerList();
+        }
 
 		private void Start()
 		{
-            ManagerInit();
-		}
-
-		public void ManagerInit()
-        {
-            _mUIManager.Init();
-            _mResManager.Init();
-
             ShowTest();
+        }
+
+		public void SetManagerList()
+        {
+            if (_mManagerList == null)
+            {
+                _mManagerList = new List<MBaseSingleton>();
+            }
+            _mManagerList.Add(MUIManager.singleton);
+            _mManagerList.Add(MResManager.singleton);
+            _mManagerList.Add(MluaManager.singleton);
+            ManagerInit();
+        }
+
+        private void ManagerInit()
+        {
+            for (int i = 0; i < ManagerList.Count; i++)
+            {
+                ManagerList[i].Init();
+            }
+        }
+
+        private void ManagerUnInit()
+        {
+            for (int i = 0; i < ManagerList.Count; i++)
+            {
+                ManagerList[i].UnInit();
+            }
         }
 
         public void ShowTest()
         {
-            _mUIManager.ActiveUI("LoginPanel");
+            MUIManager.singleton.ActiveUI("LoginPanel");
         }
     }
 

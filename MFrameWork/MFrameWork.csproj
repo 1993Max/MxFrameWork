@@ -12,12 +12,15 @@
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
-    <TargetFrameworkProfile></TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2017.4.15f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion>6</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
@@ -238,6 +241,12 @@
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>D:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
+    <Reference Include="CString">
+      <HintPath>Assets/Plugins/CString.dll</HintPath>
+    </Reference>
+    <Reference Include="Debugger">
+      <HintPath>Assets/Plugins/Debugger.dll</HintPath>
+    </Reference>
     <Reference Include="BehaviorDesignerRuntime">
       <HintPath>Assets/ThirdParty/Behavior Designer/Runtime/BehaviorDesignerRuntime.dll</HintPath>
     </Reference>
@@ -250,12 +259,6 @@
     <Reference Include="UnityEngine.StandardEvents">
       <HintPath>C:/Users/mertenma/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.10/UnityEngine.StandardEvents.dll</HintPath>
     </Reference>
-    <Reference Include="CString">
-      <HintPath>Assets/Plugins/CString.dll</HintPath>
-    </Reference>
-    <Reference Include="Debugger">
-      <HintPath>Assets/Plugins/Debugger.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>D:/Program Files/Unity/Editor/Data/PlaybackEngines/iOSSupport\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
     </Reference>
@@ -264,6 +267,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Manager\MluaManager.cs" />
     <Compile Include="Assets\_Learning\_SocketDemo\SocketDemo.cs" />
     <Compile Include="Assets\Scripts\AssetBundle\MAbInfo.cs" />
     <Compile Include="Assets\Scripts\GameLibs\CodeExtend\ArrayEx.cs" />
@@ -377,6 +381,7 @@
     <Compile Include="Assets\Scripts\Manager\MGameManager.cs" />
     <Compile Include="Assets\Scripts\Manager\MLocalizationManager.cs" />
     <Compile Include="Assets\Scripts\Manager\MSharedStringBuilderManager.cs" />
+    <Compile Include="Assets\Scripts\Manager\MUIManager.cs" />
     <Compile Include="Assets\Scripts\Resource\MAssetInfo.cs" />
     <Compile Include="Assets\Scripts\Resource\MIResLoadListener.cs" />
     <Compile Include="Assets\Scripts\Resource\MResLoader.cs" />
@@ -385,17 +390,16 @@
     <Compile Include="Assets\Scripts\Texture\AtlasDataProcess.cs" />
     <Compile Include="Assets\Scripts\Texture\TexturePacker.cs" />
     <Compile Include="Assets\Scripts\Texture\TextureScale.cs" />
-    <Compile Include="Assets\Scripts\UISystem\LogonController.cs" />
     <Compile Include="Assets\Scripts\UISystem\Lua\MLuaUICom.cs" />
     <Compile Include="Assets\Scripts\UISystem\Lua\MLuaUIGroup.cs" />
     <Compile Include="Assets\Scripts\UISystem\Lua\MLuaUIListener.cs" />
     <Compile Include="Assets\Scripts\UISystem\Lua\MLuaUIPanel.cs" />
     <Compile Include="Assets\Scripts\UISystem\Lua\MLuaUISound.cs" />
     <Compile Include="Assets\Scripts\UISystem\MUIBase.cs" />
-    <Compile Include="Assets\Scripts\UISystem\MUIManager.cs" />
-    <Compile Include="Assets\Scripts\UISystem\ScriptGener\CodeGener.cs" />
-    <Compile Include="Assets\Scripts\UISystem\ScriptGener\LuaDocument.cs" />
-    <Compile Include="Assets\Scripts\UISystem\TestController.cs" />
+    <Compile Include="Assets\Scripts\UISystem\ScriptGenerate\CodeGener.cs" />
+    <Compile Include="Assets\Scripts\UISystem\ScriptGenerate\LuaDocument.cs" />
+    <Compile Include="Assets\Scripts\UISystem\UIController\LogonController.cs" />
+    <Compile Include="Assets\Scripts\UISystem\UIController\TestController.cs" />
     <Compile Include="Assets\ThirdParty\Behavior Designer\Runtime\Actions\BehaviorTreeReference.cs" />
     <Compile Include="Assets\ThirdParty\Behavior Designer\Runtime\Actions\Idle.cs" />
     <Compile Include="Assets\ThirdParty\Behavior Designer\Runtime\Actions\Log.cs" />
@@ -1015,10 +1019,6 @@
     <Compile Include="Assets\ToLua\Reflection\LuaProperty.cs" />
     <Compile Include="Assets\ToLua\Reflection\LuaReflection.cs" />
     <Compile Include="Assets\Tools\Common\EditorResources.cs" />
-    <Compile Include="Assets\Tools\LuaUIComEditor.cs" />
-    <Compile Include="Assets\Tools\LuaUIGroupEditor.cs" />
-    <Compile Include="Assets\Tools\LuaUIPanelEditor.cs" />
-    <Compile Include="Assets\Tools\UI\LuaUISetting.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\Localization\ChineseTable.txt" />

@@ -1,19 +1,4 @@
-﻿//***************************
-
-//文件名称(File Name)： MLuaUICom.cs 
-
-//功能描述(Description)： UI控件引用，挂载需要写逻辑的Image，Button，Text等UGUI的控件上
-
-//数据表(Tables)： nothing
-
-//作者(Author)： zzr
-
-//Create Date: 2017.08.10
-
-//修改记录(Revision History)： nothing
-
-//***************************
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
