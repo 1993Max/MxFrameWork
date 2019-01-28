@@ -1,5 +1,5 @@
---<<Create By Mx>>--
---<<主入口函数>>--
+--- Created by mx
+--- DateTime: 2019/1/28 21:45
 
 -- lua垃圾回收设置 避免内存泄露 设置内存回收参数
 collectgarbage("setpause", 100)
@@ -12,11 +12,14 @@ end
 
 --Lua 逻辑入口
 function Start()
-	
+    require "Game"
+    declareGlobal("game", Game.new())
+    game:Init()
+    log("lua logic start")
 end
 
 function Close()
-	
+	game:Uninit()
 end
 
 --场景切换内存回收
@@ -27,6 +30,3 @@ end
 function ShowLog(str)
 	
 end
-
-print("This is a script from a utf8 file")
-
