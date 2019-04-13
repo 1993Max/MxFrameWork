@@ -40,6 +40,7 @@ public class MPathUtils
     public const string EFFECTRES_DIRC = "Assets/artres/_GameRes/Effects";
     public const string ITEMRES_DIRC = "Assets/artres/_GameRes/Item";
     public const string PALETTE_DIRC = "Assets/artres/_Creature/Palette";
+    public const string UIPrefab_DIRC = "Assets/artres/Resources/UI/Prefab";
     #endregion
 
     #region 美术发布资源目录
