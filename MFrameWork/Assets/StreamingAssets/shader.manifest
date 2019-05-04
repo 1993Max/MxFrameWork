@@ -1,0 +1,37 @@
+ManifestFileVersion: 0
+CRC: 133569027
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 9122c3ff72d85dd775b567c88b3d73d6
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 6f165f44e4778b6c9d85e7a145a54cb1
+HashAppended: 0
+ClassTypes:
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+Assets:
+- "Assets/Resources/Shader/A\u6700\u7B80\u5355\u7684\u9876\u70B9\u7740\u8272\u5668/Demo_02.mat"
+- "Assets/Resources/Shader/A\u6700\u7B80\u5355\u7684\u9876\u70B9\u7740\u8272\u5668/Demo_04.mat"
+- "Assets/Resources/Shader/A\u6700\u7B80\u5355\u7684\u9876\u70B9\u7740\u8272\u5668/VertexShader_02.shader"
+- "Assets/Resources/Shader/B\u57FA\u7840\u5149\u7167/SpecularVertex_03.mat"
+- "Assets/Resources/Shader/A\u6700\u7B80\u5355\u7684\u9876\u70B9\u7740\u8272\u5668/Demo_01.mat"
+- "Assets/Resources/Shader/B\u57FA\u7840\u5149\u7167/DiffuseVertexDemo_01.mat"
+- "Assets/Resources/Shader/A\u6700\u7B80\u5355\u7684\u9876\u70B9\u7740\u8272\u5668/VertexShader_03.shader"
+- "Assets/Resources/Shader/D\u900F\u660E/AlphaTestMat.shader"
+- "Assets/Resources/Shader/A\u6700\u7B80\u5355\u7684\u9876\u70B9\u7740\u8272\u5668/Demo_03.mat"
+- "Assets/Resources/Shader/D\u900F\u660E/AlphaTest.mat"
+- "Assets/Resources/Shader/A\u6700\u7B80\u5355\u7684\u9876\u70B9\u7740\u8272\u5668/VertexShader_04.shader"
+- "Assets/Resources/Shader/Z\u540E\u5904\u7406/ColorSet.shader"
+- "Assets/Resources/Shader/B\u57FA\u7840\u5149\u7167/DiffusePexelLevelDemo_02.mat"
+- "Assets/Resources/Shader/Z\u540E\u5904\u7406/EdgeSet.shader"
+- "Assets/Resources/Shader/B\u57FA\u7840\u5149\u7167/DiffusePixelLevel_02.shader"
+- "Assets/Resources/Shader/B\u57FA\u7840\u5149\u7167/DiffuseVertex_01.shader"
+- "Assets/Resources/Shader/B\u57FA\u7840\u5149\u7167/SpecularVertex_03.shader"
+- "Assets/Resources/Shader/A\u6700\u7B80\u5355\u7684\u9876\u70B9\u7740\u8272\u5668/VertexShader_01.shader"
+Dependencies: []

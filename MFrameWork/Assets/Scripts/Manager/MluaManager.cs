@@ -7,7 +7,7 @@ using LuaInterface;
 
 namespace MFrameWork
 {
-    public class MluaManager : MSingleton<MluaManager>
+    public class MLuaManager : MSingleton<MLuaManager>
     {
         private LuaState _mLuaState = null;
 

@@ -338,7 +338,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\_Learning\_SocketDemo\SocketDemo.cs" />
-    <Compile Include="Assets\Scripts\AssetBundle\MAbInfo.cs" />
+    <Compile Include="Assets\Scripts\AssetBundle\MAssetBundleBase.cs" />
+    <Compile Include="Assets\Scripts\AssetBundle\MAssetBundleConfig.cs" />
+    <Compile Include="Assets\Scripts\AssetBundle\MassetBundleLoader.cs" />
     <Compile Include="Assets\Scripts\GameLibs\CodeExtend\ArrayEx.cs" />
     <Compile Include="Assets\Scripts\GameLibs\CodeExtend\ColorEx.cs" />
     <Compile Include="Assets\Scripts\GameLibs\CodeExtend\ComponentEx.cs" />
@@ -365,8 +367,8 @@
     <Compile Include="Assets\Scripts\GameLibs\MException.cs" />
     <Compile Include="Assets\Scripts\GameLibs\MiniJson\MiniJSON.cs" />
     <Compile Include="Assets\Scripts\GameLibs\MonoSigonleton.cs" />
+    <Compile Include="Assets\Scripts\GameLibs\MPathUtils.cs" />
     <Compile Include="Assets\Scripts\GameLibs\MSingleton.cs" />
-    <Compile Include="Assets\Scripts\GameLibs\PathUtils.cs" />
     <Compile Include="Assets\Scripts\Generate\DelegateFactory.cs" />
     <Compile Include="Assets\Scripts\Generate\LuaBinder.cs" />
     <Compile Include="Assets\Scripts\Generate\LuaInterface_DebuggerWrap.cs" />
@@ -424,16 +426,15 @@
     <Compile Include="Assets\Scripts\Generate\UnityEngine_TransformWrap.cs" />
     <Compile Include="Assets\Scripts\Generate\UnityEngine_WrapModeWrap.cs" />
     <Compile Include="Assets\Scripts\Generate\UnityEngine_WWWWrap.cs" />
-    <Compile Include="Assets\Scripts\Helper\GUIHelper.cs" />
     <Compile Include="Assets\Scripts\Helper\MArrayHelper.cs" />
     <Compile Include="Assets\Scripts\Helper\MBase64Helper.cs" />
     <Compile Include="Assets\Scripts\Helper\MCommonHelper.cs" />
     <Compile Include="Assets\Scripts\Helper\MCoordinateHelper.cs" />
     <Compile Include="Assets\Scripts\Helper\MCopyHelper.cs" />
+    <Compile Include="Assets\Scripts\Helper\MCrcHelper.cs" />
     <Compile Include="Assets\Scripts\Helper\MDelayHelper.cs" />
     <Compile Include="Assets\Scripts\Helper\MDelegateHelper.cs" />
     <Compile Include="Assets\Scripts\Helper\MDictionaryHelper.cs" />
-    <Compile Include="Assets\Scripts\Helper\MFileHelper.cs" />
     <Compile Include="Assets\Scripts\Helper\MFindHelper.cs" />
     <Compile Include="Assets\Scripts\Helper\MListHelper.cs" />
     <Compile Include="Assets\Scripts\Helper\MLuaCommonHelper.cs" />
@@ -447,19 +448,23 @@
     <Compile Include="Assets\Scripts\Helper\MTypeHelper.cs" />
     <Compile Include="Assets\Scripts\Helper\MUnityHelper.cs" />
     <Compile Include="Assets\Scripts\Helper\MWeakReferenceHelper.cs" />
+    <Compile Include="Assets\Scripts\Manager\MAssetBundleManager.cs" />
+    <Compile Include="Assets\Scripts\Manager\MClassObjectManager.cs" />
     <Compile Include="Assets\Scripts\Manager\MGameManager.cs" />
     <Compile Include="Assets\Scripts\Manager\MLocalizationManager.cs" />
-    <Compile Include="Assets\Scripts\Manager\MluaManager.cs" />
+    <Compile Include="Assets\Scripts\Manager\MLuaManager.cs" />
+    <Compile Include="Assets\Scripts\Manager\MResourceManager.cs" />
     <Compile Include="Assets\Scripts\Manager\MSharedStringBuilderManager.cs" />
     <Compile Include="Assets\Scripts\Manager\MUIManager.cs" />
+    <Compile Include="Assets\Scripts\Pool\MClassObjectPool.cs" />
+    <Compile Include="Assets\Scripts\PostEffect\ColorAdjustEffect.cs" />
+    <Compile Include="Assets\Scripts\PostEffect\EdgeEffect.cs" />
+    <Compile Include="Assets\Scripts\PostEffect\PostEffectBase.cs" />
     <Compile Include="Assets\Scripts\Resource\MAssetInfo.cs" />
     <Compile Include="Assets\Scripts\Resource\MIResLoadListener.cs" />
     <Compile Include="Assets\Scripts\Resource\MResLoader.cs" />
     <Compile Include="Assets\Scripts\Resource\MResManager.cs" />
     <Compile Include="Assets\Scripts\Resource\MResPool.cs" />
-    <Compile Include="Assets\Scripts\Texture\AtlasDataProcess.cs" />
-    <Compile Include="Assets\Scripts\Texture\TexturePacker.cs" />
-    <Compile Include="Assets\Scripts\Texture\TextureScale.cs" />
     <Compile Include="Assets\Scripts\UISystem\Lua\MLuaUICom.cs" />
     <Compile Include="Assets\Scripts\UISystem\Lua\MLuaUIGroup.cs" />
     <Compile Include="Assets\Scripts\UISystem\Lua\MLuaUIListener.cs" />
@@ -1088,8 +1093,12 @@
     <Compile Include="Assets\ToLua\Reflection\LuaMethod.cs" />
     <Compile Include="Assets\ToLua\Reflection\LuaProperty.cs" />
     <Compile Include="Assets\ToLua\Reflection\LuaReflection.cs" />
+    <Compile Include="Assets\Scripts\AssetBundle\MResourceItem.cs" />
+    <Compile Include="Assets\Scripts\AssetBundle\MAssetBundleItem.cs" />
+    <Compile Include="Assets\Scripts\AssetBundle\MDoubleLinkedList.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Resources\GameData\AssetBundleData\MAssetBundleConfig.xml" />
     <None Include="Assets\Resources\Localization\ChineseTable.txt" />
     <None Include="Assets\Resources\Shader\A最简单的顶点着色器\VertexShader_01.shader" />
     <None Include="Assets\Resources\Shader\A最简单的顶点着色器\VertexShader_02.shader" />
@@ -1099,6 +1108,8 @@
     <None Include="Assets\Resources\Shader\B基础光照\DiffuseVertex_01.shader" />
     <None Include="Assets\Resources\Shader\B基础光照\SpecularVertex_03.shader" />
     <None Include="Assets\Resources\Shader\D透明\AlphaTestMat.shader" />
+    <None Include="Assets\Resources\Shader\Z后处理\ColorSet.shader" />
+    <None Include="Assets\Resources\Shader\Z后处理\EdgeSet.shader" />
     <None Include="Assets\ThirdParty\Behavior Designer\Editor\GridShader.shader" />
     <None Include="Assets\ToLua\Injection\InjectionBlackList.txt" />
     <None Include="Assets\ToLua\Injection\InjectionBridgeEditorInfo.xml" />

@@ -93,7 +93,7 @@ public class ExcuteLuaWindow : EditorWindow
             return;
         }
         
-        if (MluaManager.singleton.MLuaState != null)
-            MluaManager.singleton.MLuaState.DoString(str);
+        if (MLuaManager.singleton.MLuaState != null)
+            MLuaManager.singleton.MLuaState.DoString(str);
     }
 }

@@ -69,28 +69,6 @@ namespace MFrameWork
             return result;
         }
 
-        public static void SaveTexture(Texture2D texture, string path, bool destroyAfterSave = true)
-        {
-            if (!Directory.Exists(path))
-                Directory.CreateDirectory(Path.GetDirectoryName(path));
-
-            var mipPath = MSharedStringBuilderManager.Get().Append(path).Append(".mip").ToString();
-            var mipTexture = Object.Instantiate(texture);
-            TextureScale.Bilinear(mipTexture, texture.width / 8, texture.height / 8);
-
-            var bytes = texture.EncodeToPNG();
-            File.WriteAllBytes(path, bytes);
-
-            bytes = mipTexture.EncodeToPNG();
-            File.WriteAllBytes(mipPath, bytes);
-
-            Object.Destroy(mipTexture);
-            if (destroyAfterSave)
-            {
-                Object.Destroy(texture);
-            }
-        }
-
         public static Texture2D OpenTexture(int width, int height, string path)
         {
             FileInfo file = new FileInfo(path);

@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<MAssetBundleConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <AssetBundleList>
+    <Crc>1336049080</Crc>
+    <Path>Assets/Resources/GameData/AssetBundleData/AssetBundleConfig.asset</Path>
+    <AbName>assetbundledata</AbName>
+    <AssetName>AssetBundleConfig.asset</AssetName>
+    <AbDependence />
+  </AssetBundleList>
+  <AssetBundleList>
+    <Crc>442652926</Crc>
+    <Path>Assets/Resources/GameData/AssetBundleData/MAssetBundleConfig.bytes</Path>
+    <AbName>assetbundledata</AbName>
+    <AssetName>MAssetBundleConfig.bytes</AssetName>
+    <AbDependence />
+  </AssetBundleList>
+  <AssetBundleList>
+    <Crc>3928134064</Crc>
+    <Path>Assets/Resources/GameData/AssetBundleData/MAssetBundleConfig.xml</Path>
+    <AbName>assetbundledata</AbName>
+    <AssetName>MAssetBundleConfig.xml</AssetName>
+    <AbDependence />
+  </AssetBundleList>
+  <AssetBundleList>
+    <Crc>195196491</Crc>
+    <Path>Assets/Resources/UI/Prefabs/LoginPanel.prefab</Path>
+    <AbName>loginpanel</AbName>
+    <AssetName>LoginPanel.prefab</AssetName>
+    <AbDependence />
+  </AssetBundleList>
+  <AssetBundleList>
+    <Crc>1243657482</Crc>
+    <Path>Assets/Resources/Shader/A最简单的顶点着色器/Demo_01.mat</Path>
+    <AbName>shader</AbName>
+    <AssetName>Demo_01.mat</AssetName>
+    <AbDependence />
+  </AssetBundleList>
+  <AssetBundleList>
+    <Crc>2436308381</Crc>
+    <Path>Assets/Resources/Shader/A最简单的顶点着色器/Demo_02.mat</Path>
+    <AbName>shader</AbName>
+    <AssetName>Demo_02.mat</AssetName>
+    <AbDependence />
+  </AssetBundleList>
+  <AssetBundleList>
+    <Crc>3627710992</Crc>
+    <Path>Assets/Resources/Shader/A最简单的顶点着色器/Demo_03.mat</Path>
+    <AbName>shader</AbName>
+    <AssetName>Demo_03.mat</AssetName>
+    <AbDependence />
+  </AssetBundleList>
+  <AssetBundleList>
+    <Crc>601444612</Crc>
+    <Path>Assets/Resources/Shader/A最简单的顶点着色器/Demo_04.mat</Path>
+    <AbName>shader</AbName>
+    <AssetName>Demo_04.mat</AssetName>
+    <AbDependence />
+  </AssetBundleList>
+  <AssetBundleList>
+    <Crc>3425798707</Crc>
+    <Path>Assets/Resources/Shader/A最简单的顶点着色器/VertexShader_01.shader</Path>
+    <AbName>shader</AbName>
+    <AssetName>VertexShader_01.shader</AssetName>
+    <AbDependence />
+  </AssetBundleList>
+  <AssetBundleList>
+    <Crc>550760301</Crc>
+    <Path>Assets/Resources/Shader/A最简单的顶点着色器/VertexShader_02.shader</Path>
+    <AbName>shader</AbName>
+    <AssetName>VertexShader_02.shader</AssetName>
+    <AbDependence />
+  </AssetBundleList>
+  <AssetBundleList>
+    <Crc>2071081895</Crc>
+    <Path>Assets/Resources/Shader/A最简单的顶点着色器/VertexShader_03.shader</Path>
+    <AbName>shader</AbName>
+    <AssetName>VertexShader_03.shader</AssetName>
+    <AbDependence />
+  </AssetBundleList>
+  <AssetBundleList>
+    <Crc>4258674790</Crc>
+    <Path>Assets/Resources/Shader/A最简单的顶点着色器/VertexShader_04.shader</Path>
+    <AbName>shader</AbName>
+    <AssetName>VertexShader_04.shader</AssetName>
+    <AbDependence />
+  </AssetBundleList>
+  <AssetBundleList>
+    <Crc>3118016694</Crc>
+    <Path>Assets/Resources/Shader/B基础光照/DiffusePexelLevelDemo_02.mat</Path>
+    <AbName>shader</AbName>
+    <AssetName>DiffusePexelLevelDemo_02.mat</AssetName>
+    <AbDependence />
+  </AssetBundleList>
+  <AssetBundleList>
+    <Crc>580295477</Crc>
+    <Path>Assets/Resources/Shader/B基础光照/DiffusePixelLevel_02.shader</Path>
+    <AbName>shader</AbName>
+    <AssetName>DiffusePixelLevel_02.shader</AssetName>
+    <AbDependence />
+  </AssetBundleList>
+  <AssetBundleList>
+    <Crc>2808399692</Crc>
+    <Path>Assets/Resources/Shader/B基础光照/DiffuseVertex_01.shader</Path>
+    <AbName>shader</AbName>
+    <AssetName>DiffuseVertex_01.shader</AssetName>
+    <AbDependence />
+  </AssetBundleList>
+  <AssetBundleList>
+    <Crc>2286210534</Crc>
+    <Path>Assets/Resources/Shader/B基础光照/DiffuseVertexDemo_01.mat</Path>
+    <AbName>shader</AbName>
+    <AssetName>DiffuseVertexDemo_01.mat</AssetName>
+    <AbDependence />
+  </AssetBundleList>
+  <AssetBundleList>
+    <Crc>3961736275</Crc>
+    <Path>Assets/Resources/Shader/B基础光照/SpecularVertex_03.mat</Path>
+    <AbName>shader</AbName>
+    <AssetName>SpecularVertex_03.mat</AssetName>
+    <AbDependence />
+  </AssetBundleList>
+  <AssetBundleList>
+    <Crc>2535861429</Crc>
+    <Path>Assets/Resources/Shader/B基础光照/SpecularVertex_03.shader</Path>
+    <AbName>shader</AbName>
+    <AssetName>SpecularVertex_03.shader</AssetName>
+    <AbDependence />
+  </AssetBundleList>
+  <AssetBundleList>
+    <Crc>1952352986</Crc>
+    <Path>Assets/Resources/Shader/D透明/AlphaTest.mat</Path>
+    <AbName>shader</AbName>
+    <AssetName>AlphaTest.mat</AssetName>
+    <AbDependence />
+  </AssetBundleList>
+  <AssetBundleList>
+    <Crc>2266894726</Crc>
+    <Path>Assets/Resources/Shader/D透明/AlphaTestMat.shader</Path>
+    <AbName>shader</AbName>
+    <AssetName>AlphaTestMat.shader</AssetName>
+    <AbDependence />
+  </AssetBundleList>
+  <AssetBundleList>
+    <Crc>1139214884</Crc>
+    <Path>Assets/Resources/Shader/Z后处理/ColorSet.shader</Path>
+    <AbName>shader</AbName>
+    <AssetName>ColorSet.shader</AssetName>
+    <AbDependence />
+  </AssetBundleList>
+  <AssetBundleList>
+    <Crc>2484461602</Crc>
+    <Path>Assets/Resources/Shader/Z后处理/EdgeSet.shader</Path>
+    <AbName>shader</AbName>
+    <AssetName>EdgeSet.shader</AssetName>
+    <AbDependence />
+  </AssetBundleList>
+  <AssetBundleList>
+    <Crc>1259503316</Crc>
+    <Path>Assets/Resources/UI/Prefabs/TestPrefab.prefab</Path>
+    <AbName>testprefab</AbName>
+    <AssetName>TestPrefab.prefab</AssetName>
+    <AbDependence>
+      <string>texture</string>
+      <string>shader</string>
+    </AbDependence>
+  </AssetBundleList>
+  <AssetBundleList>
+    <Crc>1050408964</Crc>
+    <Path>Assets/Resources/Texture/PostPic.png</Path>
+    <AbName>texture</AbName>
+    <AssetName>PostPic.png</AssetName>
+    <AbDependence />
+  </AssetBundleList>
+  <AssetBundleList>
+    <Crc>568734635</Crc>
+    <Path>Assets/Resources/UI/Prefabs/UIRoot.prefab</Path>
+    <AbName>uiroot</AbName>
+    <AssetName>UIRoot.prefab</AssetName>
+    <AbDependence />
+  </AssetBundleList>
+</MAssetBundleConfig>

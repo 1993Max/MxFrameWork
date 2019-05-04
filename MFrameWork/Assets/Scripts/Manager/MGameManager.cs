@@ -34,7 +34,9 @@ namespace MFrameWork
             }
             _mManagerList.Add(MUIManager.singleton);
             _mManagerList.Add(MResManager.singleton);
-            _mManagerList.Add(MluaManager.singleton);
+            _mManagerList.Add(MLuaManager.singleton);
+            _mManagerList.Add(MClassObjectManager.singleton);
+            _mManagerList.Add(MAssetBundleManager.singleton);
             ManagerInit();
         }
 

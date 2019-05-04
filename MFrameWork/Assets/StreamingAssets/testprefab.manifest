@@ -1,0 +1,30 @@
+ManifestFileVersion: 0
+CRC: 328307499
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 2a3b46c1cf12f9b420ecadb8112165de
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 626bb35cda2251931d6eae604d22251d
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: -98529514, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 222
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/UI/Prefabs/TestPrefab.prefab
+Dependencies:
+- /Users/Max/MxFrameWork/MFrameWork/Assets/StreamingAssets/shader
+- /Users/Max/MxFrameWork/MFrameWork/Assets/StreamingAssets/texture

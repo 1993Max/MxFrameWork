@@ -369,19 +369,20 @@
     <Compile Include="Assets\ToLua\Injection\Editor\ToluaInjectionBlackListPanel.cs" />
     <Compile Include="Assets\ToLua\Injection\Editor\ToLuaInjectionHelper.cs" />
     <Compile Include="Assets\ToLua\Injection\Editor\ToLuaText.cs" />
+    <Compile Include="Assets\Tools\Editor\AssetBundleBuild\AssetBundleBuildConfig.cs" />
+    <Compile Include="Assets\Tools\Editor\AssetBundleBuild\AssetBundleBuildTools.cs" />
     <Compile Include="Assets\Tools\Editor\Common\EditorResources.cs" />
     <Compile Include="Assets\Tools\Editor\FindRefrence\FindReference.cs" />
     <Compile Include="Assets\Tools\Editor\HierarchySet\HierarchyGameObjectEditor.cs" />
     <Compile Include="Assets\Tools\Editor\Localization\LocalizationEditor.cs" />
     <Compile Include="Assets\Tools\Editor\LuaFastTool\LuaFastTest.cs" />
-    <Compile Include="Assets\Tools\Editor\SplitTexture\SplitTextureAlpha.cs" />
-    <Compile Include="Assets\Tools\Editor\SplitTexture\TextureSolver.cs" />
     <Compile Include="Assets\Tools\Editor\UIEditorCom\LuaUIComEditor.cs" />
     <Compile Include="Assets\Tools\Editor\UIEditorCom\LuaUIGroupEditor.cs" />
     <Compile Include="Assets\Tools\Editor\UIEditorCom\LuaUIPanelEditor.cs" />
     <Compile Include="Assets\Tools\Editor\UITools\FastReplace\UIPrefabFastReplaceTools.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Resources\GameData\AssetBundleData\MAssetBundleConfig.xml" />
     <None Include="Assets\Resources\Localization\ChineseTable.txt" />
     <None Include="Assets\Resources\Shader\A最简单的顶点着色器\VertexShader_01.shader" />
     <None Include="Assets\Resources\Shader\A最简单的顶点着色器\VertexShader_02.shader" />
@@ -391,6 +392,8 @@
     <None Include="Assets\Resources\Shader\B基础光照\DiffuseVertex_01.shader" />
     <None Include="Assets\Resources\Shader\B基础光照\SpecularVertex_03.shader" />
     <None Include="Assets\Resources\Shader\D透明\AlphaTestMat.shader" />
+    <None Include="Assets\Resources\Shader\Z后处理\ColorSet.shader" />
+    <None Include="Assets\Resources\Shader\Z后处理\EdgeSet.shader" />
     <None Include="Assets\ThirdParty\Behavior Designer\Editor\GridShader.shader" />
     <None Include="Assets\ToLua\Injection\InjectionBlackList.txt" />
     <None Include="Assets\ToLua\Injection\InjectionBridgeEditorInfo.xml" />

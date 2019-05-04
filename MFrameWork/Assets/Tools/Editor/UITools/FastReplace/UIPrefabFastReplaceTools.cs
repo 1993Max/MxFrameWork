@@ -51,7 +51,7 @@ public class UIPrefabFastReplaceTools : EditorWindow
     static void LoadResources()
     {
         prefabs.Clear();
-        var assets = AssetDatabase.FindAssets("t:prefab", new string[] { MPathUtils.UIRES_PATH + "Prefab" });
+        var assets = AssetDatabase.FindAssets("t:prefab", new string[] { "Assets/artres/_UI/Prefab" });
         for (int i = 0; i < assets.Length; i++)
         {
             assets[i] = AssetDatabase.GUIDToAssetPath(assets[i]);

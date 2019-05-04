@@ -9,15 +9,15 @@ public class FindReference : EditorWindow
 
     private static string[] _AllResPaths = new string[]
     {
-        MPathUtils.CREATURE_DIRC,
-        MPathUtils.GAMERES_DIRC,
-        MPathUtils.UIRES_DIRC,
-        MPathUtils.RESOURCES_DIRC
+        "Assets/artres/_Creature",
+        "Assets/artres/_GameRes",
+        "Assets/artres/_UI",
+        "Assets/artres/Resources"
     };
 
     private static string[] _UIPrefabPaths = new string[]
     {
-        MPathUtils.UIPrefab_DIRC,
+        "Assets/artres/Resources/UI/Prefab",
     };
 
     [MenuItem("MSimpleTools/FindReference(查找引用)/FindAllRefrence(查找引用关系)")]

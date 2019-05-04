@@ -1,25 +1,45 @@
 ﻿<Properties StartupConfiguration="{8D884FC7-D99F-3681-35CC-593B6E009E26}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Tools/Editor/FindRefrence/FindReference.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/AssetBundle/MDoubleLinkedList.cs">
     <Files>
-      <File FileName="Assets/Scripts/Manager/MGameManager.cs" Line="7" Column="47" />
-      <File FileName="Assets/Scripts/Manager/MluaManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GameLibs/MSingleton.cs" Line="5" Column="27" />
-      <File FileName="Assets/ToLua/Core/LuaStatePtr.cs" Line="91" Column="21" />
-      <File FileName="Assets/Tools/Editor/SplitTexture/SplitTextureAlpha.cs" Line="9" Column="14" />
-      <File FileName="Assets/Scripts/Manager/MSharedStringBuilderManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Manager/MUIManager.cs" Line="27" Column="38" />
-      <File FileName="Assets/Scripts/UISystem/Lua/MLuaUICom.cs" Line="39" Column="10" />
-      <File FileName="Assets/Scripts/UISystem/Lua/MLuaUIGroup.cs" Line="31" Column="1" />
-      <File FileName="Assets/Tools/Editor/UIEditorCom/LuaUIPanelEditor.cs" Line="220" Column="36" />
-      <File FileName="Assets/Tools/Editor/FindRefrence/FindReference.cs" Line="28" Column="64" />
-      <File FileName="Assets/Tools/Editor/LuaFastTool/LuaFastTest.cs" Line="14" Column="5" />
+      <File FileName="Assets/Scripts/AssetBundle/MDoubleLinkedList.cs" Line="166" Column="72" />
+      <File FileName="Assets/Scripts/AssetBundle/MAssetBundleConfig.cs" Line="1" Column="1" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="MFrameWork" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="Resources" expanded="True">
+                <Node name="GameData" expanded="True">
+                  <Node name="AssetBundleData" expanded="True" />
+                </Node>
+              </Node>
+              <Node name="Scripts" expanded="True">
+                <Node name="AssetBundle" expanded="True">
+                  <Node name="MDoubleLinkedList.cs" selected="True" />
+                </Node>
+              </Node>
+              <Node name="Tools" expanded="True">
+                <Node name="Editor" expanded="True">
+                  <Node name="AssetBundleBuild" expanded="True" />
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.UnitTesting.TestPad">
+        <State name="__root__">
+          <Node name="MFrameWork" expanded="True" selected="True" />
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.MFrameWork PreferredExecutionTarget="e04e0765-8697-43fb-bb2a-228064ac4a27" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.ItemProperties.MFrameWork PreferredExecutionTarget="Unity.Editor" />
 </Properties>

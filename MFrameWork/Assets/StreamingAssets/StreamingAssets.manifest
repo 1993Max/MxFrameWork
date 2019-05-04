@@ -1,0 +1,24 @@
+ManifestFileVersion: 0
+CRC: 1819727844
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: shader
+      Dependencies: {}
+    Info_1:
+      Name: texture
+      Dependencies: {}
+    Info_2:
+      Name: assetbundledata
+      Dependencies: {}
+    Info_3:
+      Name: loginpanel
+      Dependencies: {}
+    Info_4:
+      Name: testprefab
+      Dependencies:
+        Dependency_0: shader
+        Dependency_1: texture
+    Info_5:
+      Name: uiroot
+      Dependencies: {}

@@ -283,7 +283,6 @@ MonoBehaviour:
   - {fileID: 114113130874784878}
   - {fileID: 114523645582999258}
   Groups: []
-  AtlasNames: []
   HandlerRef: {fileID: 0}
 --- !u!114 &114342255316749506
 MonoBehaviour:

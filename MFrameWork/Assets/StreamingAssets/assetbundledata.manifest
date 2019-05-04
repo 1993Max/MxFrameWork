@@ -1,0 +1,22 @@
+ManifestFileVersion: 0
+CRC: 3461959777
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: f9c1890560078e0298ca500972e29fca
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: bd8366d795247f8643fdfe80f600808c
+HashAppended: 0
+ClassTypes:
+- Class: 49
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 869b6a754411a484d865241b94185c55, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/GameData/AssetBundleData/MAssetBundleConfig.xml
+- Assets/Resources/GameData/AssetBundleData/MAssetBundleConfig.bytes
+- Assets/Resources/GameData/AssetBundleData/AssetBundleConfig.asset
+Dependencies: []
