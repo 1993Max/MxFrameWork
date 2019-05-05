@@ -54,7 +54,7 @@ namespace MFrameWork
             return AddToHead(mDoubleLinkedListNode);
         }
 
-        private MDoubleLinkedListNode<T> AddToHead(MDoubleLinkedListNode<T> mDoubleLinkedListNode)
+        public MDoubleLinkedListNode<T> AddToHead(MDoubleLinkedListNode<T> mDoubleLinkedListNode)
         {
             if (mDoubleLinkedListNode == null)
                 return null;
@@ -109,7 +109,7 @@ namespace MFrameWork
         }
 
         //移除一个节点
-        public void ReMoveNode(MDoubleLinkedListNode<T> mDoubleLinkedListNode) 
+        public void RemoveNode(MDoubleLinkedListNode<T> mDoubleLinkedListNode) 
         {
             if (mDoubleLinkedListNode == null)
                 return;
@@ -161,8 +161,92 @@ namespace MFrameWork
         }
     }
 
-    public class MMapList<T> where T : class, new() 
+    //封装双项链表
+    public class CMapList<T> where T : class, new()
     {
-        MDoubleLinkedList<T> m_doubleLink = new MDoubleLinkedList<T>();
+        MDoubleLinkedList<T> mDoubleLinkedList = new MDoubleLinkedList<T>();
+
+        Dictionary<T, MDoubleLinkedListNode<T>> m_findMap = new Dictionary<T, MDoubleLinkedListNode<T>>();
+
+        ~CMapList() {
+            Clear();
+        }
+
+        //插入到表头
+        public void InsertToHead(T t) 
+        {
+            MDoubleLinkedListNode<T> mDoubleLinkedListNode = null;
+            if(m_findMap.TryGetValue(t,out mDoubleLinkedListNode) && mDoubleLinkedListNode!= null) 
+            {
+                mDoubleLinkedList.AddToHead(mDoubleLinkedListNode);
+                return;
+            }
+            mDoubleLinkedList.AddToHead(mDoubleLinkedListNode);
+            m_findMap.Add(t, mDoubleLinkedList.m_head);
+        }
+
+        //从表尾部 弹出一个节点
+        public void Pop() 
+        {
+            if (mDoubleLinkedList.m_tail != null) 
+            {
+                Remove(mDoubleLinkedList.m_tail.m_t);
+            }
+        }
+
+        //删除某一个节点
+        public void Remove(T t) 
+        {
+            MDoubleLinkedListNode<T> mDoubleLinkedListNode = null;
+            if (!m_findMap.TryGetValue(t, out mDoubleLinkedListNode) || mDoubleLinkedListNode != null)
+            {
+                return;
+            }
+            mDoubleLinkedList.RemoveNode(mDoubleLinkedListNode);
+        }
+
+        //获取尾部节点
+        public T GetTail() 
+        {
+            return mDoubleLinkedList.m_tail == null ? null : mDoubleLinkedList.m_tail.m_t;
+        }
+
+        //返回大小
+        public int Size() 
+        {
+            return m_findMap.Count; 
+        }
+
+        //是否存在某一个元素
+        public bool IsContain(T t)
+        {
+            MDoubleLinkedListNode<T> mDoubleLinkedListNode = null;
+            if (!m_findMap.TryGetValue(t, out mDoubleLinkedListNode) || mDoubleLinkedListNode == null)
+            {
+                return false;
+            }
+            return mDoubleLinkedListNode!=null;
+        }
+
+        //移动某个元素到头部
+        public bool MoveToHead(T t) 
+        {
+            MDoubleLinkedListNode<T> mDoubleLinkedListNode = null;
+            if (!m_findMap.TryGetValue(t, out mDoubleLinkedListNode) || mDoubleLinkedListNode == null)
+            {
+                return mDoubleLinkedListNode != null;
+            }
+            mDoubleLinkedList.MoveNodeToHead(mDoubleLinkedListNode);
+            return true;
+        }
+
+        //清空双项列表
+        public void Clear() 
+        {
+            while(mDoubleLinkedList.m_tail != null) 
+            {
+                Remove(mDoubleLinkedList.m_tail.m_t);
+            }
+        }
     }
 }

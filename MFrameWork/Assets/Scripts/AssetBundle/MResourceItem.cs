@@ -27,5 +27,31 @@ namespace MFrameWork
         public List<string> m_abDependence = null;
         //该资源加载的AB文件
         public AssetBundle m_assetBundle = null;
+
+        //--------------以下下为资源相关
+
+        //资源对象
+        public UnityEngine.Object m_object = null;
+        //资源最后使用时间
+        public float m_lastUseTime = 0.0f;
+        //引用计数
+        private int m_refCount = 0;
+
+        public int RefCount
+        {
+            get
+            {
+                return m_refCount;
+            }
+
+            set
+            {
+                m_refCount = value;
+                if (m_refCount < 0) 
+                {
+                     
+                }
+            }
+        }
     }
 }
