@@ -20,3 +20,5 @@ MonoBehaviour:
     abName: Texture
   - abDir: Assets/Resources/GameData/AssetBundleData
     abName: AssetBundleData
+  - abDir: Assets/Resources/Sound
+    abName: Sound

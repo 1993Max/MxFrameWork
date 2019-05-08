@@ -155,6 +155,13 @@
     <AbDependence />
   </AssetBundleList>
   <AssetBundleList>
+    <Crc>2468828386</Crc>
+    <Path>Assets/Resources/Sound/lemon.mp3</Path>
+    <AbName>sound</AbName>
+    <AssetName>lemon.mp3</AssetName>
+    <AbDependence />
+  </AssetBundleList>
+  <AssetBundleList>
     <Crc>1259503316</Crc>
     <Path>Assets/Resources/UI/Prefabs/TestPrefab.prefab</Path>
     <AbName>testprefab</AbName>

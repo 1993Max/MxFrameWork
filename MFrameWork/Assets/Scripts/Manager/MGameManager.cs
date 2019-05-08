@@ -8,6 +8,8 @@ namespace MFrameWork
     {
         private List<MBaseSingleton> _mManagerList = null;
 
+        public AudioSource mAudioSource;
+
         public List<MBaseSingleton> ManagerList
         {
             get
@@ -26,7 +28,24 @@ namespace MFrameWork
             ShowTest();
         }
 
-		public void SetManagerList()
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.A)) {
+                ResourceFrameDemo();
+            }
+            if (Input.GetKeyDown(KeyCode.B))
+            {
+                mAudioSource.Pause();
+                MResourceManager.singleton.ReleaseResource(mAudioSource.clip, false);
+            }
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                mAudioSource.Pause();
+                MResourceManager.singleton.ReleaseResource(mAudioSource.clip, true);
+            }
+        }
+
+        public void SetManagerList()
         {
             if (_mManagerList == null)
             {
@@ -37,6 +56,8 @@ namespace MFrameWork
             _mManagerList.Add(MLuaManager.singleton);
             _mManagerList.Add(MClassObjectManager.singleton);
             _mManagerList.Add(MAssetBundleManager.singleton);
+            _mManagerList.Add(MResourceManager.singleton);
+
             ManagerInit();
         }
 
@@ -59,6 +80,13 @@ namespace MFrameWork
         public void ShowTest()
         {
             MUIManager.singleton.ActiveUI("LoginPanel");
+        }
+
+        public void ResourceFrameDemo()
+        {
+            AudioClip audioClip = MResourceManager.singleton.LoadResource<AudioClip>("Assets/Resources/Sound/lemon.mp3");
+            mAudioSource.clip = audioClip;
+            mAudioSource.Play();
         }
     }
 

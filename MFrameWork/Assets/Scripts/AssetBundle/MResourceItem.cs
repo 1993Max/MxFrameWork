@@ -15,6 +15,8 @@ namespace MFrameWork
 {
     public class MResourceItem
     {
+        //--------------以下为AB数据相关
+
         //唯一标示Crc码
         public uint m_crc = 0;
         //存储文件全路径 方便加载资源
@@ -28,9 +30,10 @@ namespace MFrameWork
         //该资源加载的AB文件
         public AssetBundle m_assetBundle = null;
 
-        //--------------以下下为资源相关
-
-        //资源对象
+        //--------------以下为资源相关
+        //资源对象的唯一ID
+        public int m_guid = 0;
+        //保存UnityObject
         public UnityEngine.Object m_object = null;
         //资源最后使用时间
         public float m_lastUseTime = 0.0f;
@@ -43,13 +46,12 @@ namespace MFrameWork
             {
                 return m_refCount;
             }
-
             set
             {
                 m_refCount = value;
                 if (m_refCount < 0) 
                 {
-                     
+                    MDebug.singleton.AddErrorLog("m_refCount < 0" + m_refCount + "Name ：" + m_object != null ? m_object.name : "Null");
                 }
             }
         }

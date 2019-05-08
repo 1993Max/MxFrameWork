@@ -186,7 +186,7 @@ namespace MFrameWork
         }
 
         //从表尾部 弹出一个节点
-        public void Pop() 
+        public void PopTail() 
         {
             if (mDoubleLinkedList.m_tail != null) 
             {

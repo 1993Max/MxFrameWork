@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 328307499
+CRC: 2401843076
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 2a3b46c1cf12f9b420ecadb8112165de
+    Hash: a60e07fdec3f31f9a71f32d51d40970c
   TypeTreeHash:
     serializedVersion: 2
     Hash: 626bb35cda2251931d6eae604d22251d
@@ -26,5 +26,5 @@ ClassTypes:
 Assets:
 - Assets/Resources/UI/Prefabs/TestPrefab.prefab
 Dependencies:
-- /Users/Max/MxFrameWork/MFrameWork/Assets/StreamingAssets/shader
-- /Users/Max/MxFrameWork/MFrameWork/Assets/StreamingAssets/texture
+- D:/M_Project/MxFrameWork/MFrameWork/Assets/StreamingAssets/shader
+- D:/M_Project/MxFrameWork/MFrameWork/Assets/StreamingAssets/texture
