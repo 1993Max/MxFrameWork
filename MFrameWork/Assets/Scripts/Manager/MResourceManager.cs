@@ -17,7 +17,7 @@ using UnityEditor;
 
 namespace MFrameWork
 {
-    public class MResourceManager : MSingleton<MResourceManager>
+    public partial class MResourceManager : MSingleton<MResourceManager>
     {
         //是否从Ab加载资源
         private bool m_isLoadFormAssetBundle = false;
@@ -47,6 +47,8 @@ namespace MFrameWork
         {
             m_resourcesMapItemList = new CMapList<MResourceItem>();
             m_resourcesItemDic = new Dictionary<uint, MResourceItem>();
+            //异步加载初始化
+            InitAsyncManager();
             return base.Init();
         }
 
@@ -226,6 +228,9 @@ namespace MFrameWork
             if (mResourceItem.m_object != null)
             {
                 mResourceItem.m_object = null;
+#if UNITY_EDITOR
+                Resources.UnloadUnusedAssets();
+#endif
             }
         }
 
