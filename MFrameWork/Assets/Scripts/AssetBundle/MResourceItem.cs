@@ -39,6 +39,8 @@ namespace MFrameWork
         public float m_lastUseTime = 0.0f;
         //引用计数
         private int m_refCount = 0;
+        //是否在切场景的时候清除
+        public bool m_clear = true;
 
         public int RefCount
         {

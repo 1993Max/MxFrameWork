@@ -11,7 +11,7 @@ public class MDebug : MSingleton<MDebug>
 
     public void AddErrorLog(string log)
     {
-
+        Debug.LogError("log : " + log);
     }
 
     public void AddGreenLog(string log)

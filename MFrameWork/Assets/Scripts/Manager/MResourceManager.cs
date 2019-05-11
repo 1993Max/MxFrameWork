@@ -20,7 +20,7 @@ namespace MFrameWork
     public partial class MResourceManager : MSingleton<MResourceManager>
     {
         //是否从Ab加载资源
-        private bool m_isLoadFormAssetBundle = false;
+        private bool m_isLoadFormAssetBundle = true;
 
 //--------------------------------同步资源加载数据-------------------------------------
         //缓存加载过的资源 
@@ -45,11 +45,12 @@ namespace MFrameWork
 
         public override bool Init()
         {
-            m_resourcesMapItemList = new CMapList<MResourceItem>();
-            m_resourcesItemDic = new Dictionary<uint, MResourceItem>();
+            //同步加载初始化
+            bool bSync = InitSyncManager();
             //异步加载初始化
-            InitAsyncManager();
-            return base.Init();
+            bool bAsync = InitAsyncManager();
+
+            return bSync && bAsync;
         }
 
         public override void OnLogOut()
@@ -60,6 +61,91 @@ namespace MFrameWork
         public override void UnInit()
         {
             base.UnInit();
+        }
+
+        /// <summary>
+        /// 同步加载相基础数据初始化
+        /// </summary>
+        public bool InitSyncManager() 
+        {
+            m_resourcesMapItemList = new CMapList<MResourceItem>();
+            m_resourcesItemDic = new Dictionary<uint, MResourceItem>();
+            return true;
+        }
+
+        /// <summary>
+        /// 清空双项列表 在场景切换的时候需要做的操作
+        /// </summary>
+        public void Clear() 
+        {
+            //todo
+            //这个函数目前有问题
+            /*
+            while (m_resourcesMapItemList.Size() > 0) 
+            {
+                MResourceItem mResourceItem = m_resourcesMapItemList.GetTail();
+                DestoryResourceItem(mResourceItem,true);
+                m_resourcesMapItemList.PopTail();
+            } 
+            */
+        }
+
+        /// <summary>
+        /// 资源的预加载 这里和同步加载微小区别 就是不需要引用计数 设置该预先加载的资源 在卸载的时候不卸载
+        /// 就是直接加载 然后卸载
+        /// </summary>
+        /// <param name="resPath">Res path.</param>
+        public void PreLoadRes(string resPath) 
+        {
+            if (string.IsNullOrEmpty(resPath))
+                return;
+            uint crc = MCrcHelper.GetCRC32(resPath);
+            //预加载到内存中 不需要进行应用计数
+            MResourceItem mResourceItem = GetCacheResourceItem(crc,0);
+            if (mResourceItem != null)
+            {
+                return;
+            }
+
+            Object obj = null;
+#if UNITY_EDITOR
+            //编辑器模式下 直接从本地拿到资源
+            if (!m_isLoadFormAssetBundle)
+            {
+                mResourceItem = MAssetBundleManager.singleton.FindResourceItem(crc);
+                if (mResourceItem.m_object != null)
+                {
+                    if (mResourceItem.m_object != null)
+                    {
+                        obj = mResourceItem.m_object;
+                    }
+                    else
+                    {
+                        obj = LoadAssetFormEditor<Object>(resPath);
+                    }
+                }
+            }
+#endif
+            if (obj == null)
+            {
+                mResourceItem = MAssetBundleManager.singleton.LoadResourcesAssetBundle(crc);
+                if (mResourceItem != null && mResourceItem.m_assetBundle != null)
+                {
+                    if (mResourceItem.m_object != null)
+                    {
+                        obj = mResourceItem.m_object;
+                    }
+                    else
+                    {
+                        obj = mResourceItem.m_assetBundle.LoadAsset<Object>(mResourceItem.m_assetName);
+                    }
+                }
+            }
+
+            CacheResource(resPath, ref mResourceItem, crc, obj);
+            mResourceItem.m_clear = false;
+            //切换场景不清空缓存
+            ReleaseResource(obj, false);
         }
 
         /// <summary>
@@ -142,6 +228,27 @@ namespace MFrameWork
 
             mResourceItem.RefCount--;
             DestoryResourceItem(mResourceItem,destoryCompletly);
+            return true;
+        }
+
+        /// <summary>
+        /// 依据文件路径 不需要实例化的资源的卸载
+        /// </summary>
+        /// <param name="resPath">Res path.</param>
+        /// <param name="destoryCompletly">If set to <c>true</c> destory completly.</param>
+        public bool ReleaseResource(string resPath, bool destoryCompletly = false)
+        {
+            if (string.IsNullOrEmpty(resPath))
+                return false;
+            uint crc = MCrcHelper.GetCRC32(resPath);
+            MResourceItem mResourceItem = null;
+            if (!m_resourcesItemDic.TryGetValue(crc, out mResourceItem) && mResourceItem != null)
+            {
+                MDebug.singleton.AddErrorLog(" m_resourcesItemDic 不存在这个资源 resPath : " + resPath);
+                return false;
+            }
+            mResourceItem.RefCount--;
+            DestoryResourceItem(mResourceItem, destoryCompletly);
             return true;
         }
 

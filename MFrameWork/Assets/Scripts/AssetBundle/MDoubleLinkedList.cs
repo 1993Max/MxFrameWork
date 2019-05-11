@@ -182,7 +182,10 @@ namespace MFrameWork
                 return;
             }
             mDoubleLinkedList.AddToHead(mDoubleLinkedListNode);
-            m_findMap.Add(t, mDoubleLinkedList.m_head);
+            if (!m_findMap.ContainsKey(t)) 
+            { 
+                m_findMap.Add(t, mDoubleLinkedList.m_head);
+            }
         }
 
         //从表尾部 弹出一个节点

@@ -68,7 +68,7 @@ namespace MFrameWork
     /// <param name="resPath">资源路径</param>
     /// <param name="loadedObj">加载完成的Obj</param>
     /// <param name="parms">可变参数</param>
-    public delegate void OnAsyncLoadFinished(string resPath,object loadedObj,object[] parms = null);
+    public delegate void OnAsyncLoadFinished(string resPath,UnityEngine.Object loadedObj, object[] parms = null);
 
     public partial class MResourceManager
     {
@@ -108,9 +108,7 @@ namespace MFrameWork
             //初始化MonoBehavior脚本
             if (m_startMono == null)
             {
-                //todo
-                //m_startMono = xxx;
-                return false;
+                m_startMono = MGameManager.m_monoBehavior;
             }
 
             for (int i = 0; i < (int)LoadResPriority.RES_LOAD_LEVEL_COUNT; i++)
@@ -120,13 +118,13 @@ namespace MFrameWork
 
             //游戏初始化 需要开启这个异步加载的协程
             m_startMono.StartCoroutine(AsyncLoader());
-            return false;
+            return true;
         }
 
         /// <summary>
         /// 异步加载资源 仅加载不需要实例化的资源 音频 图片等等
         /// </summary>
-        public void AsyncLoadResource(string resPath,OnAsyncLoadFinished onAsyncLoadFinished,LoadResPriority loadResPriority,Object[] parms) 
+        public void AsyncLoadResource(string resPath,OnAsyncLoadFinished onAsyncLoadFinished,LoadResPriority loadResPriority,object[] parms) 
         {
             if (string.IsNullOrEmpty(resPath))
                 return;
@@ -180,7 +178,9 @@ namespace MFrameWork
                 for (int i = 0; i < (int)LoadResPriority.RES_LOAD_LEVEL_COUNT; i++)
                 {
                     List<AsyncLoadResParam> cAsyncLoadResList = m_asyncAssetLoadingList[i];
-                    if (m_asyncAssetLoadingList[i] != null && cAsyncLoadResList.Count > 0)
+                    if (m_asyncAssetLoadingList[i] == null)
+                        continue;
+                    if (cAsyncLoadResList.Count <= 0)
                         continue;
 
                     AsyncLoadResParam asyncLoadResParam = cAsyncLoadResList[0];
