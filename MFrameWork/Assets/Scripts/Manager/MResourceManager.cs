@@ -149,6 +149,59 @@ namespace MFrameWork
         }
 
         /// <summary>
+        /// 同步加载资源 针对给ObjectManager
+        /// </summary>
+        /// <param name="resPath">资源路径</param>
+        /// <param name="mResourceObjectItem">ObjecyResItem</param>
+        public MResourceObjectItem LoadToResourceObject(string resPath, MResourceObjectItem mResourceObjectItem) 
+        {
+            if (mResourceObjectItem == null)
+                return null;
+
+            uint crc = mResourceObjectItem.m_crc == 0 ? MCrcHelper.GetCRC32(resPath) : mResourceObjectItem.m_crc;
+
+            MResourceItem mResourceItem = GetCacheResourceItem(crc);
+            if(mResourceItem != null && mResourceItem.m_object != null) 
+            {
+                mResourceObjectItem.m_resItem = mResourceItem;
+                return mResourceObjectItem;
+            }
+
+            Object obj = null;
+#if UNITY_EDITOR
+            if (!m_isLoadFormAssetBundle)
+            {
+                mResourceItem = MAssetBundleManager.singleton.FindResourceItem(crc);
+                if (mResourceItem.m_object != null) 
+                {
+                    obj = mResourceItem.m_object as Object;
+                }
+                else 
+                {
+                    obj = LoadAssetFormEditor<Object>(mResourceItem.m_path);
+                }
+            }
+#endif
+            if(obj == null) 
+            {
+                mResourceItem = MAssetBundleManager.singleton.LoadResourcesAssetBundle(crc);
+                if (mResourceItem.m_object != null)
+                {
+                    obj = mResourceItem.m_object as Object;
+                }
+                else
+                {
+                    obj = mResourceItem.m_assetBundle.LoadAsset<Object>(mResourceItem.m_path);
+                }
+            }
+
+            CacheResource(resPath,ref mResourceItem, crc, obj);
+            mResourceItem.m_clear = mResourceObjectItem.m_isClear;
+            mResourceObjectItem.m_resItem = mResourceItem;
+            return mResourceObjectItem;
+        }
+
+        /// <summary>
         /// 同步资源加载 外部直接调用 仅用于加载不需要实例化的资源 例如Texture 音频等
         /// </summary>
         /// <typeparam name="T"></typeparam>
@@ -202,6 +255,28 @@ namespace MFrameWork
 
             CacheResource(resPath, ref mResourceItem, crc, obj);
             return obj;
+        }
+
+        /// <summary>
+        /// 给ObjectManager的释放对象的接口 依据MResourceObjectItem对对象做释放
+        /// </summary>
+        /// <param name="mResourceObjectItem">ObjectManager 对象</param>
+        /// <param name="destoryCompletly">是否彻底删除</param>
+        public bool ReleaseResource(MResourceObjectItem mResourceObjectItem, bool destoryCompletly = false) 
+        {
+            if (mResourceObjectItem == null || mResourceObjectItem.m_resItem == null || mResourceObjectItem.m_resItem.m_object == null)
+                return false;
+
+            MResourceItem mResourceItem = null;
+            if (!m_resourcesItemDic.TryGetValue(mResourceObjectItem.m_crc, out mResourceItem) && mResourceItem != null)
+            {
+                MDebug.singleton.AddErrorLog(" m_resourcesItemDic 不存在这个资源 resPath : " + mResourceItem.m_path);
+                return false;
+            }
+            Object.Destroy(mResourceObjectItem.m_gameObeject);
+            mResourceItem.RefCount--;
+            DestoryResourceItem(mResourceItem, destoryCompletly);
+            return true;
         }
 
         /// <summary>

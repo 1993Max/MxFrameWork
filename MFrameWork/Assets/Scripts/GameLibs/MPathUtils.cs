@@ -14,5 +14,6 @@ public class MPathUtils
 
     #region Object对象池相关
     public const string RECYCLE_POOL_TRANSFORM = "RecycleObjectPool"; //对象池回收节点
+    public const string DEFAULT_OBJECT_TRANSFORM = "DefaultObjectTrans"; //默认创建节点
     #endregion
 }
