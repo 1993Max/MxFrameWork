@@ -1099,6 +1099,7 @@
     <Compile Include="Assets\ToLua\Reflection\LuaReflection.cs" />
     <Compile Include="Assets\Scripts\Manager\MSyncObjectManager.cs" />
     <Compile Include="Assets\Scripts\AssetBundle\MResourceObjectItem.cs" />
+    <Compile Include="Assets\Scripts\Manager\MNetWorkManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\GameData\AssetBundleData\MAssetBundleConfig.xml" />

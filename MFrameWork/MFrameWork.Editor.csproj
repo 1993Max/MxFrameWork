@@ -380,6 +380,7 @@
     <Compile Include="Assets\Tools\Editor\UIEditorCom\LuaUIGroupEditor.cs" />
     <Compile Include="Assets\Tools\Editor\UIEditorCom\LuaUIPanelEditor.cs" />
     <Compile Include="Assets\Tools\Editor\UITools\FastReplace\UIPrefabFastReplaceTools.cs" />
+    <Compile Include="Assets\Scripts\Manager\MNetWorkManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\GameData\AssetBundleData\MAssetBundleConfig.xml" />
