@@ -33,13 +33,6 @@ namespace MFrameWork
             m_assetBundleItemPool = new MClassObjectPool<MAssetBundleItem>(500);
             bool loadConfig = LoadAssetBundleConfig();
 
-            //--------测试
-            string prefabPath = "Assets/Resources/UI/Prefabs/TestPrefab.prefab";
-            uint crc = MCrcHelper.GetCRC32(prefabPath);
-            var xx = LoadResourcesAssetBundle(crc);
-            var xxx = xx.m_assetBundle.LoadAsset<GameObject>(xx.m_assetName);
-            GameObject @object = GameObject.Instantiate(xxx);
-            //--------
             return base.Init();
         }
 
@@ -80,6 +73,7 @@ namespace MFrameWork
                         mResource.m_abName = mAssetBundleBase.AbName;
                         mResource.m_assetName = mAssetBundleBase.AssetName;
                         mResource.m_path = mAssetBundleBase.Path;
+                        Debug.LogError("mAssetBundleBase.Path  "+ mAssetBundleBase.Path);
                         mResource.m_abDependence = mAssetBundleBase.AbDependence;
                         if (m_resourcesItemDic.ContainsKey(mResource.m_crc))
                         {

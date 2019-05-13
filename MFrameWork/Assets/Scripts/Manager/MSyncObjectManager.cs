@@ -75,8 +75,8 @@ namespace MFrameWork
         /// <returns>The game obeject.</returns>
         /// <param name="resPath">资源路径</param>
         /// <param name="isSetToDefault">是否实例化到默认节点</param>
-        /// <param name="isClear">在切换场景的时候是否清楚资源的缓存</param>
-        public GameObject InstantiateGameObeject(string resPath,bool isSetToDefault = false ,bool isClear=true) {
+        /// <param name="isChangeSceneClear">在切换场景的时候是否清楚资源的缓存</param>
+        public GameObject InstantiateGameObeject(string resPath,bool isSetToDefault = false ,bool isChangeSceneClear=true) {
             uint crc = MCrcHelper.GetCRC32(resPath);
             MResourceObjectItem mResourceObjectItem = GetObjectFromPool(crc);
 
@@ -84,7 +84,7 @@ namespace MFrameWork
             {
                 mResourceObjectItem = m_resourceObjectClssPool.Spawn(true);
                 mResourceObjectItem.m_crc = crc;
-                mResourceObjectItem.m_isClear = isClear;
+                mResourceObjectItem.m_isClear = isChangeSceneClear;
                 mResourceObjectItem = MResourceManager.singleton.LoadToResourceObject(resPath, mResourceObjectItem);
 
                 if (mResourceObjectItem.m_resItem.m_object != null) 
@@ -96,7 +96,7 @@ namespace MFrameWork
 
             if (isSetToDefault) 
             {
-                mResourceObjectItem.m_gameObeject.transform.SetParent(DefaultObjectTrans);
+                mResourceObjectItem.m_gameObeject.transform.SetParent(DefaultObjectTrans,false);
             }
 
             if (!m_resourceObjectDic.ContainsKey(mResourceObjectItem.m_guid)) 
@@ -116,6 +116,7 @@ namespace MFrameWork
             List<MResourceObjectItem> mResourceObjectItemList = null;
             if (m_resourcesItemPoolDic.TryGetValue(crc, out mResourceObjectItemList) && mResourceObjectItemList.Count > 0)
             {
+                MResourceManager.singleton.InCreaseResourceRef(crc);
                 MResourceObjectItem resObj = mResourceObjectItemList[0];
                 mResourceObjectItemList.RemoveAt(0);
                 GameObject gameObject = resObj.m_gameObeject;
@@ -145,8 +146,10 @@ namespace MFrameWork
         {
             if (gameObject == null)
                 return;
+
+            int tempInstanceId = gameObject.GetInstanceID();
             MResourceObjectItem mResourceObjectItem = null;
-            if(!m_resourceObjectDic.TryGetValue(gameObject.GetInstanceID(),out mResourceObjectItem))
+            if(!m_resourceObjectDic.TryGetValue(tempInstanceId, out mResourceObjectItem))
             {
                 MDebug.singleton.AddErrorLog("这个对象不是用ObjectManager创建的GameObject Name：" + gameObject.name);
                 return;
@@ -164,14 +167,52 @@ namespace MFrameWork
 
 #if UNITY_EDITOR
             gameObject.name += "(Recycle)";
-            if (maxCatchCount == 0) 
+#endif
+            List<MResourceObjectItem> listObjectItems = null;
+            //maxCatchCount == 0 说明不缓存 对象释放
+            if (maxCatchCount == 0)
             {
-                m_resourceObjectDic.Remove(gameObject.GetInstanceID());
-                MResourceManager.singleton.ReleaseResource(mResourceObjectItem,destoryCompletly);
+                m_resourceObjectDic.Remove(tempInstanceId);
+                MResourceManager.singleton.ReleaseResource(mResourceObjectItem, destoryCompletly);
                 mResourceObjectItem.Reset();
                 m_resourceObjectClssPool.Recycle(mResourceObjectItem);
             }
-#endif
+            else
+            {
+                if (!m_resourcesItemPoolDic.TryGetValue(mResourceObjectItem.m_crc, out listObjectItems) || listObjectItems == null)
+                {
+                    listObjectItems = new List<MResourceObjectItem>();
+                    m_resourcesItemPoolDic.Add(mResourceObjectItem.m_crc, listObjectItems);
+                }
+
+                if (mResourceObjectItem.m_gameObeject != null)
+                {
+                    if (RecycleObjectPoolTrans)
+                    {
+                        mResourceObjectItem.m_gameObeject.transform.SetParent(RecycleObjectPoolTrans);
+                    }
+                    else
+                    {
+                        mResourceObjectItem.m_gameObeject.SetActiveEx(false);
+                    }
+                }
+
+                //没有达到最大缓存个数的时候 进行缓存
+                if (maxCatchCount < 0 || listObjectItems.Count < maxCatchCount)
+                {
+                    listObjectItems.Add(mResourceObjectItem);
+                    mResourceObjectItem.m_isAlreadyRelease = true;
+                    MResourceManager.singleton.DeCreaseResourceRef(mResourceObjectItem.m_crc);
+                }
+                else
+                {
+                    //多出来的资源卸载掉
+                    m_resourceObjectDic.Remove(tempInstanceId);
+                    MResourceManager.singleton.ReleaseResource(mResourceObjectItem, destoryCompletly);
+                    mResourceObjectItem.Reset();
+                    m_resourceObjectClssPool.Recycle(mResourceObjectItem);
+                }
+            }
             //todo
         }
 

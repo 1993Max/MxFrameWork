@@ -445,5 +445,65 @@ namespace MFrameWork
             }
             return mResourceItem;
         }
+
+        /// <summary>
+        /// 依据MResourceObjectItem增加Crc
+        /// </summary>
+        /// <returns></returns>
+        public int InCreaseResourceRef(MResourceObjectItem mResourceObjectItem, int count = 1)
+        {
+            if (mResourceObjectItem == null)
+                return 0;
+            return InCreaseResourceRef(mResourceObjectItem.m_crc, count);
+        }
+
+        /// <summary>
+        /// 提供一个操作引用计数的方法
+        /// </summary>
+        /// <param name="crc">crc</param>
+        /// <param name="Count">计数</param>
+        /// <returns></returns>
+        public int InCreaseResourceRef(uint crc, int count = 1)
+        {
+            MResourceItem mResourceItem = null;
+            if (!m_resourcesItemDic.TryGetValue(crc, out mResourceItem) && mResourceItem != null)
+            {
+                return 0;
+            }
+            mResourceItem.RefCount += count;
+            mResourceItem.m_lastUseTime = Time.realtimeSinceStartup;
+
+            return mResourceItem.RefCount;
+        }
+
+
+        /// <summary>
+        /// 依据MResourceObjectItem减少Crc
+        /// </summary>
+        /// <returns></returns>
+        public int DeCreaseResourceRef(MResourceObjectItem mResourceObjectItem, int count = 1)
+        {
+            if (mResourceObjectItem == null)
+                return 0;
+            return DeCreaseResourceRef(mResourceObjectItem.m_crc, count);
+        }
+
+        /// <summary>
+        /// 提供一个操作引用计数的方法
+        /// </summary>
+        /// <param name="crc">crc</param>
+        /// <param name="Count">计数</param>
+        /// <returns></returns>
+        public int DeCreaseResourceRef(uint crc, int count = 1)
+        {
+            MResourceItem mResourceItem = null;
+            if (!m_resourcesItemDic.TryGetValue(crc, out mResourceItem) && mResourceItem != null)
+            {
+                return 0;
+            }
+            mResourceItem.RefCount -= count;
+
+            return mResourceItem.RefCount;
+        }
     }
 }

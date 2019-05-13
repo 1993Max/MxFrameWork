@@ -116,6 +116,11 @@ namespace MFrameWork
             {
                 PreResourceLoad();
             }
+
+            if (GUI.Button(new Rect(10, 160, 100, 20), "实例化资源加载"))
+            {
+                ObjectResload();
+            }
         }
 
         //同步资源测试
@@ -142,10 +147,15 @@ namespace MFrameWork
             mAudioSource.Play();
         }
 
-        //资源预加载测试
+        //资源预加载测试 资源预加载之后 主动加载的时间明显变少 
         public void PreResourceLoad()
         {
             MResourceManager.singleton.PreLoadRes("Assets/Resources/Sound/lemon.mp3");
+        }
+
+        public void ObjectResload()
+        {
+            MObjectManager.singleton.InstantiateGameObeject("Assets/Resources/UI/Prefabs/TestPrefab.prefab", true);
         }
     }
 }
