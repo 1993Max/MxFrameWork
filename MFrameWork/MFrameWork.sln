@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
+# Visual Studio for Mac
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MFrameWork", "MFrameWork.csproj", "{8D884FC7-D99F-3681-35CC-593B6E009E26}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MFrameWork.Editor", "MFrameWork.Editor.csproj", "{65CE6CDC-B546-EAE1-75A4-7D41AC113F57}"

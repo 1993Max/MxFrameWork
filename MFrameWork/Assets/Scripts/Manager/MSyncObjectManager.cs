@@ -40,8 +40,7 @@ namespace MFrameWork
             {
                 if (m_defaultObjectTrans == null)
                 {
-                    GameObject obj = GameObject.Find(MPathUtils.RECYCLE_POOL_TRANSFORM);
-                    Object.DontDestroyOnLoad(obj);
+                    GameObject obj = GameObject.Find(MPathUtils.DEFAULT_OBJECT_TRANSFORM);
                     return obj.transform;
                 }
                 return m_defaultObjectTrans;
@@ -66,6 +65,8 @@ namespace MFrameWork
             m_resourcesItemPoolDic = new Dictionary<uint, List<MResourceObjectItem>>();
             m_resourceObjectClssPool = new MClassObjectPool<MResourceObjectItem>(100);
             m_resourceObjectDic = new Dictionary<int, MResourceObjectItem>();
+            Object.DontDestroyOnLoad(DefaultObjectTrans);
+            Object.DontDestroyOnLoad(RecycleObjectPoolTrans);
             return true;
         }
 
@@ -142,7 +143,7 @@ namespace MFrameWork
         /// <param name="maxCatchCount">最大缓存个数</param>
         /// <param name="destoryCompletly">是否彻底删除</param>
         /// <param name="isToRecycleParent">是非设置默认父节点</param>
-        public void ReleaseObject(GameObject gameObject,int maxCatchCount = -1,bool destoryCompletly = false,bool isToRecycleParent = false) 
+        public void ReleaseObject(GameObject gameObject,int maxCatchCount = -1,bool destoryCompletly = false,bool isToRecycleParent = true) 
         {
             if (gameObject == null)
                 return;
@@ -187,7 +188,7 @@ namespace MFrameWork
 
                 if (mResourceObjectItem.m_gameObeject != null)
                 {
-                    if (RecycleObjectPoolTrans)
+                    if (isToRecycleParent)
                     {
                         mResourceObjectItem.m_gameObeject.transform.SetParent(RecycleObjectPoolTrans);
                     }

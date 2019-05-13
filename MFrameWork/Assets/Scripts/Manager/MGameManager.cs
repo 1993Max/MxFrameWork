@@ -92,34 +92,44 @@ namespace MFrameWork
 
         public void ResourceTest() 
         {
-            if (GUI.Button(new Rect(10, 10, 100, 20), "同步加载"))
+            if (GUI.Button(new Rect(10, 10, 200, 40), "同步加载"))
             {
                 SyncResourceTest();
             }
-            if (GUI.Button(new Rect(10, 40, 100, 20), "异步加载"))
+            if (GUI.Button(new Rect(10, 70, 200, 40), "异步加载"))
             {
                 AsyncResourceTest();
             }
-            if (GUI.Button(new Rect(10, 70, 100, 20), "资源彻底卸载"))
+            if (GUI.Button(new Rect(10, 130, 200, 40), "资源彻底卸载"))
             {
                 mAudioSource.Pause();
                 MResourceManager.singleton.ReleaseResource(mAudioSource.clip, true);
                 mAudioSource.clip = null;
             }
-            if (GUI.Button(new Rect(10, 100, 100, 20), "资源进入缓存"))
+            if (GUI.Button(new Rect(10, 200, 200, 40), "资源进入缓存"))
             {
                 mAudioSource.Pause();
                 MResourceManager.singleton.ReleaseResource(mAudioSource.clip, false);
                 mAudioSource.clip = null;
             }
-            if (GUI.Button(new Rect(10, 130, 100, 20), "资源预加载"))
+            if (GUI.Button(new Rect(10, 260, 200, 40), "资源预加载"))
             {
                 PreResourceLoad();
             }
 
-            if (GUI.Button(new Rect(10, 160, 100, 20), "实例化资源加载"))
+            if (GUI.Button(new Rect(10, 320, 200, 40), "实例化资源加载"))
             {
                 ObjectResload();
+            }
+
+            if (GUI.Button(new Rect(10, 380, 200, 40), "实例化资源释放ToPool"))
+            {
+                ObjectResRelease();
+            }
+
+            if (GUI.Button(new Rect(10, 440, 200, 40), "实例化资源彻底释放"))
+            {
+                ObjectResReleaseCompletely();
             }
         }
 
@@ -153,9 +163,23 @@ namespace MFrameWork
             MResourceManager.singleton.PreLoadRes("Assets/Resources/Sound/lemon.mp3");
         }
 
+        //测试需要实例化的Object资源加载
+        public GameObject testObjectResload;
         public void ObjectResload()
         {
-            MObjectManager.singleton.InstantiateGameObeject("Assets/Resources/UI/Prefabs/TestPrefab.prefab", true);
+            testObjectResload = MObjectManager.singleton.InstantiateGameObeject("Assets/Resources/UI/Prefabs/TestPrefab.prefab", true);
+        }
+
+        //清除资源并加入到资源池
+        public void ObjectResRelease()
+        {
+            MObjectManager.singleton.ReleaseObject(testObjectResload);
+        }
+
+        //彻底清除Object资源
+        public void ObjectResReleaseCompletely()
+        {
+            MObjectManager.singleton.ReleaseObject(testObjectResload,0,true);
         }
     }
 }

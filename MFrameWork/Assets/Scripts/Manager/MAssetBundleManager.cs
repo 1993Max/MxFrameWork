@@ -73,7 +73,6 @@ namespace MFrameWork
                         mResource.m_abName = mAssetBundleBase.AbName;
                         mResource.m_assetName = mAssetBundleBase.AssetName;
                         mResource.m_path = mAssetBundleBase.Path;
-                        Debug.LogError("mAssetBundleBase.Path  "+ mAssetBundleBase.Path);
                         mResource.m_abDependence = mAssetBundleBase.AbDependence;
                         if (m_resourcesItemDic.ContainsKey(mResource.m_crc))
                         {
