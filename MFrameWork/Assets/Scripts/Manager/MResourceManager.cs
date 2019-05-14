@@ -29,6 +29,8 @@ namespace MFrameWork
         protected CMapList<MResourceItem> m_resourcesMapItemList;
 //--------------------------------同步资源加载数据-------------------------------------
 
+        //本地记录一个Guid
+        private long m_guid = 0;
 
         public Dictionary<uint, MResourceItem> ResourcesItemDic
         {
@@ -61,6 +63,11 @@ namespace MFrameWork
         public override void UnInit()
         {
             base.UnInit();
+        }
+
+        public long GetGUID()
+        {
+            return m_guid++;
         }
 
         /// <summary>
