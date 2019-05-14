@@ -94,6 +94,5 @@ namespace MFrameWork
         }
 
         //取消异步加载
-        public void Cancle
     }
 }
