@@ -20,7 +20,7 @@ namespace MFrameWork
     public partial class MResourceManager : MSingleton<MResourceManager>
     {
         //是否从Ab加载资源
-        private bool m_isLoadFormAssetBundle = false;
+        private bool m_isLoadFormAssetBundle = true;
 
 //--------------------------------同步资源加载数据-------------------------------------
         //缓存加载过的资源 
@@ -185,6 +185,7 @@ namespace MFrameWork
             if(obj == null) 
             {
                 mResourceItem = MAssetBundleManager.singleton.LoadResourcesAssetBundle(crc);
+                mResourceItem.m_path = resPath;
                 if (mResourceItem.m_object != null)
                 {
                     obj = mResourceItem.m_object as Object;

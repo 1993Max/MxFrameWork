@@ -92,44 +92,54 @@ namespace MFrameWork
 
         public void ResourceTest() 
         {
-            if (GUI.Button(new Rect(10, 10, 200, 40), "同步加载"))
+            if (GUI.Button(new Rect(10, 10, 200, 50), "同步加载"))
             {
                 SyncResourceTest();
             }
-            if (GUI.Button(new Rect(10, 70, 200, 40), "异步加载"))
+            if (GUI.Button(new Rect(10, 70, 200, 50), "异步加载"))
             {
                 AsyncResourceTest();
             }
-            if (GUI.Button(new Rect(10, 130, 200, 40), "资源彻底卸载"))
+            if (GUI.Button(new Rect(10, 130, 200, 50), "资源彻底卸载"))
             {
                 mAudioSource.Pause();
                 MResourceManager.singleton.ReleaseResource(mAudioSource.clip, true);
                 mAudioSource.clip = null;
             }
-            if (GUI.Button(new Rect(10, 200, 200, 40), "资源进入缓存"))
+            if (GUI.Button(new Rect(10, 200, 200, 50), "资源进入缓存"))
             {
                 mAudioSource.Pause();
                 MResourceManager.singleton.ReleaseResource(mAudioSource.clip, false);
                 mAudioSource.clip = null;
             }
-            if (GUI.Button(new Rect(10, 260, 200, 40), "资源预加载"))
+            if (GUI.Button(new Rect(10, 260, 200, 50), "资源预加载"))
             {
                 PreResourceLoad();
             }
 
-            if (GUI.Button(new Rect(10, 320, 200, 40), "实例化资源加载"))
+            if (GUI.Button(new Rect(10, 320, 200, 50), "实例化资源加载"))
             {
                 ObjectResload();
             }
 
-            if (GUI.Button(new Rect(10, 380, 200, 40), "实例化资源释放ToPool"))
+            if (GUI.Button(new Rect(10, 380, 200, 50), "实例化资源异步加载"))
+            {
+                AsyncObjectResload();
+            }
+
+            if (GUI.Button(new Rect(10, 440, 200, 50), "实例化资源释放ToPool"))
             {
                 ObjectResRelease();
             }
 
-            if (GUI.Button(new Rect(10, 440, 200, 40), "实例化资源彻底释放"))
+            if (GUI.Button(new Rect(10, 500, 200, 50), "实例化资源彻底释放"))
             {
                 ObjectResReleaseCompletely();
+            }
+
+            if (GUI.Button(new Rect(10, 560, 200, 50), "实例化资源预加载"))
+            {
+                MObjectManager.singleton.PreLoadGameObject("Assets/Resources/UI/Prefabs/TestPrefab.prefab", 10);
             }
         }
 
@@ -146,15 +156,13 @@ namespace MFrameWork
         //异步资源加载测试
         public void AsyncResourceTest() 
         {
-            MResourceManager.singleton.AsyncLoadResource("Assets/Resources/Sound/lemon.mp3",AsyncLoadFinish,LoadResPriority.RES_LOAD_LEVEL_HEIGHT,null);
-        }
+            MResourceManager.singleton.AsyncLoadResource("Assets/Resources/Sound/lemon.mp3",delegate(string resPath, UnityEngine.Object loadedObj, object[] parms)
+            {
+                AudioClip audioClip = loadedObj as AudioClip;
+                mAudioSource.clip = audioClip;
+                mAudioSource.Play();
 
-        public void AsyncLoadFinish(string resPath, UnityEngine.Object loadedObj, object[] parms = null) 
-        {
-
-            AudioClip audioClip = loadedObj as AudioClip;
-            mAudioSource.clip = audioClip;
-            mAudioSource.Play();
+            },LoadResPriority.RES_LOAD_LEVEL_HEIGHT,null);
         }
 
         //资源预加载测试 资源预加载之后 主动加载的时间明显变少 
@@ -168,6 +176,15 @@ namespace MFrameWork
         public void ObjectResload()
         {
             testObjectResload = MObjectManager.singleton.InstantiateGameObeject("Assets/Resources/UI/Prefabs/TestPrefab.prefab", true);
+        }
+
+        //异步资源加载
+        public void AsyncObjectResload()
+        {
+            MObjectManager.singleton.InstantiateGameObejectAsync("Assets/Resources/UI/Prefabs/TestPrefab.prefab", delegate (string resPath, MResourceObjectItem mResourceObjectItem,object[] parms)
+             {
+                 testObjectResload = mResourceObjectItem.m_gameObeject;
+             },LoadResPriority.RES_LOAD_LEVEL_HEIGHT,true);
         }
 
         //清除资源并加入到资源池

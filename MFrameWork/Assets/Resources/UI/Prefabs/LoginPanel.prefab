@@ -63,7 +63,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1814871545937304
 GameObject:
   m_ObjectHideFlags: 1
@@ -99,7 +99,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1839117503781626
 GameObject:
   m_ObjectHideFlags: 0
@@ -279,9 +279,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsHandler: 0
-  ComRefs:
-  - {fileID: 114113130874784878}
-  - {fileID: 114523645582999258}
+  ComRefs: []
   Groups: []
   HandlerRef: {fileID: 0}
 --- !u!114 &114342255316749506
@@ -349,7 +347,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: MFrameWork
+  m_Text: Emmm
 --- !u!114 &114451670952883662
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -422,7 +420,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.14267953, g: 0.51663214, b: 0.6691177, a: 1}
+  m_Color: {r: 0.11916091, g: 0.5588235, b: 0.13209218, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

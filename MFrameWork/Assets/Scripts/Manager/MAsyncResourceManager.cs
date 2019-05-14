@@ -50,14 +50,24 @@ namespace MFrameWork
 
     public class AsyncCallBack
     {
-        //加载完成的回掉
+        //针对ASyncResourceManger加载不需要实例化资源的回掉
         public OnAsyncLoadFinished m_onAsyncLoadFinished = null;
+
+        //-------------------------------------------------------------
+        //加载ASyncObjectManger需要实例化的资源完成的回掉
+        public OnAsyncLoadObjectFinished m_onAsyncLoadObjectFinished = null;
+        //存引用
+        public MResourceObjectItem m_resourceObjectItem = null;
+        //--------------------------------------------------------------
+
         //回掉参数
         public object[] m_parms = null;
         //数据重置
         public void Reset()
         {
             m_onAsyncLoadFinished = null;
+            m_onAsyncLoadObjectFinished = null;
+            m_resourceObjectItem = null;
             m_parms = null;
         }
     }
@@ -69,6 +79,13 @@ namespace MFrameWork
     /// <param name="loadedObj">加载完成的Obj</param>
     /// <param name="parms">可变参数</param>
     public delegate void OnAsyncLoadFinished(string resPath,UnityEngine.Object loadedObj, object[] parms = null);
+
+    /// <summary>
+    /// 异步加载实例化资源的回调委托
+    /// </summary>
+    /// <param name="resPath">资源路径</param>
+    /// <param name="mResourceObjectItem">封装好的的实例化资源类型</param>
+    public delegate void OnAsyncLoadObjectFinished(string resPath,MResourceObjectItem mResourceObjectItem,object[] parms = null);
 
     public partial class MResourceManager
     {
@@ -124,7 +141,7 @@ namespace MFrameWork
         /// <summary>
         /// 异步加载资源 仅加载不需要实例化的资源 音频 图片等等
         /// </summary>
-        public void AsyncLoadResource(string resPath,OnAsyncLoadFinished onAsyncLoadFinished,LoadResPriority loadResPriority,object[] parms) 
+        public void AsyncLoadResource(string resPath,OnAsyncLoadFinished onAsyncLoadFinished,LoadResPriority loadResPriority,object[] parms = null) 
         {
             if (string.IsNullOrEmpty(resPath))
                 return;
@@ -158,6 +175,50 @@ namespace MFrameWork
             AsyncCallBack m_asyncCallBack = m_asyncCallBackPool.Spawn(true);
             m_asyncCallBack.m_onAsyncLoadFinished = onAsyncLoadFinished;
             m_asyncCallBack.m_parms = parms;
+            asyncLoadResParam.m_asyncCallBacks.Add(m_asyncCallBack);
+        }
+
+        /// <summary>
+        /// 实例化资源异步加载 为MObjectManager提供的接口
+        /// </summary>
+        /// <param name="resPath">资源路径</param>
+        /// <param name="mResourceObjectItem"></param>
+        /// <param name="onAsyncLoadObjectFinished">加载回掉</param>
+        /// <param name="loadResPriority">优先级</param>
+        /// <param name="parms"></param>
+        public void AsyncLoadResource(string resPath,MResourceObjectItem mResourceObjectItem,OnAsyncLoadObjectFinished onAsyncLoadObjectFinished, LoadResPriority loadResPriority, object[] parms = null)
+        {
+            if (string.IsNullOrEmpty(resPath))
+                return;
+
+            MResourceItem mResourceItem = GetCacheResourceItem(mResourceObjectItem.m_crc);
+
+            if (mResourceItem != null && mResourceItem.m_object != null)
+            {
+                if (onAsyncLoadObjectFinished != null)
+                {
+                    onAsyncLoadObjectFinished(resPath, mResourceObjectItem, parms);
+                }
+                return;
+            }
+
+            //判断下对象是不是在加载中
+            AsyncLoadResParam asyncLoadResParam = null;
+            if (!m_asyncLoadingAssetDic.TryGetValue(mResourceObjectItem.m_crc, out asyncLoadResParam) || asyncLoadResParam == null)
+            {
+                asyncLoadResParam = m_asyncLoadResParamPool.Spawn(true);
+                asyncLoadResParam.m_crc = mResourceObjectItem.m_crc;
+                asyncLoadResParam.m_resPath = resPath;
+                asyncLoadResParam.m_loadResPriority = loadResPriority;
+                //结果保存
+                m_asyncAssetLoadingList[(int)loadResPriority].Add(asyncLoadResParam);
+                m_asyncLoadingAssetDic.Add(mResourceObjectItem.m_crc, asyncLoadResParam);
+            }
+
+            //添加回调
+            AsyncCallBack m_asyncCallBack = m_asyncCallBackPool.Spawn(true);
+            m_asyncCallBack.m_onAsyncLoadObjectFinished = onAsyncLoadObjectFinished;
+            m_asyncCallBack.m_resourceObjectItem = mResourceObjectItem;
             asyncLoadResParam.m_asyncCallBacks.Add(m_asyncCallBack);
         }
 
@@ -227,6 +288,17 @@ namespace MFrameWork
                     for (int z = 0; z < callBackList.Count; z++)
                     {
                         AsyncCallBack callBack = callBackList[z];
+
+                        //------------------------异步加载处理需要实例化的资源----------------------------
+                        if (callBack != null && callBack.m_onAsyncLoadObjectFinished != null && callBack.m_resourceObjectItem != null)
+                        {
+                            MResourceObjectItem mResourceObjectItem = callBack.m_resourceObjectItem;
+                            callBack.m_resourceObjectItem.m_resItem = mResourceItem;
+                            callBack.m_onAsyncLoadObjectFinished(asyncLoadResParam.m_resPath, callBack.m_resourceObjectItem, callBack.m_resourceObjectItem.m_parms);
+                            callBack.m_onAsyncLoadObjectFinished = null;
+                        }
+
+                        //------------------------异步加载处理不需要实例化的Object资源----------------------------
                         if (callBack != null && callBack.m_onAsyncLoadFinished != null)
                         {
                             callBack.m_onAsyncLoadFinished(asyncLoadResParam.m_resPath, obj, callBack.m_parms);

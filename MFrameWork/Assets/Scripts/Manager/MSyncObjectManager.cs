@@ -71,13 +71,35 @@ namespace MFrameWork
         }
 
         /// <summary>
+        /// 预加载GamObject
+        /// </summary>
+        /// <param name="resPath">资源路径</param>
+        /// <param name="addCount">预加载数量</param>
+        /// <param name="isChangeSceneClear">且场景是否清除</param>
+        public void PreLoadGameObject(string resPath,int addCount = 1,bool isChangeSceneClear = true)
+        {
+            List<GameObject> tempGameObjects = new List<GameObject>();
+            for (int i = 0; i < addCount; i++)
+            {
+                GameObject obj = InstantiateGameObeject(resPath, false, isChangeSceneClear);
+                tempGameObjects.Add(obj);
+            }
+
+            for (int i = 0; i < tempGameObjects.Count; i++)
+            {
+                ReleaseObject(tempGameObjects[i].gameObject);
+                tempGameObjects[i] = null;
+            }
+        }
+
+        /// <summary>
         /// 同步加载GameObject的方法
         /// </summary>
         /// <returns>The game obeject.</returns>
         /// <param name="resPath">资源路径</param>
         /// <param name="isSetToDefault">是否实例化到默认节点</param>
         /// <param name="isChangeSceneClear">在切换场景的时候是否清楚资源的缓存</param>
-        public GameObject InstantiateGameObeject(string resPath,bool isSetToDefault = false ,bool isChangeSceneClear=true) {
+        public GameObject InstantiateGameObeject(string resPath,bool isSetToDefault = false,bool isChangeSceneClear=true) {
             uint crc = MCrcHelper.GetCRC32(resPath);
             MResourceObjectItem mResourceObjectItem = GetObjectFromPool(crc);
 
