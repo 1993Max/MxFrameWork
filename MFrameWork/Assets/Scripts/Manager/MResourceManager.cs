@@ -98,6 +98,40 @@ namespace MFrameWork
         }
 
         /// <summary>
+        /// 取消异步加载资源
+        /// </summary>
+        /// <returns></returns>
+        public bool CancleAsyncLoad(MResourceObjectItem mResourceObjectItem)
+        {
+            AsyncLoadResParam asyncLoadResParam = null;
+            if (m_asyncLoadingAssetDic.TryGetValue(mResourceObjectItem.m_crc, out asyncLoadResParam)
+                //异步进行中有取的操作 所以有这个判断
+                && m_asyncAssetLoadingList[(int)asyncLoadResParam.m_loadResPriority].Contains(asyncLoadResParam))
+            {
+                for (int i = asyncLoadResParam.m_asyncCallBacks.Count; i >0; i--)
+                {
+                    AsyncCallBack asyncCallBack = asyncLoadResParam.m_asyncCallBacks[i];
+                    if (asyncCallBack != null
+                        && mResourceObjectItem == asyncCallBack.m_resourceObjectItem)
+                    {
+                        asyncCallBack.Reset();
+                        m_asyncCallBackPool.Recycle(asyncCallBack);
+                        asyncLoadResParam.m_asyncCallBacks.Remove(asyncCallBack);
+                    }
+                }
+                //如果中间类中已经没有回调类了 那么回收中间类
+                if (asyncLoadResParam.m_asyncCallBacks.Count < 0)
+                {
+                    asyncLoadResParam.Reset();
+                    m_asyncAssetLoadingList[(int)asyncLoadResParam.m_loadResPriority].Remove(asyncLoadResParam);
+                    m_asyncLoadResParamPool.Recycle(asyncLoadResParam);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        /// <summary>
         /// 资源的预加载 这里和同步加载微小区别 就是不需要引用计数 设置该预先加载的资源 在卸载的时候不卸载
         /// 就是直接加载 然后卸载
         /// </summary>

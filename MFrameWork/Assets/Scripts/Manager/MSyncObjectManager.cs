@@ -113,7 +113,7 @@ namespace MFrameWork
                 if (mResourceObjectItem.m_resItem.m_object != null) 
                 {
                     mResourceObjectItem.m_gameObeject = (GameObject)Object.Instantiate(mResourceObjectItem.m_resItem.m_object);
-                    mResourceObjectItem.m_guid = mResourceObjectItem.m_gameObeject.GetInstanceID();
+                    mResourceObjectItem.m_instanceId = mResourceObjectItem.m_gameObeject.GetInstanceID();
                 }
             }
 
@@ -122,9 +122,9 @@ namespace MFrameWork
                 mResourceObjectItem.m_gameObeject.transform.SetParent(DefaultObjectTrans,false);
             }
 
-            if (!m_resourceObjectDic.ContainsKey(mResourceObjectItem.m_guid)) 
+            if (!m_resourceObjectDic.ContainsKey(mResourceObjectItem.m_instanceId)) 
             {
-                m_resourceObjectDic.Add(mResourceObjectItem.m_guid, mResourceObjectItem);
+                m_resourceObjectDic.Add(mResourceObjectItem.m_instanceId, mResourceObjectItem);
             }
             return mResourceObjectItem.m_gameObeject;
         }

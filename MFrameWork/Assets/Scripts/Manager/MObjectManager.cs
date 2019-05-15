@@ -24,6 +24,7 @@ namespace MFrameWork
         {
             bool bObject = InitObjectManager();
             bool bSyncObject = InitSyncObjectManager();
+            bool bAsyncObject = InitASyncObjectManager();
             return bObject && bSyncObject;
         }
 
