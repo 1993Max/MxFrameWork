@@ -183,7 +183,7 @@ namespace MFrameWork
         {
             MObjectManager.singleton.InstantiateGameObejectAsync("Assets/Resources/UI/Prefabs/TestPrefab.prefab", delegate (string resPath, MResourceObjectItem mResourceObjectItem,object[] parms)
              {
-                 testObjectResload = mResourceObjectItem.m_gameObeject;
+                 testObjectResload = mResourceObjectItem.m_cloneObeject;
              },LoadResPriority.RES_LOAD_LEVEL_HEIGHT,true);
         }
 

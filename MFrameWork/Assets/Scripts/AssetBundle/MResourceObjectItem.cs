@@ -19,7 +19,7 @@ namespace MFrameWork
         //存储MresourceItem这个对象数据
         public MResourceItem m_resItem;
         //实例化出来的gameobject
-        public GameObject m_gameObeject;
+        public GameObject m_cloneObeject;
         //是否切场景清除
         public bool m_isClear = true;
         //实例化Gameobject的实例化Id
@@ -41,7 +41,7 @@ namespace MFrameWork
         public void Reset() 
         {
             m_crc = 0;
-            m_gameObeject = null;
+            m_cloneObeject = null;
             m_isClear = true;
             m_instanceId = 0;
             m_isAlreadyRelease = false;

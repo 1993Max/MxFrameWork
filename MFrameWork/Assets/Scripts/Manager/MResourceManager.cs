@@ -108,7 +108,7 @@ namespace MFrameWork
                 //异步进行中有取的操作 所以有这个判断
                 && m_asyncAssetLoadingList[(int)asyncLoadResParam.m_loadResPriority].Contains(asyncLoadResParam))
             {
-                for (int i = asyncLoadResParam.m_asyncCallBacks.Count; i >0; i--)
+                for (int i = asyncLoadResParam.m_asyncCallBacks.Count-1; i>=0; i--)
                 {
                     AsyncCallBack asyncCallBack = asyncLoadResParam.m_asyncCallBacks[i];
                     if (asyncCallBack != null
@@ -315,7 +315,7 @@ namespace MFrameWork
                 MDebug.singleton.AddErrorLog(" m_resourcesItemDic 不存在这个资源 resPath : " + mResourceItem.m_path);
                 return false;
             }
-            Object.Destroy(mResourceObjectItem.m_gameObeject);
+            Object.Destroy(mResourceObjectItem.m_cloneObeject);
             mResourceItem.RefCount--;
             DestoryResourceItem(mResourceItem, destoryCompletly);
             return true;
@@ -448,6 +448,9 @@ namespace MFrameWork
 
             //释放在AssetBundle里面的引用
             MAssetBundleManager.singleton.ReleaseAsset(mResourceItem);
+
+            //清除资源对应的对象池
+            MObjectManager.singleton.ClearPoolObject(mResourceItem.m_crc);
 
             if (mResourceItem.m_object != null)
             {

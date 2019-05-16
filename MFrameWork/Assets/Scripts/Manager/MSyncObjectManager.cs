@@ -71,6 +71,72 @@ namespace MFrameWork
         }
 
         /// <summary>
+        /// objectManager 提供一个清除缓存的接口
+        /// </summary>
+        public void ClearCatch()
+        {
+            List<uint> tempList = new List<uint>();
+            foreach (var key in m_resourcesItemPoolDic.Keys)
+            {
+                List<MResourceObjectItem> mResourceObjectLsit = m_resourcesItemPoolDic[key];
+                for (int i = mResourceObjectLsit.Count-1; i >= 0; i--)
+                {
+                    MResourceObjectItem mResourceObjectItem = mResourceObjectLsit[i];
+                    m_resourceObjectDic.Remove(mResourceObjectItem.m_cloneObeject.GetInstanceID());
+                    mResourceObjectItem.Reset();
+                    m_resourceObjectClssPool.Recycle(mResourceObjectItem);
+                }
+
+                if (mResourceObjectLsit.Count <= 0)
+                {
+                    tempList.Add(key);
+                }
+            }
+
+            for (int i = 0; i < tempList.Count; i++)
+            {
+                uint tempKey = tempList[i];
+                if (m_resourcesItemPoolDic.ContainsKey(tempKey))
+                {
+                    m_resourcesItemPoolDic.Remove(tempKey);
+                }
+            }
+
+            tempList.Clear();
+        }
+
+        /// <summary>
+        /// 清除某个对象在对象池中的所有对象
+        /// </summary>
+        /// <param name="resCrc">资源路径Crc</param>
+        public void ClearPoolObject(uint resCrc)
+        {
+            List<MResourceObjectItem> mResourceObjectLsit = null;
+            if (!m_resourcesItemPoolDic.TryGetValue(resCrc, out mResourceObjectLsit) || mResourceObjectLsit == null)
+                return;
+            for (int i = mResourceObjectLsit.Count - 1; i >= 0; i--)
+            {
+                MResourceObjectItem mResourceObjectItem = mResourceObjectLsit[i];
+                if (mResourceObjectItem.m_isClear)
+                {
+                    mResourceObjectLsit.Remove(mResourceObjectItem);
+                    mResourceObjectItem.Reset();
+                    m_resourceObjectDic.Remove(mResourceObjectItem.m_cloneObeject.GetInstanceID());
+                    m_resourceObjectClssPool.Recycle(mResourceObjectItem);
+                    GameObject.Destroy(mResourceObjectItem.m_cloneObeject);
+                }
+            }
+
+            if (mResourceObjectLsit.Count <= 0)
+            {
+                if (m_resourcesItemPoolDic.ContainsKey(resCrc))
+                {
+                    m_resourcesItemPoolDic.Remove(resCrc);
+                }
+            }
+        }
+
+        /// <summary>
         /// 预加载GamObject
         /// </summary>
         /// <param name="resPath">资源路径</param>
@@ -112,21 +178,21 @@ namespace MFrameWork
 
                 if (mResourceObjectItem.m_resItem.m_object != null) 
                 {
-                    mResourceObjectItem.m_gameObeject = (GameObject)Object.Instantiate(mResourceObjectItem.m_resItem.m_object);
-                    mResourceObjectItem.m_instanceId = mResourceObjectItem.m_gameObeject.GetInstanceID();
+                    mResourceObjectItem.m_cloneObeject = (GameObject)Object.Instantiate(mResourceObjectItem.m_resItem.m_object);
+                    mResourceObjectItem.m_instanceId = mResourceObjectItem.m_cloneObeject.GetInstanceID();
                 }
             }
 
             if (isSetToDefault) 
             {
-                mResourceObjectItem.m_gameObeject.transform.SetParent(DefaultObjectTrans,false);
+                mResourceObjectItem.m_cloneObeject.transform.SetParent(DefaultObjectTrans,false);
             }
 
             if (!m_resourceObjectDic.ContainsKey(mResourceObjectItem.m_instanceId)) 
             {
                 m_resourceObjectDic.Add(mResourceObjectItem.m_instanceId, mResourceObjectItem);
             }
-            return mResourceObjectItem.m_gameObeject;
+            return mResourceObjectItem.m_cloneObeject;
         }
 
         /// <summary>
@@ -142,7 +208,7 @@ namespace MFrameWork
                 MResourceManager.singleton.InCreaseResourceRef(crc);
                 MResourceObjectItem resObj = mResourceObjectItemList[0];
                 mResourceObjectItemList.RemoveAt(0);
-                GameObject gameObject = resObj.m_gameObeject;
+                GameObject gameObject = resObj.m_cloneObeject;
                 if (!System.Object.ReferenceEquals(gameObject, null))
                 {
                     resObj.m_isAlreadyRelease = false;
@@ -208,15 +274,15 @@ namespace MFrameWork
                     m_resourcesItemPoolDic.Add(mResourceObjectItem.m_crc, listObjectItems);
                 }
 
-                if (mResourceObjectItem.m_gameObeject != null)
+                if (mResourceObjectItem.m_cloneObeject != null)
                 {
                     if (isToRecycleParent)
                     {
-                        mResourceObjectItem.m_gameObeject.transform.SetParent(RecycleObjectPoolTrans);
+                        mResourceObjectItem.m_cloneObeject.transform.SetParent(RecycleObjectPoolTrans);
                     }
                     else
                     {
-                        mResourceObjectItem.m_gameObeject.SetActiveEx(false);
+                        mResourceObjectItem.m_cloneObeject.SetActiveEx(false);
                     }
                 }
 

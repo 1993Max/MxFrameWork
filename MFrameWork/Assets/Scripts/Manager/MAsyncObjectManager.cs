@@ -15,14 +15,49 @@ namespace MFrameWork
 {
     public partial class MObjectManager
     {
-        //根据异步的Guid存储MResourceObjectItem 用于判断是否正在异步加载
+        //根据异步的Guid存储MResourceObjectItem  用于记录异步加载中的列表 也可以取消正在进行中的异步加载
         public Dictionary<long, MResourceObjectItem> m_asyncResourcesObjectsDic = null;
-
 
         public bool InitASyncObjectManager()
         {
             m_asyncResourcesObjectsDic = new Dictionary<long, MResourceObjectItem>();
             return true;
+        }
+
+        /// <summary>
+        /// 取消异步加载
+        /// </summary>
+        /// <param name="asyncGuid">异步加载GUID</param>
+        public void CancleAsyncResObjectLoad(long asyncGuid)
+        {
+            MResourceObjectItem mResourceObjectItem = null;
+            if (m_asyncResourcesObjectsDic.TryGetValue(asyncGuid, out mResourceObjectItem))
+            {
+                m_asyncResourcesObjectsDic.Remove(asyncGuid);
+                mResourceObjectItem.Reset();
+                m_resourceObjectClssPool.Recycle(mResourceObjectItem);
+            }
+        }
+
+        /// <summary>
+        /// 是否在异步加载中
+        /// </summary>
+        /// <param name="guid"></param>
+        /// <returns></returns>
+        public bool IsInAsyncLoad(long guid)
+        {
+            return m_asyncResourcesObjectsDic[guid] != null;
+        }
+
+        /// <summary>
+        /// 是否由对象池创建的
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public bool IsObjectManagerCreate(GameObject obj)
+        {
+            MResourceObjectItem mResourceObjectItem = m_resourceObjectDic[obj.GetInstanceID()];
+            return mResourceObjectItem != null;
         }
 
         /// <summary>
@@ -42,11 +77,11 @@ namespace MFrameWork
 
             uint crc = MCrcHelper.GetCRC32(resPath);
             MResourceObjectItem mResourceObjectItem = GetObjectFromPool(crc);
-            if (mResourceObjectItem != null && mResourceObjectItem.m_gameObeject!= null)
+            if (mResourceObjectItem != null && mResourceObjectItem.m_cloneObeject!= null)
             {
                 if (isSetToDefault)
                 {
-                    mResourceObjectItem.m_gameObeject.transform.SetParent(DefaultObjectTrans);
+                    mResourceObjectItem.m_cloneObeject.transform.SetParent(DefaultObjectTrans);
                 }
 
                 if (onAsyncLoadFinished != null)
@@ -55,17 +90,20 @@ namespace MFrameWork
                 }
                 return mResourceObjectItem.m_asyncGuid;
             }
+            long m_asyncGuid = MResourceManager.singleton.GetGUID();
             mResourceObjectItem = m_resourceObjectClssPool.Spawn(true);
             mResourceObjectItem.m_crc = crc;
             mResourceObjectItem.m_isSetToDefault = isSetToDefault;
             mResourceObjectItem.m_isClear = isChangeSceneClear;
             mResourceObjectItem.m_onAsyncLoadObjectFinished = onAsyncLoadFinished;
             mResourceObjectItem.m_parms = parms;
-            mResourceObjectItem.m_asyncGuid = MResourceManager.singleton.GetGUID();
+            mResourceObjectItem.m_asyncGuid = m_asyncGuid;
+
+            //添加到异步加载管理列表里
+            m_asyncResourcesObjectsDic.Add(m_asyncGuid, mResourceObjectItem);
             //调用MResourceManager为Object准备的的异步加载函数
             MResourceManager.singleton.AsyncLoadResource(resPath, mResourceObjectItem, OnAsyncLoadObjectFinish, loadResPriority, parms);
-
-            return MResourceManager.singleton.GetGUID();
+            return m_asyncGuid;
         }
 
         /// <summary>
@@ -86,7 +124,7 @@ namespace MFrameWork
             }
             else
             {
-                mResourceObjectItem.m_gameObeject = GameObject.Instantiate(mResourceObjectItem.m_resItem.m_object) as GameObject;
+                mResourceObjectItem.m_cloneObeject = GameObject.Instantiate(mResourceObjectItem.m_resItem.m_object) as GameObject;
             }
 
             //加载完成从正在加载的异步队列中移除
@@ -95,34 +133,19 @@ namespace MFrameWork
                 m_asyncResourcesObjectsDic.Remove(mResourceObjectItem.m_asyncGuid);
             }
 
-            if (mResourceObjectItem.m_gameObeject != null && mResourceObjectItem.m_isSetToDefault)
+            if (mResourceObjectItem.m_cloneObeject != null && mResourceObjectItem.m_isSetToDefault)
             {
-                mResourceObjectItem.m_gameObeject.transform.SetParent(DefaultObjectTrans);
+                mResourceObjectItem.m_cloneObeject.transform.SetParent(DefaultObjectTrans);
             }
 
             if (mResourceObjectItem.m_onAsyncLoadObjectFinished != null)
             {
-                int instanceId = mResourceObjectItem.m_gameObeject.GetInstanceID();
+                int instanceId = mResourceObjectItem.m_cloneObeject.GetInstanceID();
                 if (!m_resourceObjectDic.ContainsKey(instanceId))
                 {
                     m_resourceObjectDic.Add(instanceId, mResourceObjectItem);
                 }
                 mResourceObjectItem.m_onAsyncLoadObjectFinished(resPath, mResourceObjectItem, parms);
-            }
-        }
-
-        /// <summary>
-        /// 取消异步加载
-        /// </summary>
-        /// <param name="asyncGuid">异步加载GUID</param>
-        public void CancleAsyncResObjectLoad(long asyncGuid)
-        {
-            MResourceObjectItem mResourceObjectItem = null;
-            if (m_asyncResourcesObjectsDic.TryGetValue(asyncGuid, out mResourceObjectItem))
-            {
-                m_asyncResourcesObjectsDic.Remove(asyncGuid);
-                mResourceObjectItem.Reset();
-                m_resourceObjectClssPool.Recycle(mResourceObjectItem);
             }
         }
     }

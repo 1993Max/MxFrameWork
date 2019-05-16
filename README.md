@@ -1,43 +1,27 @@
 # MxFrameWork
 
-A Sample Framework
+# Each time with new function update,Mark the update content~
+
+# This is a Simple Unity FrameWork
 
 Already Done
 
-1 UI File Generater
+* Resource Management Framework(资源管理框架)
 
-2 UI FrameWork DeSign (40%)
-
-3 Add ULua In FrameWork
-
-4 Add AssetBundleTools
-
-5 Add AssetBundleManager
-
-6 Add Simple Post Effect
-
-7 Add Object Pool
-
-8 Add Some Tools
+* Some Tools(游戏工具)
 
 ToDo
 
-1 Resource Manager
+* UI Management FrameWork
 
-2 NetWork FrameWork
+* Add Lua
 
-3 Perfect UIManager
+* NetWork Management FrameWork
 
-4 LuaHotFix
+* HotFix Management FrameWork
 
-5 HotFix FrameWork
+* Event System
 
-6 AI
+* Tools
 
-7 Fight Design
-
-8 Path Finding
-
-9 Sdk
-
-10 Event System
+* Behavior Tree

@@ -396,6 +396,8 @@
     <Compile Include="Assets\Scripts\PostEffect\ColorAdjustEffect.cs" />
     <Compile Include="Assets\Scripts\PostEffect\EdgeEffect.cs" />
     <Compile Include="Assets\Scripts\PostEffect\PostEffectBase.cs" />
+    <Compile Include="Assets\Scripts\ResData\MResOffLineDataBase.cs" />
+    <Compile Include="Assets\Scripts\ResData\MUIResOffLineData.cs" />
     <Compile Include="Assets\Scripts\Resource\MAssetInfo.cs" />
     <Compile Include="Assets\Scripts\Resource\MIResLoadListener.cs" />
     <Compile Include="Assets\Scripts\Resource\MResLoader.cs" />
