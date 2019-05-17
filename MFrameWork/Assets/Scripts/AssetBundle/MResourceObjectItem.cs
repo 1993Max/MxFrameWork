@@ -26,7 +26,8 @@ namespace MFrameWork
         public int m_instanceId = 0;
         //是否已经被释放过了
         public bool m_isAlreadyRelease = false;
-
+        //离线数据
+        public MResOffLineDataBase m_resOffLineData = null;
         //----------------------------以下是一些异步的参数
         
         //是否默认创建到默认节点下
@@ -49,6 +50,7 @@ namespace MFrameWork
             m_onAsyncLoadObjectFinished = null;
             m_parms = null;
             m_asyncGuid = 0;
+            m_resOffLineData = null;
         }
     }
 }

@@ -180,6 +180,7 @@ namespace MFrameWork
                 {
                     mResourceObjectItem.m_cloneObeject = (GameObject)Object.Instantiate(mResourceObjectItem.m_resItem.m_object);
                     mResourceObjectItem.m_instanceId = mResourceObjectItem.m_cloneObeject.GetInstanceID();
+                    mResourceObjectItem.m_resOffLineData = mResourceObjectItem.m_cloneObeject.GetComponent<MResOffLineDataBase>();
                 }
             }
 
@@ -211,6 +212,10 @@ namespace MFrameWork
                 GameObject gameObject = resObj.m_cloneObeject;
                 if (!System.Object.ReferenceEquals(gameObject, null))
                 {
+                    if (!System.Object.ReferenceEquals(resObj.m_resOffLineData,null))
+                    {
+                        resObj.m_resOffLineData.ResetBasicData();
+                    }
                     resObj.m_isAlreadyRelease = false;
 #if UNITY_EDITOR
                     if (gameObject.name.EndsWith("(Recycle)"))
@@ -305,5 +310,19 @@ namespace MFrameWork
             //todo
         }
 
+        //返回当前Gameobject身上的离线数据信息
+        public MResOffLineDataBase GetObjOffLineData(GameObject gameObject) 
+        {
+            MResOffLineDataBase mResOffLineData = null;
+            MResourceObjectItem mResourceObjectItem = null;
+            if(m_resourceObjectDic.TryGetValue(gameObject.GetInstanceID(), out mResourceObjectItem)) 
+            {
+                if (mResourceObjectItem != null) 
+                {
+                    mResOffLineData = mResourceObjectItem.m_resOffLineData;
+                } 
+            }
+            return mResOffLineData;
+        }
     }
 }

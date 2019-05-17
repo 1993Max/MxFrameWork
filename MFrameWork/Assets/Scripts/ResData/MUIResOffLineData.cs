@@ -19,12 +19,19 @@ namespace MFrameWork
 {
     public class MUIResOffLineData : MResOffLineDataBase
     {
-        public RectTransform m_rectTransform;
+        public Vector2[] m_anchorMax;
+        public Vector2[] m_anchorMin;
+        public Vector2[] m_pivot;
+        public Vector2[] m_sizeDelta;
+        public Vector3[] m_anchorPos;
 
         [ContextMenu("BindBasicData")]
         public override void BindBasicData()
         {
-            base.BindBasicData();
+            for (int i = 0; i < m_allCount; i++)
+            {
+
+            }
         }
 
         public override void ResetBasicData()

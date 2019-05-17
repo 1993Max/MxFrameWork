@@ -21,7 +21,7 @@ public class FindReference : EditorWindow
     };
 
     [MenuItem("MSimpleTools/FindReference(查找引用)/FindAllRefrence(查找引用关系)")]
-    [MenuItem("Assets/FindReference(查找引用)/FindAllRefrence(查找引用关系)")]
+    [MenuItem("Assets/MSimpleTools/FindReference(查找引用)/FindAllRefrence(查找引用关系)")]
     public static void Init()
     {
         FindReference me;
@@ -36,7 +36,7 @@ public class FindReference : EditorWindow
     }
 
     [MenuItem("MSimpleTools/FindReference(查找引用)/FindRefrenceInPrefab(查找在UI的prefab里的引用)")]
-    [MenuItem("Assets/FindReference(查找引用)/FindRefrenceInPrefab(查找在UI的prefab里的引用)")]
+    [MenuItem("Assets/MSimpleTools/FindReference(查找引用)/FindRefrenceInPrefab(查找在UI的prefab里的引用)")]
     public static void InitUI()
     {
         FindReference me;

@@ -125,6 +125,7 @@ namespace MFrameWork
             else
             {
                 mResourceObjectItem.m_cloneObeject = GameObject.Instantiate(mResourceObjectItem.m_resItem.m_object) as GameObject;
+                mResourceObjectItem.m_resOffLineData = mResourceObjectItem.m_cloneObeject.GetComponent<MResOffLineDataBase>();
             }
 
             //加载完成从正在加载的异步队列中移除
