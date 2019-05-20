@@ -5,7 +5,7 @@ namespace MFrameWork
 {
     public class TestController : MUIBase
     {
-        public TestController() : base("TestController", UILayerType.Normal)
+        public TestController() : base("TestController", MUILayerType.Normal)
         {
             
         }

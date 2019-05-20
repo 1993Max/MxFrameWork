@@ -16,4 +16,8 @@ public class MPathUtils
     public const string RECYCLE_POOL_TRANSFORM = "RecycleObjectPool"; //对象池回收节点
     public const string DEFAULT_OBJECT_TRANSFORM = "DefaultObjectTrans"; //默认创建节点
     #endregion
+
+    #region UI相关的路径
+    public const string UI_MAINPATH = "Assets/Resources/UI/Prefabs";
+    #endregion
 }

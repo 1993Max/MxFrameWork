@@ -9,7 +9,7 @@ namespace MFrameWork
         public GameObject BtnStart;
         public GameObject BtnExit;
 
-        public LogonController() : base("LoginPanel", UILayerType.Normal)
+        public LogonController() : base("LoginPanel.Prefab", MUILayerType.Normal)
         {
 
         }
@@ -17,8 +17,8 @@ namespace MFrameWork
 		public override void Init()
 		{
             base.Init();
-            BtnStart = _mUIGameObject.transform.Find("BtnLogin").gameObject;
-            BtnExit  = _mUIGameObject.transform.Find("BtnExit").gameObject;
+            BtnStart = m_uiGameObject.transform.Find("BtnLogin").gameObject;
+            BtnExit  = m_uiGameObject.transform.Find("BtnExit").gameObject;
 
             BtnStart.GetComponent<Button>().onClick.AddListener(delegate
             {

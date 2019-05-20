@@ -1,3 +1,12 @@
+// **************************************
+//
+// 文件名(MUIBase.cs):
+// 功能描述("UI基类"):
+// 作者(Max1993):
+// 日期(2019/5/19  21:26):
+//
+// **************************************
+//
 using UnityEngine;
 using System.Collections;
 
@@ -6,8 +15,10 @@ namespace MFrameWork
     //GameObject Loaded CallBack 物体加载回掉
     public delegate void GameObjectLoadedCallBack(GameObject obj);
 
-    //UILayer Type UI层的类型枚举
-    public enum UILayerType
+    /// <summary>
+    /// UI层级
+    /// </summary>
+    public enum MUILayerType
     {
         Top,
         Upper,
@@ -15,49 +26,93 @@ namespace MFrameWork
         Hud
     }
 
-    //
+    /// <summary>
+    /// 加载UI的方式
+    /// </summary>
+    public enum MUILoadType 
+    {
+        SyncLoad,
+        AsyncLoad, 
+    }
+
     public abstract class MUIBase
     {
-        //Is Init 是否加载完成
-        protected bool   _mInited;
+        /// <summary>
+        /// 是否加载完成的标志位
+        /// </summary>
+        protected bool m_isInited;
 
-        //UIName  UI名
-        protected string _mUIName;
+        /// <summary>
+        /// UI名字
+        /// </summary>
+        protected string m_uiName;
 
-        //UIGameObject UI物体
-        protected GameObject _mUIGameObject;
+        /// <summary>
+        /// 在关闭的时候是否缓存UI 默认不缓存
+        /// </summary>
+        protected bool m_isCatchUI=false;
 
-        //IsActive 是否可见
-        protected bool _mActive;
+        /// <summary>
+        /// UI的实例化GamObejct
+        /// </summary>
+        protected GameObject m_uiGameObject;
 
-        //LoadedCallBack 加载回掉
-        protected GameObjectLoadedCallBack _mCallBack;
+        /// <summary>
+        /// 设置UI可见性状态
+        /// </summary>
+        protected bool m_active = false;
+
+        /// <summary>
+        /// 加载完成的回调
+        /// </summary>
+        protected GameObjectLoadedCallBack m_callBack;
+
+        /// <summary>
+        /// UI的资源全路径
+        /// </summary>
+        protected string m_uiFullPath = "";
 
         //UILayerType UI层类型
-        protected UILayerType _mUILayerType;
+        protected MUILayerType m_uiLayerType;
 
-        public string MUIName
+        //UI的加载方式
+        protected MUILoadType m_uiLoadType;
+
+        public string MUiName
         {
-            get { return _mUIName;  }
-            set { _mUIName = value; }
+            get { return m_uiName;  }
+            set 
+            { 
+                m_uiName = value;
+                m_uiFullPath = MPathUtils.UI_MAINPATH + "/" + m_uiName;
+            }
+        }
+
+        public bool MIsCatchUI 
+        {
+            get { return m_isCatchUI; }
+            set
+            {
+                m_isCatchUI = value;
+            }
         }
 
         public GameObject MUIGameObject
         {
-            get { return _mUIGameObject; }
-            set { _mUIGameObject = value; }
+            get { return m_uiGameObject; }
+            set { m_uiGameObject = value; }
         }
 
         public bool MActive
         {
-            get { return _mActive; }
+            get { return m_active; }
             set 
             {
-                _mActive = value; 
-                if(_mUIGameObject!=null)
+                m_active = value; 
+                if(m_uiGameObject!=null)
                 {
-                    _mUIGameObject.SetActive(value);
-                    if(_mUIGameObject.activeSelf)
+                    m_uiGameObject.SetActive(value);
+                    if(m_uiGameObject.activeSelf)
                     {
                         OnActive();   
                     }
@@ -69,26 +124,60 @@ namespace MFrameWork
             }
         }
 
-        public bool MIsInited { get { return _mInited; } }
+        public bool MIsInited { get { return m_isInited; } }
 
-        public MUIBase(string uiName,UILayerType layerType)
+        protected MUIBase(string uiName,MUILayerType layerType,MUILoadType loadType = MUILoadType.SyncLoad)
         {
-            _mUIName = uiName;
-            _mUILayerType = layerType;
+            MUiName = uiName;
+            m_uiLayerType = layerType;
+            m_uiLoadType = loadType;
         }
 
         public virtual void Init()
         {
-            _mUIGameObject = Object.Instantiate(Resources.Load("UI/Prefabs/" + _mUIName)) as GameObject;
-            _mCallBack += OnLoaded;
-            _mInited = true;
-            OnLoaded(_mUIGameObject);
+            if(m_uiLoadType == MUILoadType.SyncLoad) 
+            {
+                GameObject go = MObjectManager.singleton.InstantiateGameObeject(m_uiFullPath);
+                OnGameObjectLoaded(go);
+            }
+            else 
+            {
+                MObjectManager.singleton.InstantiateGameObejectAsync(m_uiFullPath,delegate (string resPath, MResourceObjectItem mResourceObjectItem,object[] parms)
+                {
+                    GameObject go = mResourceObjectItem.m_cloneObeject;
+                    OnGameObjectLoaded(go);
+                },LoadResPriority.RES_LOAD_LEVEL_HEIGHT);
+            }
+        }
+
+        private void OnGameObjectLoaded(GameObject uiObj) 
+        {
+            if(uiObj == null)
+            {
+                MDebug.singleton.AddErrorLog("UI加载失败了老铁~看看路径 ResPath: " + m_uiFullPath);
+                return;
+            }
+            m_uiGameObject = uiObj;
+            m_isInited = true;
+            SetPanetByLayerType(m_uiLayerType);
+            m_uiGameObject.transform.localPosition = Vector3.zero;
+            m_uiGameObject.transform.localScale = Vector3.one;
         }
 
         public virtual void Uninit()
         {
-            _mInited = false;
-            //Release GameObject
+            m_isInited = false;
+            m_active = false;
+            if (m_isCatchUI) 
+            {
+                //资源并加入到资源池
+                MObjectManager.singleton.ReleaseObject(m_uiGameObject);
+            }
+            else 
+            {
+                //彻底清除Object资源
+                MObjectManager.singleton.ReleaseObject(m_uiGameObject, 0, true);
+            }
         }
 
         protected abstract void OnActive();
@@ -110,37 +199,21 @@ namespace MFrameWork
             
         }
 
-        protected void OnLoaded(GameObject go)
+        protected void SetPanetByLayerType(MUILayerType layerType)
         {
-            SetPanetByLayerType(_mUILayerType);
-            go.transform.localPosition = Vector3.zero;
-            go.transform.localScale = Vector3.one;
-            RectTransform rectTrans = go.GetComponent<RectTransform>();
-            if (rectTrans)
+            switch(m_uiLayerType)
             {
-                rectTrans.offsetMax = Vector2.zero;
-                rectTrans.offsetMin = Vector2.zero;
-            }
-
-            go.transform.SetAsLastSibling();
-            _mActive = true;
-        }
-
-        protected void SetPanetByLayerType(UILayerType layerType)
-        {
-            switch(_mUILayerType)
-            {
-                case UILayerType.Top:
-                    _mUIGameObject.transform.SetParent(MUIManager.singleton.MTransTop);
+                case MUILayerType.Top:
+                    m_uiGameObject.transform.SetParent(MUIManager.singleton.MTransTop);
                     break;
-                case UILayerType.Upper:
-                    _mUIGameObject.transform.SetParent(MUIManager.singleton.MTransUpper);
+                case MUILayerType.Upper:
+                    m_uiGameObject.transform.SetParent(MUIManager.singleton.MTransUpper);
                     break;
-                case UILayerType.Normal:
-                    _mUIGameObject.transform.SetParent(MUIManager.singleton.MTransNormal);
+                case MUILayerType.Normal:
+                    m_uiGameObject.transform.SetParent(MUIManager.singleton.MTransNormal);
                     break;
-                case UILayerType.Hud:
-                    _mUIGameObject.transform.SetParent(MUIManager.singleton.MTransHUD);
+                case MUILayerType.Hud:
+                    m_uiGameObject.transform.SetParent(MUIManager.singleton.MTransHUD);
                     break;
             }
         }

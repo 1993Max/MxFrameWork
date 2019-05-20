@@ -10,8 +10,8 @@ namespace MFrameWork
     /// </summary>
     public class MUIManager : MSingleton<MUIManager>
     {
-        public const string TEST_CONTROLLER = "TestController";
-        public const string LOGON_CONTROLLER = "LoginPanel";
+        public const string TEST_CONTROLLER = "TestController.prefab";
+        public const string LOGON_CONTROLLER = "LoginPanel.prefab";
 
         private Dictionary<string, MUIBase> _mUiDict;
         private Camera _mUICamera;
@@ -129,7 +129,6 @@ namespace MFrameWork
                 ui.Init();
             }
 
-            ui.MActive = true;
             return ui;
         }
 

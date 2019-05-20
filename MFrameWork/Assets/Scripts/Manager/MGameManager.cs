@@ -28,8 +28,7 @@ namespace MFrameWork
 
 		private void Start()
 		{
-            //练习函数
-            Test();
+
         }
 
         public void OnGUI()
@@ -79,16 +78,6 @@ namespace MFrameWork
         //------以下为测试逻辑--------
 
         public AudioSource mAudioSource;
-
-        public void Test() 
-        {
-            ShowUIPanelTest();
-        }
-
-        public void ShowUIPanelTest()
-        {
-            MUIManager.singleton.ActiveUI("LoginPanel");
-        }
 
         public void ResourceTest() 
         {
@@ -140,6 +129,11 @@ namespace MFrameWork
             if (GUI.Button(new Rect(10, 560, 200, 50), "实例化资源预加载"))
             {
                 MObjectManager.singleton.PreLoadGameObject("Assets/Resources/UI/Prefabs/TestPrefab.prefab", 10);
+            }
+
+            if (GUI.Button(new Rect(10, 620, 200, 50), "UIManager测试"))
+            {
+                MUIManager.singleton.ActiveUI("LoginPanel.prefab");
             }
         }
 
