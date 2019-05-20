@@ -1,3 +1,12 @@
+// **************************************
+//
+// 文件名(MUIManager.cs):
+// 功能描述("UI核心管理类"):
+// 作者(Max1993):
+// 日期(2019/5/19  21:26):
+//
+// **************************************
+//
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
@@ -5,109 +14,107 @@ using System.Collections.Generic;
 
 namespace MFrameWork
 {
-    /// <summary>
-    /// This is a Manager of all UI
-    /// </summary>
     public class MUIManager : MSingleton<MUIManager>
     {
-        public const string TEST_CONTROLLER = "TestController.prefab";
-        public const string LOGON_CONTROLLER = "LoginPanel.prefab";
+        /// <summary>
+        /// 核心的管理所有UI的Dictionary
+        /// </summary>
+        private Dictionary<string, MUIBase> m_uiDict;
 
-        private Dictionary<string, MUIBase> _mUiDict;
-        private Camera _mUICamera;
-        private GameObject _mUIRoot;
+        /// <summary>
+        /// 摄像机UICamera
+        /// </summary>
+        private Camera m_uiCamera;
 
-        private CanvasScaler _mUiRootCanvasScaler;
-        private Transform _mTransNormal;
-        private RectTransform _mRectTransNormal;
-        private Transform _mTtransTop;
-        private RectTransform _mRectTransTop;
-        private Transform _mTransUpper;
-        private RectTransform _mRectTransUpper;
-        private Transform _mTransHUD;
-        private RectTransform _mRectTransHUD;
+        private GameObject m_uiRoot;
+        private Transform m_transNormal;
+        private RectTransform m_rectTransNormal;
+        private Transform m_transTop;
+        private RectTransform m_rectTransTop;
+        private Transform m_transUpper;
+        private RectTransform m_rectTransUpper;
+        private Transform m_transHUD;
+        private RectTransform m_rectTransHUD;
 
-        public Camera MUICamera { get { return _mUICamera; } }
-        public GameObject MUIRoot { get { return _mUIRoot; } }
-        public Transform MTransNormal { get { return _mTransNormal; } }
-        public RectTransform MRectTransNormal { get { return _mRectTransNormal; } }
-        public Transform MTransUpper { get { return _mTransUpper; } }
-        public RectTransform MRectTransUpper { get { return _mRectTransUpper; } }
-        public Transform MTransTop { get { return _mTtransTop; } }
-        public RectTransform MRectTransTop { get { return _mRectTransTop; } }
-        public Transform MTransHUD { get { return _mTransHUD; } }
-        public RectTransform MRectTransHUD { get { return _mRectTransHUD; } }
+        //以下是一些基础的层级位置信息
+        public GameObject MUIRoot { get { return m_uiRoot; } }
+        public Transform MTransNormal { get { return m_transNormal; } }
+        public RectTransform MRectTransNormal { get { return m_rectTransNormal; } }
+        public Transform MTransUpper { get { return m_transUpper; } }
+        public RectTransform MRectTransUpper { get { return m_rectTransUpper; } }
+        public Transform MTransTop { get { return m_transTop; } }
+        public RectTransform MRectTransTop { get { return m_rectTransTop; } }
+        public Transform MTransHUD { get { return m_transHUD; } }
+        public RectTransform MRectTransHUD { get { return m_rectTransHUD; } }
 
-        public Transform MTransRoleHUD { get; private set; }
-        public Transform MTransMonsterHUD { get; private set; }
-        public Transform MTransBubbleHUD { get; private set; }
-        public Transform MTransSkillHUD { get; private set; }
-
-		public override bool Init()
-		{
-            _mUiDict = new Dictionary<string, MUIBase>();
-            _mUIRoot = Object.Instantiate(Resources.Load("UI/Prefabs/UIRoot") as GameObject);
-            _mUIRoot.name = "UIRoot";
-            _mUIRoot.SetActive(true);
-            Object.DontDestroyOnLoad(_mUIRoot);
-            _mUiRootCanvasScaler = _mUIRoot.GetComponent<CanvasScaler>();
-
-            _mTransNormal = _mUIRoot.transform.Find("NormalLayer");
-            _mRectTransNormal = _mTransNormal.gameObject.GetComponent<RectTransform>();
-            _mTtransTop = _mUIRoot.transform.Find("TopLayer");
-            _mRectTransTop = _mTtransTop.gameObject.GetComponent<RectTransform>();
-            _mTransUpper = _mUIRoot.transform.Find("UpperLayer");
-            _mRectTransUpper = _mTransUpper.gameObject.GetComponent<RectTransform>();
-            _mTransHUD = _mUIRoot.transform.Find("HudLayer");
-            _mRectTransHUD = _mTransHUD.gameObject.GetComponent<RectTransform>();
-
-            for (int i = 0; i < _mTransHUD.childCount; i++)
-            {
-                Transform t = _mTransHUD.GetChild(i);
-                switch (t.name)
-                {
-                    case "RoleHUDList":
-                        MTransRoleHUD = t;
-                        break;
-                    case "MonsterHUDList":
-                        MTransMonsterHUD = t;
-                        break;
-                    case "BubbleHUDList":
-                        MTransBubbleHUD = t;
-                        break;
-                    case "SkillHUDList":
-                        MTransSkillHUD = t;
-                        break;
-                }
-            }
-            _mUICamera = _mUIRoot.transform.Find("Camera").GetComponent<Camera>();
-
-            UIRegister();
-            return base.Init();
-        }
-
-        //UI Register
-        private void UIRegister()
+        public Camera MUICamera
         {
-            _mUiDict.Add(TEST_CONTROLLER, new TestController());
-            _mUiDict.Add(LOGON_CONTROLLER, new LogonController());
+            get
+            {
+                return m_uiCamera;
+            }
         }
 
-		public override void UnInit()
+        public override bool Init()
 		{
-            if (_mUIRoot)
+            return InitUIInfo() && UIRegister();
+        }
+
+        /// <summary>
+        /// 初始化一些常用的UI信息
+        /// </summary>
+        /// <returns></returns>
+        public bool InitUIInfo()
+        {
+            m_uiDict = new Dictionary<string, MUIBase>();
+            m_uiRoot = MObjectManager.singleton.InstantiateGameObeject(MPathUtils.UI_ROOTPATH);
+            if (m_uiRoot == null)
             {
-                /*
-                MResLoader.singleton.DestroyObj(_uiRoot, false);
-                _uiRoot = null;
-                _transNormal = null;
-                _transUpper = null;
-                _transTop = null;
-                _transHUD = null;
-                _uiCamera = null;
-                */
+                MDebug.singleton.AddErrorLog("初始化UIManager 失败了~");
+                return false;
             }
-            base.UnInit();
+            m_uiRoot.name = "UIRoot";
+            m_uiRoot.SetActive(true);
+            m_transNormal = m_uiRoot.transform.Find("NormalLayer");
+            m_rectTransNormal = m_transNormal.gameObject.GetComponent<RectTransform>();
+            m_transTop = m_uiRoot.transform.Find("TopLayer");
+            m_rectTransTop = m_transTop.gameObject.GetComponent<RectTransform>();
+            m_transUpper = m_uiRoot.transform.Find("UpperLayer");
+            m_rectTransUpper = m_transUpper.gameObject.GetComponent<RectTransform>();
+            m_transHUD = m_uiRoot.transform.Find("HudLayer");
+            m_rectTransHUD = m_transHUD.gameObject.GetComponent<RectTransform>();
+            m_uiCamera = m_uiRoot.transform.Find("Camera").GetComponent<Camera>();
+            GameObject.DontDestroyOnLoad(m_uiRoot);
+            return true;
+        }
+
+        public const string LOGON_CONTROLLER = "LoginPanel.prefab";
+        /// <summary>
+        /// 在C#层实现逻辑的UI进行注册注册 
+        /// </summary>
+        /// <returns></returns>
+        private bool UIRegister()
+        {
+            m_uiDict.Add(LOGON_CONTROLLER, new LogonController());
+            return true;
+        }
+
+        public override void UnInit()
+		{
+            if (m_uiRoot)
+            {
+                MObjectManager.singleton.ReleaseObjectComopletly(m_uiRoot);
+                m_uiRoot = null;
+                m_transNormal = null;
+                m_rectTransNormal = null;
+                m_transTop = null;
+                m_rectTransTop = null;
+                m_transUpper = null;
+                m_rectTransUpper = null;
+                m_transHUD = null;
+                m_rectTransHUD = null;
+                m_uiCamera = null;
+            }
 		}
 
 		public override void OnLogOut()
@@ -115,96 +122,124 @@ namespace MFrameWork
             base.OnLogOut();
 		}
 
+        /// <summary>
+        /// 打开一个UI的接口
+        /// </summary>
+        /// <param name="uiName"></param>
+        /// <returns></returns>
         public MUIBase ActiveUI(string uiName)
         {
-            MUIBase ui = GetUI(uiName);
-            if (ui == null)
+            MUIBase mUIBase = GetUI(uiName);
+            if (mUIBase == null)
             {
-                Debug.LogError("unregister ui name= "+uiName);
+                Debug.LogError("UIDic里面没有这个UI信息 UIName："+ uiName);
                 return null;
             }
 
-            if (!ui.MIsInited)
+            if (!mUIBase.IsInited)
             {
-                ui.Init();
+                mUIBase.Init();
             }
 
-            return ui;
+            return mUIBase;
         }
 
+        /// <summary>
+        /// 关闭一个UI的接口
+        /// </summary>
+        /// <param name="uiName"></param>
         public void DeActiveUI(string uiName)
         {
-            MUIBase ui = GetUI(uiName);
-            if (ui == null)
+            MUIBase mUIBase = GetUI(uiName);
+            if (mUIBase == null)
             {
-                Debug.LogError("Name= " + uiName +"is null");
+                Debug.LogError("UIDic里面没有这个UI信息 UIName：" + uiName);
                 return;
             }
 
-            if(ui.MIsInited)
+            if(mUIBase.IsInited)
             {
-                if (ui.MActive)
+                if (mUIBase.Active)
                 {
-                    ui.MActive = false;
-                    ui.Uninit();
+                    mUIBase.Active = false;
                 }
+                mUIBase.Uninit();
             }
 
         }
 
+        /// <summary>
+        /// 获取一个UI的接口
+        /// </summary>
+        /// <param name="uiName"></param>
+        /// <returns></returns>
         public MUIBase GetUI(string uiName)
         {
-            MUIBase result = null;
-            _mUiDict.TryGetValue(uiName, out result);
-            return result;
+            MUIBase mUIBase = null;
+            m_uiDict.TryGetValue(uiName, out mUIBase);
+            return mUIBase;
         }
 
         public T GetUI<T>(string uiName) where T : MUIBase
         {
-            MUIBase result = null;
-            if (_mUiDict.TryGetValue(uiName, out result))
+            MUIBase mUIBase = null;
+            if (m_uiDict.TryGetValue(uiName, out mUIBase))
             {
-                if (result is T)
+                if (mUIBase is T)
                 {
-                    return (T)result;
+                    return (T)mUIBase;
                 }
             }
             return null;
         }
 
+        /// <summary>
+        /// 关闭所有UI的接口
+        /// </summary>
         public void DeActiveAll()
         {
-            foreach (KeyValuePair<string, MUIBase> pair in _mUiDict)
+            foreach (KeyValuePair<string, MUIBase> pair in m_uiDict)
             {
                 DeActiveUI(pair.Key);
             }
         }
-
+        
+        /// <summary>
+        /// Update方法
+        /// </summary>
+        /// <param name="delta"></param>
         public void Update(float delta)
         {
-            foreach (KeyValuePair<string, MUIBase> pair in _mUiDict)
+            foreach (var mUIBase in m_uiDict.Values)
             {
-                pair.Value.Update(delta);
+                mUIBase.Update(delta);
             }
         }
 
+        /// <summary>
+        /// LateUpdate方法
+        /// </summary>
+        /// <param name="delta"></param>
         public void LateUpdate(float delta)
         {
-            foreach (KeyValuePair<string, MUIBase> pair in _mUiDict)
+            foreach (var mUIBase in m_uiDict.Values)
             {
-                pair.Value.LateUpdate(delta);
+                mUIBase.LateUpdate(delta);
             }
         }
 
+        /// <summary>
+        /// 注销方法
+        /// </summary>
         public void OnLogout()
         {
-            foreach (KeyValuePair<string, MUIBase> pair in _mUiDict)
+            foreach (var mUIBase in m_uiDict.Values)
             {
-                pair.Value.OnLogOut();
+                mUIBase.OnLogOut();
             }
-            if(_mUICamera)
+            if (m_uiCamera)
             {
-                _mUICamera.enabled = false;
+                m_uiCamera.enabled = false;
             }
         }
 

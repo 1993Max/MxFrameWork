@@ -9,7 +9,7 @@ namespace MFrameWork
         public GameObject BtnStart;
         public GameObject BtnExit;
 
-        public LogonController() : base("LoginPanel.Prefab", MUILayerType.Normal)
+        public LogonController() : base("LoginPanel", MUILayerType.Normal)
         {
 
         }

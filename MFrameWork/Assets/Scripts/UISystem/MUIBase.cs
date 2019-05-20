@@ -78,17 +78,17 @@ namespace MFrameWork
         //UI的加载方式
         protected MUILoadType m_uiLoadType;
 
-        public string MUiName
+        public string UIName
         {
             get { return m_uiName;  }
             set 
-            { 
-                m_uiName = value;
+            {
+                m_uiName = value.EndsWith(MPathUtils.UI_PREFAB_SUFFIX) ? m_uiName = value : m_uiName = value + MPathUtils.UI_PREFAB_SUFFIX;
                 m_uiFullPath = MPathUtils.UI_MAINPATH + "/" + m_uiName;
             }
         }
 
-        public bool MIsCatchUI 
+        public bool IsCatchUI 
         {
             get { return m_isCatchUI; }
             set
@@ -97,13 +97,13 @@ namespace MFrameWork
             }
         }
 
-        public GameObject MUIGameObject
+        public GameObject UIGameObject
         {
             get { return m_uiGameObject; }
             set { m_uiGameObject = value; }
         }
 
-        public bool MActive
+        public bool Active
         {
             get { return m_active; }
             set 
@@ -124,11 +124,11 @@ namespace MFrameWork
             }
         }
 
-        public bool MIsInited { get { return m_isInited; } }
+        public bool IsInited { get { return m_isInited; } }
 
         protected MUIBase(string uiName,MUILayerType layerType,MUILoadType loadType = MUILoadType.SyncLoad)
         {
-            MUiName = uiName;
+            UIName = uiName;
             m_uiLayerType = layerType;
             m_uiLoadType = loadType;
         }

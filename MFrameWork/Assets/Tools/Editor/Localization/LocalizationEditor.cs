@@ -107,7 +107,7 @@ public class LocalizationEditor : EditorWindow
     public static void ReadFromFile()
     {
         stringDict.Clear();
-        var value = MResLoader.singleton.ReadString("Localization/ChineseTable", ".txt");
+        var value = MFileLoadManager.singleton.ReadString("Localization/ChineseTable", ".txt");
         var lines = value.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
         for (int i = 0; i < lines.Length; i++)
         {

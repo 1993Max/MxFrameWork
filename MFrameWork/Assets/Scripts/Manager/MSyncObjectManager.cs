@@ -230,6 +230,15 @@ namespace MFrameWork
         }
 
         /// <summary>
+        /// 彻底删除某一个Go
+        /// </summary>
+        /// <param name="gameObject"></param>
+        public void ReleaseObjectComopletly(GameObject gameObject)
+        {
+            ReleaseObject(gameObject, -1, true);
+        }
+
+        /// <summary>
         /// ObjectManager的释放 对创建出来的Gameobject的释放
         /// </summary>
         /// <param name="gameObject">释放对象</param>

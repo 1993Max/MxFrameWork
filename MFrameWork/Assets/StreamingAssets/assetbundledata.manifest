@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1316263579
+CRC: 2780523657
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 1288a8f9fca95b82dc3078791eda4487
+    Hash: a511670a08cc53432522c2474cb19a0c
   TypeTreeHash:
     serializedVersion: 2
     Hash: bd8366d795247f8643fdfe80f600808c
@@ -19,4 +19,5 @@ Assets:
 - Assets/Resources/GameData/AssetBundleData/MAssetBundleConfig.xml
 - Assets/Resources/GameData/AssetBundleData/MAssetBundleConfig.bytes
 - Assets/Resources/GameData/AssetBundleData/AssetBundleConfig.asset
+- Assets/Resources/GameData/AssetBundleData/ReadMe.md
 Dependencies: []

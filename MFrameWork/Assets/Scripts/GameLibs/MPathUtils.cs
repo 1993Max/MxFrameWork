@@ -19,5 +19,7 @@ public class MPathUtils
 
     #region UI相关的路径
     public const string UI_MAINPATH = "Assets/Resources/UI/Prefabs";
+    public const string UI_ROOTPATH = "Assets/Resources/UI/Prefabs/UIRoot.prefab";
+    public const string UI_PREFAB_SUFFIX  = ".prefab";
     #endregion
 }

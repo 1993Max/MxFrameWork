@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 1752269549
+CRC: 2997606563
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -18,10 +18,5 @@ AssetBundleManifest:
       Name: loginpanel
       Dependencies: {}
     Info_5:
-      Name: testprefab
-      Dependencies:
-        Dependency_0: shader
-        Dependency_1: texture
-    Info_6:
       Name: uiroot
       Dependencies: {}

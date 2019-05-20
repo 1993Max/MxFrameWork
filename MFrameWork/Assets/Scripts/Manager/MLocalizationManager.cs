@@ -21,7 +21,7 @@ namespace MFrameWork
         {
             _stringDict.Clear();
 
-            var value = MResLoader.singleton.ReadString("Localization/ChineseTable", MResLoader.SUFFIX_TXT);
+            var value = MFileLoadManager.singleton.ReadString("Localization/ChineseTable", MFileLoadManager.SUFFIX_TXT);
             using (TextReader reader = new StringReader(value))
             {
                 string line;

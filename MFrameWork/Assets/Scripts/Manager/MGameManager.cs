@@ -47,12 +47,12 @@ namespace MFrameWork
             {
                 m_managerList = new List<MBaseSingleton>();
             }
-            m_managerList.Add(MUIManager.singleton);
-            m_managerList.Add(MResManager.singleton);
-            m_managerList.Add(MLuaManager.singleton);
             m_managerList.Add(MObjectManager.singleton);
             m_managerList.Add(MAssetBundleManager.singleton);
+            m_managerList.Add(MFileLoadManager.singleton);
             m_managerList.Add(MResourceManager.singleton);
+            m_managerList.Add(MLuaManager.singleton);
+            m_managerList.Add(MUIManager.singleton);
             ManagerInit();
         }
 

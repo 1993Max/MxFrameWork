@@ -22,6 +22,13 @@
     <AbDependence />
   </AssetBundleList>
   <AssetBundleList>
+    <Crc>1299343054</Crc>
+    <Path>Assets/Resources/GameData/AssetBundleData/ReadMe.md</Path>
+    <AbName>assetbundledata</AbName>
+    <AssetName>ReadMe.md</AssetName>
+    <AbDependence />
+  </AssetBundleList>
+  <AssetBundleList>
     <Crc>195196491</Crc>
     <Path>Assets/Resources/UI/Prefabs/LoginPanel.prefab</Path>
     <AbName>loginpanel</AbName>
@@ -160,16 +167,6 @@
     <AbName>sound</AbName>
     <AssetName>lemon.mp3</AssetName>
     <AbDependence />
-  </AssetBundleList>
-  <AssetBundleList>
-    <Crc>1259503316</Crc>
-    <Path>Assets/Resources/UI/Prefabs/TestPrefab.prefab</Path>
-    <AbName>testprefab</AbName>
-    <AssetName>TestPrefab.prefab</AssetName>
-    <AbDependence>
-      <string>texture</string>
-      <string>shader</string>
-    </AbDependence>
   </AssetBundleList>
   <AssetBundleList>
     <Crc>1050408964</Crc>

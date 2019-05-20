@@ -1,4 +1,13 @@
-﻿using System;
+﻿// **************************************
+//
+// 文件名(MFileLoadManager.cs.cs):
+// 功能描述("文件读取管理器"):
+// 作者(Max1993):
+// 日期(2019/5/2  19:21):
+//
+// **************************************
+//
+using System;
 using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,15 +17,15 @@ using System.Text;
 
 namespace MFrameWork
 {
-    public sealed class MResLoader : MSingleton<MResLoader>
+    public sealed class MFileLoadManager : MSingleton<MFileLoadManager>
     {
         private const int SHARED_STREAM_SIZE = 512 * 1024;
         private const int FILE_BYTES_SIZE = 64 * 1024;
 
-        private MemoryStream _sharedStream = new MemoryStream(SHARED_STREAM_SIZE);
-        private byte[] _fileBytes = new byte[FILE_BYTES_SIZE];
-
+        private MemoryStream m_sharedStream = new MemoryStream(SHARED_STREAM_SIZE);
+        private byte[] m_fileBytes = new byte[FILE_BYTES_SIZE];
         public const string SUFFIX_TXT = ".txt";
+
         /// <summary>
         /// 读取字符串
         /// </summary>
@@ -26,7 +35,7 @@ namespace MFrameWork
         /// <returns></returns>
         public string ReadString(string location, string suffix, bool errNonexist = true)
         {
-            if (!ReadBytes(location, suffix, _sharedStream))
+            if (!ReadBytes(location, suffix, m_sharedStream))
             {
                 if (errNonexist)
                 {
@@ -34,7 +43,7 @@ namespace MFrameWork
                 }
                 return string.Empty;
             }
-            return Encoding.UTF8.GetString(_sharedStream.GetBuffer(), 0, (int)_sharedStream.Length);
+            return Encoding.UTF8.GetString(m_sharedStream.GetBuffer(), 0, (int)m_sharedStream.Length);
         }
 
         /// <summary>
@@ -64,9 +73,9 @@ namespace MFrameWork
 
                 fs.Position = 0;
                 int readSize = 0;
-                while ((readSize = fs.Read(_fileBytes, 0, _fileBytes.Length)) > 0)
+                while ((readSize = fs.Read(m_fileBytes, 0, m_fileBytes.Length)) > 0)
                 {
-                    stream.Write(_fileBytes, 0, readSize);
+                    stream.Write(m_fileBytes, 0, readSize);
                 }
                 stream.Seek(0, SeekOrigin.Begin);
                 return true;
