@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MFrameWork;
 
 //在编辑器下也可以运行
 [ExecuteInEditMode]

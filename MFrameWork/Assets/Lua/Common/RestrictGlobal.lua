@@ -9,6 +9,7 @@ function getGlobal(name)
     return rawget(_G, name)
 end
 
+--给_G设置原表
 setmetatable(
     _G,
     {
@@ -18,7 +19,7 @@ setmetatable(
             if _G.module == calling_func.func then
                 declareGlobal(key, value)
             else
-                --logError( "Attempt to write to undeclared global variable: " .. key )
+                print("Attempt to write to undeclared global variable: " .. key )
             end
         end
     }

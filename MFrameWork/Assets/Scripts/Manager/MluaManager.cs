@@ -26,9 +26,12 @@ namespace MFrameWork
 
         public override bool Init()
         {
+            //创建Lua虚拟机
             MLuaState = new LuaState();
             MLuaState.LuaSetTop(0);
             MLuaState.Start();
+            //Wrap绑定
+            LuaBinder.Bind(MLuaState);
             MLuaState.DoFile("Main");
             return base.Init();
         }

@@ -12,16 +12,13 @@
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <TargetFrameworkProfile></TargetFrameworkProfile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectGenerator>VSTU</UnityProjectGenerator>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2017.4.15f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion>6</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
@@ -268,7 +265,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Manager\MFileLoadManager.cs" />
     <Compile Include="Assets\_Learning\_SocketDemo\SocketDemo.cs" />
     <Compile Include="Assets\Scripts\AssetBundle\MAssetBundleBase.cs" />
     <Compile Include="Assets\Scripts\AssetBundle\MAssetBundleConfig.cs" />
@@ -311,6 +307,7 @@
     <Compile Include="Assets\Scripts\Generate\LuaInterface_InjectTypeWrap.cs" />
     <Compile Include="Assets\Scripts\Generate\LuaInterface_LuaInjectionStationWrap.cs" />
     <Compile Include="Assets\Scripts\Generate\LuaProfilerWrap.cs" />
+    <Compile Include="Assets\Scripts\Generate\MFrameWork_MLuaCommonHelperWrap.cs" />
     <Compile Include="Assets\Scripts\Generate\UnityEngine_AnimationBlendModeWrap.cs" />
     <Compile Include="Assets\Scripts\Generate\UnityEngine_AnimationClipWrap.cs" />
     <Compile Include="Assets\Scripts\Generate\UnityEngine_AnimationStateWrap.cs" />
@@ -387,6 +384,7 @@
     <Compile Include="Assets\Scripts\Manager\MAssetBundleManager.cs" />
     <Compile Include="Assets\Scripts\Manager\MAsyncObjectManager.cs" />
     <Compile Include="Assets\Scripts\Manager\MAsyncResourceManager.cs" />
+    <Compile Include="Assets\Scripts\Manager\MFileLoadManager.cs" />
     <Compile Include="Assets\Scripts\Manager\MGameManager.cs" />
     <Compile Include="Assets\Scripts\Manager\MLocalizationManager.cs" />
     <Compile Include="Assets\Scripts\Manager\MLuaManager.cs" />

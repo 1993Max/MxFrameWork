@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using LuaInterface;
 using UnityEditor;
+using MFrameWork;
 
 using BindType = ToLuaMenu.BindType;
 using System.Reflection;
@@ -60,7 +61,7 @@ public static class CustomSettings
         _GT(typeof(LuaInjectionStation)),
         _GT(typeof(InjectType)),
         _GT(typeof(Debugger)).SetNameSpace(null),          
-
+        _GT(typeof(MLuaCommonHelper)),
 #if USING_DOTWEENING
         _GT(typeof(DG.Tweening.DOTween)),
         _GT(typeof(DG.Tweening.Tween)).SetBaseType(typeof(System.Object)).AddExtendType(typeof(DG.Tweening.TweenExtensions)),
