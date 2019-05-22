@@ -1,15 +1,28 @@
---
---禁止隐式声明 访问全局变量
---
-function declareGlobal(name, intValue)
-    rawset(_G, name, intValue or false)
+ -- @FileName Main
+ -- @Create by mx
+ -- @Create time 2019/05/25 22:08:38
+ -- @FileInfo 禁止隐式声明 访问全局变量
+
+ --提供全局函数声明全局对象
+function DeclareGlobal(name, intValue)
+    if _G[name] then
+        LogError(" please check u code, _G Exist Name："..name,"It is already exist")
+    else
+        rawset(_G, name, intValue or false)
+    end
 end
 
-function getGlobal(name)
-    return rawget(_G, name)
+--提供全局函数访问全局对象
+function GetGlobal(name)
+    if _G[name] then
+        return rawget(_G, name)
+    else
+        LogError(" please check u code, _G dont Exist Name："..name)
+        return nil
+    end
 end
 
---给_G设置原表
+--给_G设置_newindex元表
 setmetatable(
     _G,
     {
@@ -17,11 +30,10 @@ setmetatable(
             local calling_func = debug.getinfo(2)
             --对于module进行特殊处理
             if _G.module == calling_func.func then
-                declareGlobal(key, value)
+                DeclareGlobal(key, value)
             else
-                print("Attempt to write to undeclared global variable: " .. key )
+                LogError("Attempt to write to undeclared global variable: " .. key )
             end
         end
     }
 )
-
