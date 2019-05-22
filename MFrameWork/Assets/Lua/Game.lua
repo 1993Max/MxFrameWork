@@ -2,7 +2,7 @@
  -- @Create by mx
  -- @Create time 2019/02/23 22:06:27
 
-declareGlobal("Game", class("Game"))
+DeclareGlobal("Game", class("Game"))
 
 function Game:Ctor()
     -- body

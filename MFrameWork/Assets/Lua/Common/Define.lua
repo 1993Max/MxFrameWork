@@ -4,5 +4,7 @@
  -- @FileInfo 全局申明定义
 
  Object = UnityEngine.Object
- --print(type(MLuaCommonHelper))
  MLuaCommonHelper = MFrameWork.MLuaCommonHelper
+ MPathUtils = MFrameWork.MPathUtils
+ MResourceManager = MFrameWork.MResourceManager.singleton
+ MObjectManager = MFrameWork.MObjectManager.singleton

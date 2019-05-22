@@ -61,7 +61,6 @@ public static class CustomSettings
         _GT(typeof(LuaInjectionStation)),
         _GT(typeof(InjectType)),
         _GT(typeof(Debugger)).SetNameSpace(null),          
-        _GT(typeof(MLuaCommonHelper)),
 #if USING_DOTWEENING
         _GT(typeof(DG.Tweening.DOTween)),
         _GT(typeof(DG.Tweening.Tween)).SetBaseType(typeof(System.Object)).AddExtendType(typeof(DG.Tweening.TweenExtensions)),
@@ -151,6 +150,12 @@ public static class CustomSettings
         _GT(typeof(RenderTexture)),
         _GT(typeof(Resources)),     
         _GT(typeof(LuaProfiler)),
+#region
+        _GT(typeof(MLuaCommonHelper)),
+        _GT(typeof(MPathUtils)),
+        _GT(typeof(MResourceManager)),
+        _GT(typeof(MObjectManager)),
+#endregion
     };
 
     public static List<Type> dynamicList = new List<Type>()

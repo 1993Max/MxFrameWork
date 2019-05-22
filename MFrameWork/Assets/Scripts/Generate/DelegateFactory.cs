@@ -30,6 +30,8 @@ public class DelegateFactory
 		dict.Add(typeof(UnityEngine.AudioClip.PCMReaderCallback), factory.UnityEngine_AudioClip_PCMReaderCallback);
 		dict.Add(typeof(UnityEngine.AudioClip.PCMSetPositionCallback), factory.UnityEngine_AudioClip_PCMSetPositionCallback);
 		dict.Add(typeof(System.Action<UnityEngine.AsyncOperation>), factory.System_Action_UnityEngine_AsyncOperation);
+		dict.Add(typeof(MFrameWork.OnAsyncLoadFinished), factory.MFrameWork_OnAsyncLoadFinished);
+		dict.Add(typeof(MFrameWork.OnAsyncLoadObjectFinished), factory.MFrameWork_OnAsyncLoadObjectFinished);
 
 		DelegateTraits<System.Action>.Init(factory.System_Action);
 		DelegateTraits<UnityEngine.Events.UnityAction>.Init(factory.UnityEngine_Events_UnityAction);
@@ -44,6 +46,8 @@ public class DelegateFactory
 		DelegateTraits<UnityEngine.AudioClip.PCMReaderCallback>.Init(factory.UnityEngine_AudioClip_PCMReaderCallback);
 		DelegateTraits<UnityEngine.AudioClip.PCMSetPositionCallback>.Init(factory.UnityEngine_AudioClip_PCMSetPositionCallback);
 		DelegateTraits<System.Action<UnityEngine.AsyncOperation>>.Init(factory.System_Action_UnityEngine_AsyncOperation);
+		DelegateTraits<MFrameWork.OnAsyncLoadFinished>.Init(factory.MFrameWork_OnAsyncLoadFinished);
+		DelegateTraits<MFrameWork.OnAsyncLoadObjectFinished>.Init(factory.MFrameWork_OnAsyncLoadObjectFinished);
 
 		TypeTraits<System.Action>.Init(factory.Check_System_Action);
 		TypeTraits<UnityEngine.Events.UnityAction>.Init(factory.Check_UnityEngine_Events_UnityAction);
@@ -58,6 +62,8 @@ public class DelegateFactory
 		TypeTraits<UnityEngine.AudioClip.PCMReaderCallback>.Init(factory.Check_UnityEngine_AudioClip_PCMReaderCallback);
 		TypeTraits<UnityEngine.AudioClip.PCMSetPositionCallback>.Init(factory.Check_UnityEngine_AudioClip_PCMSetPositionCallback);
 		TypeTraits<System.Action<UnityEngine.AsyncOperation>>.Init(factory.Check_System_Action_UnityEngine_AsyncOperation);
+		TypeTraits<MFrameWork.OnAsyncLoadFinished>.Init(factory.Check_MFrameWork_OnAsyncLoadFinished);
+		TypeTraits<MFrameWork.OnAsyncLoadObjectFinished>.Init(factory.Check_MFrameWork_OnAsyncLoadObjectFinished);
 
 		StackTraits<System.Action>.Push = factory.Push_System_Action;
 		StackTraits<UnityEngine.Events.UnityAction>.Push = factory.Push_UnityEngine_Events_UnityAction;
@@ -72,6 +78,8 @@ public class DelegateFactory
 		StackTraits<UnityEngine.AudioClip.PCMReaderCallback>.Push = factory.Push_UnityEngine_AudioClip_PCMReaderCallback;
 		StackTraits<UnityEngine.AudioClip.PCMSetPositionCallback>.Push = factory.Push_UnityEngine_AudioClip_PCMSetPositionCallback;
 		StackTraits<System.Action<UnityEngine.AsyncOperation>>.Push = factory.Push_System_Action_UnityEngine_AsyncOperation;
+		StackTraits<MFrameWork.OnAsyncLoadFinished>.Push = factory.Push_MFrameWork_OnAsyncLoadFinished;
+		StackTraits<MFrameWork.OnAsyncLoadObjectFinished>.Push = factory.Push_MFrameWork_OnAsyncLoadObjectFinished;
 	}
     
     public static Delegate CreateDelegate(Type t, LuaFunction func = null)
@@ -930,6 +938,128 @@ public class DelegateFactory
 	}
 
 	void Push_System_Action_UnityEngine_AsyncOperation(IntPtr L, System.Action<UnityEngine.AsyncOperation> o)
+	{
+		ToLua.Push(L, o);
+	}
+
+	class MFrameWork_OnAsyncLoadFinished_Event : LuaDelegate
+	{
+		public MFrameWork_OnAsyncLoadFinished_Event(LuaFunction func) : base(func) { }
+		public MFrameWork_OnAsyncLoadFinished_Event(LuaFunction func, LuaTable self) : base(func, self) { }
+
+		public void Call(string param0, UnityEngine.Object param1, object[] param2)
+		{
+			func.BeginPCall();
+			func.Push(param0);
+			func.Push(param1);
+			func.Push(param2);
+			func.PCall();
+			func.EndPCall();
+		}
+
+		public void CallWithSelf(string param0, UnityEngine.Object param1, object[] param2)
+		{
+			func.BeginPCall();
+			func.Push(self);
+			func.Push(param0);
+			func.Push(param1);
+			func.Push(param2);
+			func.PCall();
+			func.EndPCall();
+		}
+	}
+
+	public MFrameWork.OnAsyncLoadFinished MFrameWork_OnAsyncLoadFinished(LuaFunction func, LuaTable self, bool flag)
+	{
+		if (func == null)
+		{
+			MFrameWork.OnAsyncLoadFinished fn = delegate(string param0, UnityEngine.Object param1, object[] param2) { };
+			return fn;
+		}
+
+		if(!flag)
+		{
+			MFrameWork_OnAsyncLoadFinished_Event target = new MFrameWork_OnAsyncLoadFinished_Event(func);
+			MFrameWork.OnAsyncLoadFinished d = target.Call;
+			target.method = d.Method;
+			return d;
+		}
+		else
+		{
+			MFrameWork_OnAsyncLoadFinished_Event target = new MFrameWork_OnAsyncLoadFinished_Event(func, self);
+			MFrameWork.OnAsyncLoadFinished d = target.CallWithSelf;
+			target.method = d.Method;
+			return d;
+		}
+	}
+
+	bool Check_MFrameWork_OnAsyncLoadFinished(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(MFrameWork.OnAsyncLoadFinished), L, pos);
+	}
+
+	void Push_MFrameWork_OnAsyncLoadFinished(IntPtr L, MFrameWork.OnAsyncLoadFinished o)
+	{
+		ToLua.Push(L, o);
+	}
+
+	class MFrameWork_OnAsyncLoadObjectFinished_Event : LuaDelegate
+	{
+		public MFrameWork_OnAsyncLoadObjectFinished_Event(LuaFunction func) : base(func) { }
+		public MFrameWork_OnAsyncLoadObjectFinished_Event(LuaFunction func, LuaTable self) : base(func, self) { }
+
+		public void Call(string param0, MFrameWork.MResourceObjectItem param1, object[] param2)
+		{
+			func.BeginPCall();
+			func.Push(param0);
+			func.PushObject(param1);
+			func.Push(param2);
+			func.PCall();
+			func.EndPCall();
+		}
+
+		public void CallWithSelf(string param0, MFrameWork.MResourceObjectItem param1, object[] param2)
+		{
+			func.BeginPCall();
+			func.Push(self);
+			func.Push(param0);
+			func.PushObject(param1);
+			func.Push(param2);
+			func.PCall();
+			func.EndPCall();
+		}
+	}
+
+	public MFrameWork.OnAsyncLoadObjectFinished MFrameWork_OnAsyncLoadObjectFinished(LuaFunction func, LuaTable self, bool flag)
+	{
+		if (func == null)
+		{
+			MFrameWork.OnAsyncLoadObjectFinished fn = delegate(string param0, MFrameWork.MResourceObjectItem param1, object[] param2) { };
+			return fn;
+		}
+
+		if(!flag)
+		{
+			MFrameWork_OnAsyncLoadObjectFinished_Event target = new MFrameWork_OnAsyncLoadObjectFinished_Event(func);
+			MFrameWork.OnAsyncLoadObjectFinished d = target.Call;
+			target.method = d.Method;
+			return d;
+		}
+		else
+		{
+			MFrameWork_OnAsyncLoadObjectFinished_Event target = new MFrameWork_OnAsyncLoadObjectFinished_Event(func, self);
+			MFrameWork.OnAsyncLoadObjectFinished d = target.CallWithSelf;
+			target.method = d.Method;
+			return d;
+		}
+	}
+
+	bool Check_MFrameWork_OnAsyncLoadObjectFinished(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(MFrameWork.OnAsyncLoadObjectFinished), L, pos);
+	}
+
+	void Push_MFrameWork_OnAsyncLoadObjectFinished(IntPtr L, MFrameWork.OnAsyncLoadObjectFinished o)
 	{
 		ToLua.Push(L, o);
 	}

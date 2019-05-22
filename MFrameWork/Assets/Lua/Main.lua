@@ -10,24 +10,22 @@ collectgarbage("setstepmul", 5000)
 require("Common/Define")
 require("Common/Class")
 require("Common/Log")
-
 --需要全局访问的Lua文件在者之前Require
 require("Common/RestrictGlobal")
-
 
 local Main = {}
 
 --预加载一些数据
 local PreLoadDate = function ()
     require "ModuleMgr/MgrMgr"
-    declareGlobal("MgrMgr",MoudleMgr.MgrMgr.new())
+    DeclareGlobal("MgrMgr",MoudleMgr.MgrMgr.new())
 end
 
 --主入口函数。从这里开始lua逻辑
 function Main.OnStart()
     Log("lua logic start")
     require "Game"
-    declareGlobal("Game", Game.new())
+    require "UI/UIBase"
     Game:Init()
 end
 
