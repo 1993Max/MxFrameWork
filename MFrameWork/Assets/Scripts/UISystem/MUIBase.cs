@@ -21,7 +21,7 @@ namespace MFrameWork
     public enum MUILayerType
     {
         Top,
-        Upper,
+        Up,
         Normal,
         Hud
     }
@@ -206,7 +206,7 @@ namespace MFrameWork
                 case MUILayerType.Top:
                     m_uiGameObject.transform.SetParent(MUIManager.singleton.MTransTop);
                     break;
-                case MUILayerType.Upper:
+                case MUILayerType.Up:
                     m_uiGameObject.transform.SetParent(MUIManager.singleton.MTransUpper);
                     break;
                 case MUILayerType.Normal:

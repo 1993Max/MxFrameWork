@@ -30,8 +30,14 @@ namespace MFrameWork
             MLuaState = new LuaState();
             MLuaState.LuaSetTop(0);
             MLuaState.Start();
+
             //Wrap绑定
             LuaBinder.Bind(MLuaState);
+            //委托
+            DelegateFactory.Init();
+            //协程
+            LuaCoroutine.Register(MLuaState,MGameManager.m_monoBehavior);
+
             MLuaState.DoFile("Main");
             return base.Init();
         }

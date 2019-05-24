@@ -8,3 +8,4 @@
  MPathUtils = MFrameWork.MPathUtils
  MResourceManager = MFrameWork.MResourceManager.singleton
  MObjectManager = MFrameWork.MObjectManager.singleton
+ LoadResPriority = MFrameWork.LoadResPriority

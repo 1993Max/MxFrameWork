@@ -307,6 +307,7 @@
     <Compile Include="Assets\Scripts\Generate\LuaInterface_InjectTypeWrap.cs" />
     <Compile Include="Assets\Scripts\Generate\LuaInterface_LuaInjectionStationWrap.cs" />
     <Compile Include="Assets\Scripts\Generate\LuaProfilerWrap.cs" />
+    <Compile Include="Assets\Scripts\Generate\MFrameWork_LoadResPriorityWrap.cs" />
     <Compile Include="Assets\Scripts\Generate\MFrameWork_MBaseSingletonWrap.cs" />
     <Compile Include="Assets\Scripts\Generate\MFrameWork_MLuaCommonHelperWrap.cs" />
     <Compile Include="Assets\Scripts\Generate\MFrameWork_MObjectManagerWrap.cs" />

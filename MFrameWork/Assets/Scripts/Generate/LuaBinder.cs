@@ -76,11 +76,12 @@ public static class LuaBinder
 		MFrameWork_MPathUtilsWrap.Register(L);
 		MFrameWork_MResourceManagerWrap.Register(L);
 		MFrameWork_MObjectManagerWrap.Register(L);
+		MFrameWork_LoadResPriorityWrap.Register(L);
 		MFrameWork_MSingleton_MFrameWork_MResourceManagerWrap.Register(L);
 		MFrameWork_MBaseSingletonWrap.Register(L);
 		MFrameWork_MSingleton_MFrameWork_MObjectManagerWrap.Register(L);
-		L.RegFunction("OnAsyncLoadFinished", MFrameWork_OnAsyncLoadFinished);
 		L.RegFunction("OnAsyncLoadObjectFinished", MFrameWork_OnAsyncLoadObjectFinished);
+		L.RegFunction("OnAsyncLoadFinished", MFrameWork_OnAsyncLoadFinished);
 		L.EndModule();
 		L.BeginModule("System");
 		L.RegFunction("Action", System_Action);
@@ -298,33 +299,6 @@ public static class LuaBinder
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int MFrameWork_OnAsyncLoadFinished(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-			LuaFunction func = ToLua.CheckLuaFunction(L, 1);
-
-			if (count == 1)
-			{
-				Delegate arg1 = DelegateTraits<MFrameWork.OnAsyncLoadFinished>.Create(func);
-				ToLua.Push(L, arg1);
-			}
-			else
-			{
-				LuaTable self = ToLua.CheckLuaTable(L, 2);
-				Delegate arg1 = DelegateTraits<MFrameWork.OnAsyncLoadFinished>.Create(func, self);
-				ToLua.Push(L, arg1);
-			}
-			return 1;
-		}
-		catch(Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int MFrameWork_OnAsyncLoadObjectFinished(IntPtr L)
 	{
 		try
@@ -341,6 +315,33 @@ public static class LuaBinder
 			{
 				LuaTable self = ToLua.CheckLuaTable(L, 2);
 				Delegate arg1 = DelegateTraits<MFrameWork.OnAsyncLoadObjectFinished>.Create(func, self);
+				ToLua.Push(L, arg1);
+			}
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int MFrameWork_OnAsyncLoadFinished(IntPtr L)
+	{
+		try
+		{
+			int count = LuaDLL.lua_gettop(L);
+			LuaFunction func = ToLua.CheckLuaFunction(L, 1);
+
+			if (count == 1)
+			{
+				Delegate arg1 = DelegateTraits<MFrameWork.OnAsyncLoadFinished>.Create(func);
+				ToLua.Push(L, arg1);
+			}
+			else
+			{
+				LuaTable self = ToLua.CheckLuaTable(L, 2);
+				Delegate arg1 = DelegateTraits<MFrameWork.OnAsyncLoadFinished>.Create(func, self);
 				ToLua.Push(L, arg1);
 			}
 			return 1;

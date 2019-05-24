@@ -41,6 +41,8 @@ public static class CustomSettings
         _DT(typeof(System.Action<int>)),
         _DT(typeof(System.Comparison<int>)),
         _DT(typeof(System.Func<int, int>)),
+        _DT(typeof(OnAsyncLoadObjectFinished)),
+        _DT(typeof(OnAsyncLoadFinished)),
     };
 
     //在这里添加你要导出注册到lua的类型列表
@@ -150,11 +152,12 @@ public static class CustomSettings
         _GT(typeof(RenderTexture)),
         _GT(typeof(Resources)),     
         _GT(typeof(LuaProfiler)),
-#region
+#region 项目导出的数据
         _GT(typeof(MLuaCommonHelper)),
         _GT(typeof(MPathUtils)),
         _GT(typeof(MResourceManager)),
         _GT(typeof(MObjectManager)),
+        _GT(typeof(LoadResPriority)),
 #endregion
     };
 
