@@ -16,14 +16,14 @@ local super = UI.UIBaseCtrl
 --next--
 --lua fields end
 
---lua class define
-LoginPanelCtrl = class("LoginPanelCtrl", super)
---lua class define end
+--lua Class define
+LoginPanelCtrl = Class("LoginPanelCtrl", super)
+--lua Class define end
 
 --lua functions
-function LoginPanelCtrl:ctor()
+function LoginPanelCtrl:Ctor()
 	
-	super.ctor(self, CtrlNames.LoginPanel, UILayer.Upper, nil, ActiveType.Exclusive)
+	super.Ctor(self, CtrlNames.LoginPanel, UILayer.Upper, nil, ActiveType.Exclusive)
 	
 end --func end
 --next--

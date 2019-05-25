@@ -3,7 +3,7 @@
   -- @Create time 2019/02/23 22:06:15
  
 module("MoudleMgr", package.seeall)
-MgrMgr = class("MgrMgr")
+MgrMgr = Class("MgrMgr")
 
 --全局保存所有Mgr的一个Table
 local l_mgrTable = {}
@@ -16,7 +16,7 @@ function MgrMgr:GetMgr(mgrName)
     return l_mgrTable[mgrName]
 end
 
-function MgrMgr:ctor()
+function MgrMgr:Ctor()
     print("MgrMgr Ctor")
 end
 

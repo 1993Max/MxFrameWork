@@ -5,7 +5,7 @@
 
 module("UI",package.seeall)
 --全局申明UIBase基类
-UIBase = class("UIBase")
+UIBase = Class("UIBase")
 --全局申明 UI资源加载方式
 UILoadType = 
 {
@@ -13,7 +13,7 @@ UILoadType =
     ASync, --异步
 }
 
-function UIBase:ctor( ... )
+function UIBase:Ctor( ... )
     --该UI是否已经初始化完成
     self.m_isInited = false
     --实例化的Prefab

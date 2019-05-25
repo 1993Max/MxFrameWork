@@ -18,7 +18,7 @@ local Main = {}
 --预加载一些数据
 local PreLoadDate = function ()
     require "ModuleMgr/MgrMgr"
-    DeclareGlobal("MgrMgr",MoudleMgr.MgrMgr.new())
+    DeclareGlobal("MgrMgr",MoudleMgr.MgrMgr.New())
 end
 
 --主入口函数。从这里开始lua逻辑

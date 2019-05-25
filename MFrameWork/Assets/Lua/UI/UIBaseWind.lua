@@ -9,11 +9,11 @@ module("UI",package.seeall)
 
 --本地存储GetUIBase
 local l_superBase = UI.UIBase
---全局申明UIBase基类
-DeclareGlobal("UIBaseWind",class("UIBaseWind",l_superBase))
+--申明UIBaseWind基类
+UIBaseWind = Class("UIBaseWind",l_superBase)
 
 --UI的层级
-UILayer = 
+UISortLayer = 
 {
     Top,
     Up,
@@ -21,7 +21,7 @@ UILayer =
     Hud 
 }
 
---UI的类型
+--UI的激活类型
 UIActiveType = 
 {
     Normal,
@@ -29,6 +29,31 @@ UIActiveType =
     StandAlone  
 }
 
+function UIBaseWind:Ctor( windName,windSortLayer,windActiveType )
+    --父类Ctor
+    l_superBase.Ctor()
+    --UIName
+    self.m_uiName = windName
+    --UI层级
+    self.m_sortLayer = windSortLayer or UISortLayer.Normal
+    --UI激活类型
+    self.m_activeType = windActiveType or UIActiveType.Normal
+end
+
+function UIBaseWind:Active(callBack)
+    if self.m_uiObj and self.m_isInited then
+        self.m_uiTrans:SetAsLastSibling()
+        self.m_uiObj:SetActiveEx(true)
+        if type(callBack) == "function" then
+            callBack(self)
+            return
+        end
+    end
+    
+    self:load(function(uiWind)
+        
+    end)
+end
 
 
 return UIBaseWind
