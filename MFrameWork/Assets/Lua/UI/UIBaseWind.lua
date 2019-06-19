@@ -38,6 +38,8 @@ function UIBaseWind:Ctor( windName,windSortLayer,windActiveType )
     self.m_sortLayer = windSortLayer or UISortLayer.Normal
     --UI激活类型
     self.m_activeType = windActiveType or UIActiveType.Normal
+    --UIToggleWind的存储
+    self.m_toggleWindTable = {}
 end
 
 function UIBaseWind:Active(callBack)
@@ -49,11 +51,57 @@ function UIBaseWind:Active(callBack)
             return
         end
     end
-    
+
     self:load(function(uiWind)
-        
+        uiWind:OnLoadedFinishSet(callBack)
     end)
 end
+
+function UIBaseWind:Init()
+    l_superBase.Init(self)
+end
+
+function UIBaseWind:UnInit()
+    l_superBase.Uninit(self)
+end
+
+--资源加载完成
+function UIBaseWind:OnLoadedFinishSet(callBack)
+    if self.m_uiObj == nil then
+        return
+    end
+    self.m_uiTrans:SetAsLastSibling()
+    self.m_uiObj:SetActiveEx(true)
+    if type(callBack) == "function" then
+        callBack(self)
+    end
+
+    self:OnActive()
+    self:BindEvents()
+end
+
+function UIBaseWind:BindEvents()
+    l_superBase:BindEvents()
+end
+
+function UIBaseWind:UnBindEvents()
+    l_superBase:BindEvents()
+end
+
+function UIBaseWind:OnActive()
+    l_superBase:OnActive()
+end
+
+function UIBaseWind:DeActive()
+    
+end
+
+
+
+
+
+
+
 
 
 return UIBaseWind

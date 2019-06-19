@@ -25,12 +25,16 @@ end
 function Main.OnStart()
     Log("lua logic start")
     require "Game"
-    require "UI/UIBase"
+    --require "UI/UIBase"
     Game:Init()
 end
 
 function Main.OnClose()
 	Game:Uninit()
+end
+
+function Main:InitHotUpdate(params)
+    
 end
 
 Main.OnStart()

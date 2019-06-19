@@ -1,8 +1,9 @@
 ﻿<Properties StartupConfiguration="{8D884FC7-D99F-3681-35CC-593B6E009E26}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/AssetBundle/MDoubleLinkedList.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Generate/LuaBinder.cs">
     <Files>
-      <File FileName="Assets/Scripts/AssetBundle/MDoubleLinkedList.cs" Line="166" Column="72" />
+      <File FileName="Assets/Scripts/AssetBundle/MDoubleLinkedList.cs" Line="166" Column="6" />
       <File FileName="Assets/Scripts/AssetBundle/MAssetBundleConfig.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Generate/LuaBinder.cs" Line="744" Column="34" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -15,8 +16,9 @@
                 </Node>
               </Node>
               <Node name="Scripts" expanded="True">
-                <Node name="AssetBundle" expanded="True">
-                  <Node name="MDoubleLinkedList.cs" selected="True" />
+                <Node name="AssetBundle" expanded="True" />
+                <Node name="Generate" expanded="True">
+                  <Node name="LuaBinder.cs" selected="True" />
                 </Node>
               </Node>
               <Node name="Tools" expanded="True">
@@ -28,14 +30,9 @@
           </Node>
         </State>
       </Pad>
-      <Pad Id="MonoDevelop.UnitTesting.TestPad">
-        <State name="__root__">
-          <Node name="MFrameWork" expanded="True" selected="True" />
-        </State>
-      </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.ItemProperties.MFrameWork PreferredExecutionTarget="e04e0765-8697-43fb-bb2a-228064ac4a27" />
+  <MonoDevelop.Ide.ItemProperties.MFrameWork PreferredExecutionTarget="86a8deae-fb9e-4c8d-9628-328f15f47db1" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

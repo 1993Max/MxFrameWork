@@ -20,6 +20,7 @@ public class MFrameWork_MPathUtilsWrap
 		L.RegVar("UI_MAINPATH", get_UI_MAINPATH, null);
 		L.RegVar("UI_ROOTPATH", get_UI_ROOTPATH, null);
 		L.RegVar("UI_PREFAB_SUFFIX", get_UI_PREFAB_SUFFIX, null);
+		L.RegVar("UI_LOGIC_WIND_SUFFIX", get_UI_LOGIC_WIND_SUFFIX, null);
 		L.EndClass();
 	}
 
@@ -193,6 +194,20 @@ public class MFrameWork_MPathUtilsWrap
 		try
 		{
 			LuaDLL.lua_pushstring(L, MFrameWork.MPathUtils.UI_PREFAB_SUFFIX);
+			return 1;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_UI_LOGIC_WIND_SUFFIX(IntPtr L)
+	{
+		try
+		{
+			LuaDLL.lua_pushstring(L, MFrameWork.MPathUtils.UI_LOGIC_WIND_SUFFIX);
 			return 1;
 		}
 		catch (Exception e)
