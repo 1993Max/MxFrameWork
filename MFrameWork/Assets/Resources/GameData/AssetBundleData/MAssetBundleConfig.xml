@@ -29,6 +29,13 @@
     <AbDependence />
   </AssetBundleList>
   <AssetBundleList>
+    <Crc>22194229</Crc>
+    <Path>Assets/Resources/UI/Prefabs/LoadingPanel.prefab</Path>
+    <AbName>loadingpanel</AbName>
+    <AssetName>LoadingPanel.prefab</AssetName>
+    <AbDependence />
+  </AssetBundleList>
+  <AssetBundleList>
     <Crc>195196491</Crc>
     <Path>Assets/Resources/UI/Prefabs/LoginPanel.prefab</Path>
     <AbName>loginpanel</AbName>
@@ -166,13 +173,6 @@
     <Path>Assets/Resources/Sound/lemon.mp3</Path>
     <AbName>sound</AbName>
     <AssetName>lemon.mp3</AssetName>
-    <AbDependence />
-  </AssetBundleList>
-  <AssetBundleList>
-    <Crc>1050408964</Crc>
-    <Path>Assets/Resources/Texture/PostPic.png</Path>
-    <AbName>texture</AbName>
-    <AssetName>PostPic.png</AssetName>
     <AbDependence />
   </AssetBundleList>
   <AssetBundleList>

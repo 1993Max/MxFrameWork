@@ -89,6 +89,7 @@ namespace MFrameWork
         }
 
         public const string LOGON_CONTROLLER = "LoginPanel.prefab";
+        public const string LOADING_CONTROLLER = "LoadingPanel.prefab";
         /// <summary>
         /// 在C#层实现逻辑的UI进行注册注册 
         /// </summary>
@@ -96,6 +97,7 @@ namespace MFrameWork
         private bool UIRegister()
         {
             m_uiDict.Add(LOGON_CONTROLLER, new LogonController());
+            m_uiDict.Add(LOADING_CONTROLLER, new LoadingController());
             return true;
         }
 

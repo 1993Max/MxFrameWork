@@ -258,6 +258,11 @@ namespace MFrameWork
                         yield return new WaitForSeconds(0.2f);
 
                         mResourceItem = MAssetBundleManager.singleton.FindResourceItem(asyncLoadResParam.m_crc);
+                        if (mResourceItem == null) 
+                        {
+                            mResourceItem = new MResourceItem();
+                            mResourceItem.m_crc = asyncLoadResParam.m_crc;
+                        }
                     }
 #endif
                     if (obj == null)

@@ -1,9 +1,19 @@
 ﻿<Properties StartupConfiguration="{8D884FC7-D99F-3681-35CC-593B6E009E26}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Generate/LuaBinder.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Manager/MGameManager.cs">
     <Files>
       <File FileName="Assets/Scripts/AssetBundle/MDoubleLinkedList.cs" Line="166" Column="6" />
       <File FileName="Assets/Scripts/AssetBundle/MAssetBundleConfig.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Generate/LuaBinder.cs" Line="744" Column="34" />
+      <File FileName="Assets/Scripts/AssetBundle/MAssetBundleBase.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Manager/MResourceManager.cs" Line="220" Column="48" />
+      <File FileName="Assets/Scripts/Manager/MGameManager.cs" Line="197" Column="2" />
+      <File FileName="Assets/Scripts/Manager/MAsyncResourceManager.cs" Line="125" Column="1" />
+      <File FileName="Assets/Scripts/Manager/MAssetBundleManager.cs" Line="198" Column="30" />
+      <File FileName="Assets/Scripts/Manager/MSceneManager.cs" Line="120" Column="14" />
+      <File FileName="Assets/Scripts/Manager/MObjectManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Manager/MluaManager.cs" Line="39" Column="14" />
+      <File FileName="Assets/Scripts/UISystem/UIController/LogonController.cs" Line="7" Column="33" />
+      <File FileName="Assets/Scripts/UISystem/UIController/LoadingController.cs" Line="16" Column="35" />
+      <File FileName="Assets/Scripts/Manager/MUIManager.cs" Line="132" Column="29" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -16,23 +26,23 @@
                 </Node>
               </Node>
               <Node name="Scripts" expanded="True">
-                <Node name="AssetBundle" expanded="True" />
-                <Node name="Generate" expanded="True">
-                  <Node name="LuaBinder.cs" selected="True" />
+                <Node name="Manager" expanded="True">
+                  <Node name="MGameManager.cs" selected="True" />
                 </Node>
-              </Node>
-              <Node name="Tools" expanded="True">
-                <Node name="Editor" expanded="True">
-                  <Node name="AssetBundleBuild" expanded="True" />
+                <Node name="UISystem" expanded="True">
+                  <Node name="UIController" expanded="True" />
                 </Node>
               </Node>
             </Node>
           </Node>
         </State>
       </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.ItemProperties.MFrameWork PreferredExecutionTarget="86a8deae-fb9e-4c8d-9628-328f15f47db1" />
+  <MonoDevelop.Ide.ItemProperties.MFrameWork PreferredExecutionTarget="7dd8ebb1-d166-4c8d-8814-5a88113b6ed4" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
