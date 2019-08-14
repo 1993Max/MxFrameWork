@@ -136,11 +136,11 @@ end
 ------------------生命周期 End--------------------
 
 function UIBase:IsActive( ... )
-    return self.isActive
+    return self.m_isActive
 end
 
 function UIBase:IsInited( ... )
-    return self.IsInited
+    return self.m_isInited
 end
 
 --设置UI的全路径
@@ -152,6 +152,7 @@ function UIBase:SetUIFullPath( ... )
     self.m_uiFullPath = MPathUtils.UI_MAINPATH.."/"..self.m_uiName..MPathUtils.UI_PREFAB_SUFFIX
 end
 
---UIBase.m_uiName = "LoginPanel"
---UIBase.Load(UIBase)
+UIBase.m_uiName = "LoginPanel"
+UIBase.Load(UIBase)
+
 return UIBase

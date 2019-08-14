@@ -22,6 +22,7 @@ namespace MFrameWork
         public const string UI_MAINPATH = "Assets/Resources/UI/Prefabs";
         public const string UI_ROOTPATH = "Assets/Resources/UI/Prefabs/UIRoot.prefab";
         public const string UI_PREFAB_SUFFIX  = ".prefab";
+        public const string UI_LOGIC_WIND_SUFFIX = "Wind";
         #endregion
     }
 }

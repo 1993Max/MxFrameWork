@@ -53,6 +53,7 @@ namespace MFrameWork
             m_managerList.Add(MResourceManager.singleton);
             m_managerList.Add(MLuaManager.singleton);
             m_managerList.Add(MUIManager.singleton);
+            m_managerList.Add(MSceneManager.singleton);
             ManagerInit();
         }
 
@@ -128,7 +129,7 @@ namespace MFrameWork
 
             if (GUI.Button(new Rect(10, 560, 200, 50), "实例化资源预加载"))
             {
-                MObjectManager.singleton.PreLoadGameObject("Assets/Resources/UI/Prefabs/TestPrefab.prefab", 10);
+                MObjectManager.singleton.PreLoadGameObject("Assets/Resources/UI/Prefabs/LoginPanel.prefab", 10);
             }
 
             if (GUI.Button(new Rect(10, 620, 200, 50), "UIManager测试"))
@@ -169,13 +170,13 @@ namespace MFrameWork
         public GameObject testObjectResload;
         public void ObjectResload()
         {
-            testObjectResload = MObjectManager.singleton.InstantiateGameObeject("Assets/Resources/UI/Prefabs/TestPrefab.prefab", true);
+            testObjectResload = MObjectManager.singleton.InstantiateGameObeject("Assets/Resources/UI/Prefabs/LoginPanel.prefab", true);
         }
 
         //异步资源加载
         public void AsyncObjectResload()
         {
-            MObjectManager.singleton.InstantiateGameObejectAsync("Assets/Resources/UI/Prefabs/TestPrefab.prefab", delegate (string resPath, MResourceObjectItem mResourceObjectItem,object[] parms)
+            MObjectManager.singleton.InstantiateGameObejectAsync("Assets/Resources/UI/Prefabs/LoginPanel.prefab", delegate (string resPath, MResourceObjectItem mResourceObjectItem,object[] parms)
              {
                  testObjectResload = mResourceObjectItem.m_cloneObeject;
              },LoadResPriority.RES_LOAD_LEVEL_HEIGHT,true);

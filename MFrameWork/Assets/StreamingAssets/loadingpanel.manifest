@@ -1,0 +1,42 @@
+ManifestFileVersion: 0
+CRC: 2325086311
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: d48d75e8253ea6994ee1056b08f2205a
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: a303c5da2bce5f1480b22d2b9e4be4e9
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 114
+  Script: {fileID: -113659843, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 114
+  Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: fa7c0b9c72e9adf47942c6439465c705, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 128
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 222
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+Assets:
+- Assets/Atlas/Bg/play_bg.png
+- Assets/Resources/UI/Prefabs/LoadingPanel.prefab
+- Assets/Atlas/Common/loading_box02.png
+Dependencies: []

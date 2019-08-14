@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2653691877
+CRC: 3288991932
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 826373bd1965717c2989ca2f3c5196ed
+    Hash: 07c2ab461c13545a222321b4ca5a5048
   TypeTreeHash:
     serializedVersion: 2
     Hash: 96ed1387a4debab438b566b0795a29d0
@@ -39,4 +39,6 @@ ClassTypes:
   Script: {instanceID: 0}
 Assets:
 - Assets/Resources/UI/Prefabs/LoginPanel.prefab
-Dependencies: []
+- Assets/Atlas/Common/push-button.png
+Dependencies:
+- /Users/Max/MxFrameWork/MFrameWork/Assets/StreamingAssets/loadingpanel

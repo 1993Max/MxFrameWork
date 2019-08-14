@@ -3,7 +3,7 @@
 
 
 --lua requires
-require "UI/UIBaseCtrl"
+require "UI/UIBaseWind"
 require "UI/Panel/LoginPanelPanel"
 --lua requires end
 
@@ -12,7 +12,7 @@ module("UI", package.seeall)
 --lua model end
 
 --lua fields
-local super = UI.UIBaseCtrl
+local super = UI.UIBase
 --next--
 --lua fields end
 
