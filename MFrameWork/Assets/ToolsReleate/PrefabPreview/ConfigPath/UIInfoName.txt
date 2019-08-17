@@ -1,0 +1,14 @@
+Up&上|
+Middle&中|
+Down&下|
+Left&左|
+Right&右|
+Small&小|
+Big&大|
+Head&顶部|
+Foot&底部|
+First&第一|
+Second&第二|
+Third&第三|
+嘻嘻嘻&第三|
+Last&最后

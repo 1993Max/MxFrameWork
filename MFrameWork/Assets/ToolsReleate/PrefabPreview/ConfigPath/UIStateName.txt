@@ -1,0 +1,9 @@
+Normal&普通|
+HighLight&高亮|
+Enable&激活|
+Disabled&未激活|
+Pre&预选中|
+True&正确|
+False&错误|
+Normal&普通|
+Selected&选中
