@@ -34,7 +34,7 @@ public class AssetBundleBuildTools
     public static Dictionary<string, List<string>> m_abWithDepenceDic = new Dictionary<string, List<string>>();
 
     //有效路径存储 这里的有效路径指的打包的资源文件夹路径和所有单个资源路径 方便后续引用资源剔除
-    public static List<string> m_effectiveFile = new List<string>();
+    public static List<string> m_EffectiveFile = new List<string>();
 
     //存储所有打包的资源文件的对应信息 Key是资源的全路径 Valeu是AB的名字 这个存储比较重要 后续生成XML的时候有用到
     public static Dictionary<string, string> m_AllAssetBundleDic = new Dictionary<string, string>();
@@ -85,7 +85,7 @@ public class AssetBundleBuildTools
             {
                 m_allFileDirDic.Add(item.abName, item.abDir);
                 m_AddedPathList.Add(item.abDir);
-                m_effectiveFile.Add(item.abDir);
+                m_EffectiveFile.Add(item.abDir);
             }
         }
 
@@ -110,7 +110,7 @@ public class AssetBundleBuildTools
                 }
             }
             m_abWithDepenceDic.Add(gameObject.name, fileAllDependeceList);
-            m_effectiveFile.Add(filePath);
+            m_EffectiveFile.Add(filePath);
         }
     }
 
@@ -266,7 +266,7 @@ public class AssetBundleBuildTools
         m_allFileDirDic.Clear();
         m_abWithDepenceDic.Clear();
         m_AddedPathList.Clear();
-        m_effectiveFile.Clear();
+        m_EffectiveFile.Clear();
     }
 
     //检测是否添加的接口函数
@@ -306,9 +306,9 @@ public class AssetBundleBuildTools
     //是否是有效路径判断
     public static bool IsEffectivePath(string path)
     {
-        for (int i = 0; i < m_effectiveFile.Count; i++)
+        for (int i = 0; i < m_EffectiveFile.Count; i++)
         {
-            if(path.Contains(m_effectiveFile[i]))
+            if(path.Contains(m_EffectiveFile[i]))
             {
                 return true;
             }

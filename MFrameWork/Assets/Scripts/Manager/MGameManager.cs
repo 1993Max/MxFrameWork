@@ -76,10 +76,9 @@ namespace MFrameWork
             }
         }
 
+        #region 逻辑的测试代码
         //------以下为测试逻辑--------
-
         public AudioSource mAudioSource;
-
         public void ResourceTest() 
         {
             if (GUI.Button(new Rect(10, 10, 200, 50), "同步加载"))
@@ -193,5 +192,6 @@ namespace MFrameWork
         {
             MObjectManager.singleton.ReleaseObject(testObjectResload,0,true);
         }
+        #endregion
     }
 }
